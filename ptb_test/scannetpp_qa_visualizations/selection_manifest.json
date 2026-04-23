@@ -1,0 +1,3714 @@
+{
+  "dataset_root": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed",
+  "total_questions": 40,
+  "scenes": [
+    {
+      "scene_name": "06bd2cf800",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/06bd2cf800.jpg",
+      "questions": [
+        {
+          "qa_id": "cac34684-312c-40d9-b3ed-1446f56fd2ef",
+          "scene_name": "06bd2cf800",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/01_mc_distance_compare_cac34684.jpg",
+          "best_frame_file": "color/train/06bd2cf800/frame_000320.jpg",
+          "best_frame_score": 719.8061331800993,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (pillow, bed, keyboard, cabinet) is the closest to the heater? If there are multiple instances of an object category, measure to the closest. Options: A. pillow B. bed C. keyboard D. cabinet Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "pillow",
+              "bed",
+              "keyboard",
+              "cabinet",
+              "heater"
+            ],
+            "answer_value": "C",
+            "answer_object": "keyboard",
+            "options_map": {
+              "A": "pillow",
+              "B": "bed",
+              "C": "keyboard",
+              "D": "cabinet"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/01_mc_distance_compare_cac34684.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/06bd2cf800/frame_000320.png",
+            "drawn_instances": [
+              {
+                "object_name": "pillow",
+                "instance_id": 40,
+                "bbox_2d": [
+                  565,
+                  279,
+                  639,
+                  350
+                ],
+                "instance_rank": 1,
+                "area": 5254
+              },
+              {
+                "object_name": "bed",
+                "instance_id": 23,
+                "bbox_2d": [
+                  387,
+                  177,
+                  639,
+                  450
+                ],
+                "instance_rank": 1,
+                "area": 68796
+              },
+              {
+                "object_name": "keyboard",
+                "instance_id": 34,
+                "bbox_2d": [
+                  235,
+                  173,
+                  298,
+                  186
+                ],
+                "instance_rank": 1,
+                "area": 819
+              },
+              {
+                "object_name": "cabinet",
+                "instance_id": 4,
+                "bbox_2d": [
+                  0,
+                  0,
+                  143,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 68497
+              },
+              {
+                "object_name": "heater",
+                "instance_id": 17,
+                "bbox_2d": [
+                  111,
+                  189,
+                  172,
+                  336
+                ],
+                "instance_rank": 1,
+                "area": 8967
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "4f7450ed-3f8e-448a-a18a-7d00d0e4f75f",
+          "scene_name": "06bd2cf800",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/02_pair_distance_4f7450ed.jpg",
+          "best_frame_file": "color/train/06bd2cf800/frame_000320.jpg",
+          "best_frame_score": 187.82505399689256,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the poster and the chair (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "poster",
+              "chair"
+            ],
+            "answer_value": "1.3",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/02_pair_distance_4f7450ed.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/06bd2cf800/frame_000320.png",
+            "drawn_instances": [
+              {
+                "object_name": "poster",
+                "instance_id": 32,
+                "bbox_2d": [
+                  478,
+                  77,
+                  552,
+                  126
+                ],
+                "instance_rank": 1,
+                "area": 3626
+              },
+              {
+                "object_name": "chair",
+                "instance_id": 9,
+                "bbox_2d": [
+                  210,
+                  191,
+                  302,
+                  368
+                ],
+                "instance_rank": 1,
+                "area": 16284
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "07e6f56969",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/07e6f56969.jpg",
+      "questions": [
+        {
+          "qa_id": "7ba2c4e5-fedb-419b-849e-eca48e985d23",
+          "scene_name": "07e6f56969",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/07e6f56969/01_mc_distance_compare_7ba2c4e5.jpg",
+          "best_frame_file": "color/train/07e6f56969/frame_000752.jpg",
+          "best_frame_score": 432.00298597591006,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (chair, towel, toilet paper, soap dispenser) is the closest to the toilet? If there are multiple instances of an object category, measure to the closest. Options: A. chair B. towel C. toilet paper D. soap dispenser Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "chair",
+              "towel",
+              "toilet paper",
+              "soap dispenser",
+              "toilet"
+            ],
+            "answer_value": "C",
+            "answer_object": "toilet paper",
+            "options_map": {
+              "A": "chair",
+              "B": "towel",
+              "C": "toilet paper",
+              "D": "soap dispenser"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/07e6f56969/01_mc_distance_compare_7ba2c4e5.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000752.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/07e6f56969/frame_000752.png",
+            "drawn_instances": [
+              {
+                "object_name": "chair",
+                "instance_id": 53,
+                "bbox_2d": [
+                  152,
+                  210,
+                  279,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 34163
+              },
+              {
+                "object_name": "towel",
+                "instance_id": 16,
+                "bbox_2d": [
+                  193,
+                  214,
+                  241,
+                  338
+                ],
+                "instance_rank": 1,
+                "area": 5952
+              },
+              {
+                "object_name": "toilet paper",
+                "instance_id": 62,
+                "bbox_2d": [
+                  283,
+                  188,
+                  316,
+                  216
+                ],
+                "instance_rank": 1,
+                "area": 924
+              },
+              {
+                "object_name": "soap dispenser",
+                "instance_id": 4,
+                "bbox_2d": [
+                  11,
+                  185,
+                  61,
+                  247
+                ],
+                "instance_rank": 1,
+                "area": 3100
+              },
+              {
+                "object_name": "toilet",
+                "instance_id": 63,
+                "bbox_2d": [
+                  358,
+                  242,
+                  445,
+                  323
+                ],
+                "instance_rank": 1,
+                "area": 7047
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "e3273b18-85a6-4436-acca-601e01983bb3",
+          "scene_name": "07e6f56969",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/07e6f56969/02_pair_distance_e3273b18.jpg",
+          "best_frame_file": "color/train/07e6f56969/frame_004364.jpg",
+          "best_frame_score": 459.65569812070476,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the door and the sink (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "door",
+              "sink"
+            ],
+            "answer_value": "1.1",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/07e6f56969/02_pair_distance_e3273b18.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004364.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/07e6f56969/frame_004364.png",
+            "drawn_instances": [
+              {
+                "object_name": "door",
+                "instance_id": 40,
+                "bbox_2d": [
+                  0,
+                  0,
+                  162,
+                  213
+                ],
+                "instance_rank": 1,
+                "area": 34506
+              },
+              {
+                "object_name": "sink",
+                "instance_id": 50,
+                "bbox_2d": [
+                  397,
+                  65,
+                  639,
+                  375
+                ],
+                "instance_rank": 1,
+                "area": 75020
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "07ff1c45bb",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/07ff1c45bb.jpg",
+      "questions": [
+        {
+          "qa_id": "24f54a74-66c6-4463-87d8-d72597d1121e",
+          "scene_name": "07ff1c45bb",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/07ff1c45bb/01_mc_distance_compare_24f54a74.jpg",
+          "best_frame_file": "color/train/07ff1c45bb/frame_002001.jpg",
+          "best_frame_score": 843.9049767561752,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (whiteboard, book, door, window) is the closest to the box? If there are multiple instances of an object category, measure to the closest. Options: A. whiteboard B. book C. door D. window Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "whiteboard",
+              "book",
+              "door",
+              "window",
+              "box"
+            ],
+            "answer_value": "B",
+            "answer_object": "book",
+            "options_map": {
+              "A": "whiteboard",
+              "B": "book",
+              "C": "door",
+              "D": "window"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/07ff1c45bb/01_mc_distance_compare_24f54a74.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07ff1c45bb/frame_002001.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/07ff1c45bb/frame_002001.png",
+            "drawn_instances": [
+              {
+                "object_name": "whiteboard",
+                "instance_id": 140,
+                "bbox_2d": [
+                  0,
+                  216,
+                  155,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 40765
+              },
+              {
+                "object_name": "book",
+                "instance_id": 50,
+                "bbox_2d": [
+                  615,
+                  408,
+                  639,
+                  461
+                ],
+                "instance_rank": 1,
+                "area": 1272
+              },
+              {
+                "object_name": "book",
+                "instance_id": 79,
+                "bbox_2d": [
+                  614,
+                  360,
+                  639,
+                  401
+                ],
+                "instance_rank": 2,
+                "area": 1025
+              },
+              {
+                "object_name": "book",
+                "instance_id": 69,
+                "bbox_2d": [
+                  516,
+                  351,
+                  540,
+                  393
+                ],
+                "instance_rank": 3,
+                "area": 1008
+              },
+              {
+                "object_name": "book",
+                "instance_id": 81,
+                "bbox_2d": [
+                  503,
+                  299,
+                  526,
+                  338
+                ],
+                "instance_rank": 4,
+                "area": 897
+              },
+              {
+                "object_name": "book",
+                "instance_id": 49,
+                "bbox_2d": [
+                  604,
+                  414,
+                  621,
+                  460
+                ],
+                "instance_rank": 5,
+                "area": 782
+              },
+              {
+                "object_name": "book",
+                "instance_id": 47,
+                "bbox_2d": [
+                  581,
+                  410,
+                  597,
+                  457
+                ],
+                "instance_rank": 6,
+                "area": 752
+              },
+              {
+                "object_name": "book",
+                "instance_id": 46,
+                "bbox_2d": [
+                  567,
+                  411,
+                  582,
+                  455
+                ],
+                "instance_rank": 7,
+                "area": 660
+              },
+              {
+                "object_name": "book",
+                "instance_id": 45,
+                "bbox_2d": [
+                  558,
+                  411,
+                  573,
+                  454
+                ],
+                "instance_rank": 8,
+                "area": 645
+              },
+              {
+                "object_name": "book",
+                "instance_id": 40,
+                "bbox_2d": [
+                  517,
+                  408,
+                  533,
+                  448
+                ],
+                "instance_rank": 9,
+                "area": 640
+              },
+              {
+                "object_name": "book",
+                "instance_id": 129,
+                "bbox_2d": [
+                  557,
+                  253,
+                  576,
+                  285
+                ],
+                "instance_rank": 10,
+                "area": 608
+              },
+              {
+                "object_name": "book",
+                "instance_id": 133,
+                "bbox_2d": [
+                  528,
+                  254,
+                  547,
+                  286
+                ],
+                "instance_rank": 11,
+                "area": 608
+              },
+              {
+                "object_name": "book",
+                "instance_id": 48,
+                "bbox_2d": [
+                  594,
+                  416,
+                  608,
+                  458
+                ],
+                "instance_rank": 12,
+                "area": 588
+              },
+              {
+                "object_name": "book",
+                "instance_id": 128,
+                "bbox_2d": [
+                  565,
+                  255,
+                  585,
+                  284
+                ],
+                "instance_rank": 13,
+                "area": 580
+              },
+              {
+                "object_name": "book",
+                "instance_id": 78,
+                "bbox_2d": [
+                  599,
+                  359,
+                  613,
+                  399
+                ],
+                "instance_rank": 14,
+                "area": 560
+              },
+              {
+                "object_name": "book",
+                "instance_id": 80,
+                "bbox_2d": [
+                  607,
+                  359,
+                  621,
+                  399
+                ],
+                "instance_rank": 15,
+                "area": 560
+              },
+              {
+                "object_name": "book",
+                "instance_id": 66,
+                "bbox_2d": [
+                  506,
+                  355,
+                  521,
+                  392
+                ],
+                "instance_rank": 16,
+                "area": 555
+              },
+              {
+                "object_name": "book",
+                "instance_id": 97,
+                "bbox_2d": [
+                  616,
+                  303,
+                  631,
+                  340
+                ],
+                "instance_rank": 17,
+                "area": 555
+              },
+              {
+                "object_name": "book",
+                "instance_id": 84,
+                "bbox_2d": [
+                  535,
+                  306,
+                  551,
+                  339
+                ],
+                "instance_rank": 18,
+                "area": 528
+              },
+              {
+                "object_name": "book",
+                "instance_id": 126,
+                "bbox_2d": [
+                  584,
+                  252,
+                  600,
+                  284
+                ],
+                "instance_rank": 19,
+                "area": 512
+              },
+              {
+                "object_name": "book",
+                "instance_id": 41,
+                "bbox_2d": [
+                  528,
+                  413,
+                  542,
+                  449
+                ],
+                "instance_rank": 20,
+                "area": 504
+              },
+              {
+                "object_name": "book",
+                "instance_id": 42,
+                "bbox_2d": [
+                  538,
+                  409,
+                  550,
+                  451
+                ],
+                "instance_rank": 21,
+                "area": 504
+              },
+              {
+                "object_name": "book",
+                "instance_id": 70,
+                "bbox_2d": [
+                  535,
+                  358,
+                  549,
+                  394
+                ],
+                "instance_rank": 22,
+                "area": 504
+              },
+              {
+                "object_name": "book",
+                "instance_id": 125,
+                "bbox_2d": [
+                  590,
+                  251,
+                  605,
+                  284
+                ],
+                "instance_rank": 23,
+                "area": 495
+              },
+              {
+                "object_name": "book",
+                "instance_id": 124,
+                "bbox_2d": [
+                  602,
+                  253,
+                  618,
+                  283
+                ],
+                "instance_rank": 24,
+                "area": 480
+              },
+              {
+                "object_name": "book",
+                "instance_id": 130,
+                "bbox_2d": [
+                  549,
+                  255,
+                  565,
+                  285
+                ],
+                "instance_rank": 25,
+                "area": 480
+              },
+              {
+                "object_name": "book",
+                "instance_id": 95,
+                "bbox_2d": [
+                  603,
+                  304,
+                  616,
+                  340
+                ],
+                "instance_rank": 26,
+                "area": 468
+              },
+              {
+                "object_name": "book",
+                "instance_id": 51,
+                "bbox_2d": [
+                  626,
+                  420,
+                  639,
+                  455
+                ],
+                "instance_rank": 27,
+                "area": 455
+              },
+              {
+                "object_name": "book",
+                "instance_id": 74,
+                "bbox_2d": [
+                  570,
+                  361,
+                  583,
+                  396
+                ],
+                "instance_rank": 28,
+                "area": 455
+              },
+              {
+                "object_name": "book",
+                "instance_id": 43,
+                "bbox_2d": [
+                  545,
+                  410,
+                  556,
+                  451
+                ],
+                "instance_rank": 29,
+                "area": 451
+              },
+              {
+                "object_name": "book",
+                "instance_id": 71,
+                "bbox_2d": [
+                  547,
+                  358,
+                  559,
+                  395
+                ],
+                "instance_rank": 30,
+                "area": 444
+              },
+              {
+                "object_name": "book",
+                "instance_id": 75,
+                "bbox_2d": [
+                  579,
+                  360,
+                  591,
+                  397
+                ],
+                "instance_rank": 31,
+                "area": 444
+              },
+              {
+                "object_name": "book",
+                "instance_id": 86,
+                "bbox_2d": [
+                  550,
+                  305,
+                  563,
+                  339
+                ],
+                "instance_rank": 32,
+                "area": 442
+              },
+              {
+                "object_name": "book",
+                "instance_id": 91,
+                "bbox_2d": [
+                  573,
+                  304,
+                  585,
+                  340
+                ],
+                "instance_rank": 33,
+                "area": 432
+              },
+              {
+                "object_name": "book",
+                "instance_id": 77,
+                "bbox_2d": [
+                  592,
+                  359,
+                  603,
+                  398
+                ],
+                "instance_rank": 34,
+                "area": 429
+              },
+              {
+                "object_name": "book",
+                "instance_id": 127,
+                "bbox_2d": [
+                  577,
+                  257,
+                  592,
+                  285
+                ],
+                "instance_rank": 35,
+                "area": 420
+              },
+              {
+                "object_name": "book",
+                "instance_id": 73,
+                "bbox_2d": [
+                  563,
+                  359,
+                  574,
+                  396
+                ],
+                "instance_rank": 36,
+                "area": 407
+              },
+              {
+                "object_name": "book",
+                "instance_id": 82,
+                "bbox_2d": [
+                  522,
+                  301,
+                  533,
+                  338
+                ],
+                "instance_rank": 37,
+                "area": 407
+              },
+              {
+                "object_name": "book",
+                "instance_id": 132,
+                "bbox_2d": [
+                  538,
+                  254,
+                  552,
+                  282
+                ],
+                "instance_rank": 38,
+                "area": 392
+              },
+              {
+                "object_name": "book",
+                "instance_id": 44,
+                "bbox_2d": [
+                  553,
+                  414,
+                  563,
+                  452
+                ],
+                "instance_rank": 39,
+                "area": 380
+              },
+              {
+                "object_name": "book",
+                "instance_id": 39,
+                "bbox_2d": [
+                  510,
+                  410,
+                  520,
+                  446
+                ],
+                "instance_rank": 40,
+                "area": 360
+              },
+              {
+                "object_name": "book",
+                "instance_id": 72,
+                "bbox_2d": [
+                  556,
+                  357,
+                  565,
+                  396
+                ],
+                "instance_rank": 41,
+                "area": 351
+              },
+              {
+                "object_name": "book",
+                "instance_id": 76,
+                "bbox_2d": [
+                  587,
+                  359,
+                  596,
+                  397
+                ],
+                "instance_rank": 42,
+                "area": 342
+              },
+              {
+                "object_name": "book",
+                "instance_id": 134,
+                "bbox_2d": [
+                  524,
+                  253,
+                  534,
+                  286
+                ],
+                "instance_rank": 43,
+                "area": 330
+              },
+              {
+                "object_name": "book",
+                "instance_id": 68,
+                "bbox_2d": [
+                  522,
+                  357,
+                  531,
+                  393
+                ],
+                "instance_rank": 44,
+                "area": 324
+              },
+              {
+                "object_name": "book",
+                "instance_id": 94,
+                "bbox_2d": [
+                  597,
+                  304,
+                  606,
+                  340
+                ],
+                "instance_rank": 45,
+                "area": 324
+              },
+              {
+                "object_name": "book",
+                "instance_id": 93,
+                "bbox_2d": [
+                  590,
+                  305,
+                  599,
+                  340
+                ],
+                "instance_rank": 46,
+                "area": 315
+              },
+              {
+                "object_name": "book",
+                "instance_id": 131,
+                "bbox_2d": [
+                  545,
+                  256,
+                  556,
+                  284
+                ],
+                "instance_rank": 47,
+                "area": 308
+              },
+              {
+                "object_name": "book",
+                "instance_id": 135,
+                "bbox_2d": [
+                  517,
+                  258,
+                  528,
+                  286
+                ],
+                "instance_rank": 48,
+                "area": 308
+              },
+              {
+                "object_name": "book",
+                "instance_id": 88,
+                "bbox_2d": [
+                  561,
+                  306,
+                  570,
+                  339
+                ],
+                "instance_rank": 49,
+                "area": 297
+              },
+              {
+                "object_name": "book",
+                "instance_id": 92,
+                "bbox_2d": [
+                  583,
+                  306,
+                  592,
+                  339
+                ],
+                "instance_rank": 50,
+                "area": 297
+              },
+              {
+                "object_name": "book",
+                "instance_id": 83,
+                "bbox_2d": [
+                  529,
+                  307,
+                  538,
+                  339
+                ],
+                "instance_rank": 51,
+                "area": 288
+              },
+              {
+                "object_name": "book",
+                "instance_id": 136,
+                "bbox_2d": [
+                  513,
+                  257,
+                  522,
+                  286
+                ],
+                "instance_rank": 52,
+                "area": 261
+              },
+              {
+                "object_name": "book",
+                "instance_id": 96,
+                "bbox_2d": [
+                  611,
+                  304,
+                  618,
+                  340
+                ],
+                "instance_rank": 53,
+                "area": 252
+              },
+              {
+                "object_name": "book",
+                "instance_id": 67,
+                "bbox_2d": [
+                  519,
+                  358,
+                  526,
+                  392
+                ],
+                "instance_rank": 54,
+                "area": 238
+              },
+              {
+                "object_name": "book",
+                "instance_id": 90,
+                "bbox_2d": [
+                  569,
+                  305,
+                  576,
+                  339
+                ],
+                "instance_rank": 55,
+                "area": 238
+              },
+              {
+                "object_name": "book",
+                "instance_id": 85,
+                "bbox_2d": [
+                  546,
+                  306,
+                  553,
+                  339
+                ],
+                "instance_rank": 56,
+                "area": 231
+              },
+              {
+                "object_name": "book",
+                "instance_id": 113,
+                "bbox_2d": [
+                  634,
+                  296,
+                  639,
+                  341
+                ],
+                "instance_rank": 57,
+                "area": 225
+              },
+              {
+                "object_name": "book",
+                "instance_id": 89,
+                "bbox_2d": [
+                  567,
+                  305,
+                  573,
+                  340
+                ],
+                "instance_rank": 58,
+                "area": 210
+              },
+              {
+                "object_name": "book",
+                "instance_id": 87,
+                "bbox_2d": [
+                  557,
+                  306,
+                  563,
+                  339
+                ],
+                "instance_rank": 59,
+                "area": 198
+              },
+              {
+                "object_name": "door",
+                "instance_id": 35,
+                "bbox_2d": [
+                  357,
+                  275,
+                  473,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 23664
+              },
+              {
+                "object_name": "door",
+                "instance_id": 139,
+                "bbox_2d": [
+                  146,
+                  260,
+                  245,
+                  479
+                ],
+                "instance_rank": 2,
+                "area": 21681
+              },
+              {
+                "object_name": "window",
+                "instance_id": 201,
+                "bbox_2d": [
+                  168,
+                  287,
+                  206,
+                  472
+                ],
+                "instance_rank": 1,
+                "area": 7030
+              },
+              {
+                "object_name": "window",
+                "instance_id": 192,
+                "bbox_2d": [
+                  413,
+                  298,
+                  449,
+                  479
+                ],
+                "instance_rank": 2,
+                "area": 6516
+              },
+              {
+                "object_name": "box",
+                "instance_id": 137,
+                "bbox_2d": [
+                  634,
+                  213,
+                  639,
+                  228
+                ],
+                "instance_rank": 1,
+                "area": 75
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "5ea959ca-2d46-40f7-834b-5f4df4470415",
+          "scene_name": "07ff1c45bb",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/07ff1c45bb/02_pair_distance_5ea959ca.jpg",
+          "best_frame_file": "color/train/07ff1c45bb/frame_004837.jpg",
+          "best_frame_score": 757.6218448482244,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the tv and the bookshelf (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "tv",
+              "bookshelf"
+            ],
+            "answer_value": "0.4",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/07ff1c45bb/02_pair_distance_5ea959ca.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07ff1c45bb/frame_004837.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/07ff1c45bb/frame_004837.png",
+            "drawn_instances": [
+              {
+                "object_name": "tv",
+                "instance_id": 204,
+                "bbox_2d": [
+                  341,
+                  0,
+                  639,
+                  435
+                ],
+                "instance_rank": 1,
+                "area": 129630
+              },
+              {
+                "object_name": "bookshelf",
+                "instance_id": 38,
+                "bbox_2d": [
+                  0,
+                  0,
+                  330,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 158070
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "1730c7d709",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/1730c7d709.jpg",
+      "questions": [
+        {
+          "qa_id": "73ed80ff-a5d1-4aad-a696-b19886ea2d90",
+          "scene_name": "1730c7d709",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1730c7d709/01_mc_distance_compare_73ed80ff.jpg",
+          "best_frame_file": "color/train/1730c7d709/frame_012663.jpg",
+          "best_frame_score": 763.3513561390771,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (table, chair, heater, office chair) is the closest to the telephone? If there are multiple instances of an object category, measure to the closest. Options: A. table B. chair C. heater D. office chair Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "table",
+              "chair",
+              "heater",
+              "office chair",
+              "telephone"
+            ],
+            "answer_value": "D",
+            "answer_object": "office chair",
+            "options_map": {
+              "A": "table",
+              "B": "chair",
+              "C": "heater",
+              "D": "office chair"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1730c7d709/01_mc_distance_compare_73ed80ff.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/1730c7d709/frame_012663.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/1730c7d709/frame_012663.png",
+            "drawn_instances": [
+              {
+                "object_name": "table",
+                "instance_id": 42,
+                "bbox_2d": [
+                  0,
+                  217,
+                  439,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 115018
+              },
+              {
+                "object_name": "chair",
+                "instance_id": 44,
+                "bbox_2d": [
+                  371,
+                  162,
+                  509,
+                  421
+                ],
+                "instance_rank": 1,
+                "area": 35742
+              },
+              {
+                "object_name": "chair",
+                "instance_id": 46,
+                "bbox_2d": [
+                  319,
+                  115,
+                  364,
+                  233
+                ],
+                "instance_rank": 2,
+                "area": 5310
+              },
+              {
+                "object_name": "heater",
+                "instance_id": 47,
+                "bbox_2d": [
+                  285,
+                  83,
+                  394,
+                  159
+                ],
+                "instance_rank": 1,
+                "area": 8284
+              },
+              {
+                "object_name": "heater",
+                "instance_id": 32,
+                "bbox_2d": [
+                  92,
+                  130,
+                  167,
+                  195
+                ],
+                "instance_rank": 2,
+                "area": 4875
+              },
+              {
+                "object_name": "office chair",
+                "instance_id": 45,
+                "bbox_2d": [
+                  62,
+                  153,
+                  131,
+                  281
+                ],
+                "instance_rank": 1,
+                "area": 8832
+              },
+              {
+                "object_name": "telephone",
+                "instance_id": 14,
+                "bbox_2d": [
+                  129,
+                  145,
+                  185,
+                  171
+                ],
+                "instance_rank": 1,
+                "area": 1456
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "84a361b5-15e5-4899-b31c-622b94adf71f",
+          "scene_name": "1730c7d709",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1730c7d709/02_pair_distance_84a361b5.jpg",
+          "best_frame_file": "color/train/1730c7d709/frame_004366.jpg",
+          "best_frame_score": 340.65738308493985,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the stapler and the printer (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "stapler",
+              "printer"
+            ],
+            "answer_value": "1.1",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1730c7d709/02_pair_distance_84a361b5.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/1730c7d709/frame_004366.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/1730c7d709/frame_004366.png",
+            "drawn_instances": [
+              {
+                "object_name": "stapler",
+                "instance_id": 64,
+                "bbox_2d": [
+                  494,
+                  360,
+                  574,
+                  439
+                ],
+                "instance_rank": 1,
+                "area": 6320
+              },
+              {
+                "object_name": "printer",
+                "instance_id": 61,
+                "bbox_2d": [
+                  90,
+                  5,
+                  379,
+                  241
+                ],
+                "instance_rank": 1,
+                "area": 68204
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "192ab15daf",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/192ab15daf.jpg",
+      "questions": [
+        {
+          "qa_id": "d1941c94-9572-405c-abdb-c069bc001263",
+          "scene_name": "192ab15daf",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/192ab15daf/01_mc_distance_compare_d1941c94.jpg",
+          "best_frame_file": "color/train/192ab15daf/frame_005842.jpg",
+          "best_frame_score": 356.1392641569669,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (office chair, heater, pillow, monitor) is the closest to the bookshelf? If there are multiple instances of an object category, measure to the closest. Options: A. office chair B. heater C. pillow D. monitor Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "office chair",
+              "heater",
+              "pillow",
+              "monitor",
+              "bookshelf"
+            ],
+            "answer_value": "B",
+            "answer_object": "heater",
+            "options_map": {
+              "A": "office chair",
+              "B": "heater",
+              "C": "pillow",
+              "D": "monitor"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/192ab15daf/01_mc_distance_compare_d1941c94.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/192ab15daf/frame_005842.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/192ab15daf/frame_005842.png",
+            "drawn_instances": [
+              {
+                "object_name": "office chair",
+                "instance_id": 57,
+                "bbox_2d": [
+                  91,
+                  362,
+                  217,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 14742
+              },
+              {
+                "object_name": "heater",
+                "instance_id": 48,
+                "bbox_2d": [
+                  477,
+                  368,
+                  484,
+                  369
+                ],
+                "instance_rank": 1,
+                "area": 7
+              },
+              {
+                "object_name": "pillow",
+                "instance_id": 56,
+                "bbox_2d": [
+                  36,
+                  351,
+                  97,
+                  419
+                ],
+                "instance_rank": 1,
+                "area": 4148
+              },
+              {
+                "object_name": "monitor",
+                "instance_id": 46,
+                "bbox_2d": [
+                  0,
+                  339,
+                  80,
+                  413
+                ],
+                "instance_rank": 1,
+                "area": 5920
+              },
+              {
+                "object_name": "bookshelf",
+                "instance_id": 80,
+                "bbox_2d": [
+                  461,
+                  381,
+                  545,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 8232
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "0e281f1d-33b4-412c-a4bd-5a227fdc4741",
+          "scene_name": "192ab15daf",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/192ab15daf/02_pair_distance_0e281f1d.jpg",
+          "best_frame_file": "color/train/192ab15daf/frame_018989.jpg",
+          "best_frame_score": 520.374594444843,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the table and the curtain (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "table",
+              "curtain"
+            ],
+            "answer_value": "0.8",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/192ab15daf/02_pair_distance_0e281f1d.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/192ab15daf/frame_018989.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/192ab15daf/frame_018989.png",
+            "drawn_instances": [
+              {
+                "object_name": "table",
+                "instance_id": 45,
+                "bbox_2d": [
+                  0,
+                  126,
+                  186,
+                  468
+                ],
+                "instance_rank": 1,
+                "area": 63612
+              },
+              {
+                "object_name": "curtain",
+                "instance_id": 29,
+                "bbox_2d": [
+                  357,
+                  0,
+                  639,
+                  255
+                ],
+                "instance_rank": 1,
+                "area": 71910
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "1b379f1114",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/1b379f1114.jpg",
+      "questions": [
+        {
+          "qa_id": "2d134e11-58b8-402d-9c26-0d747d47a605",
+          "scene_name": "1b379f1114",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1b379f1114/01_mc_distance_compare_2d134e11.jpg",
+          "best_frame_file": "color/train/1b379f1114/frame_006258.jpg",
+          "best_frame_score": 238.64614190175809,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (table lamp, box, blanket, window) is the closest to the laptop? If there are multiple instances of an object category, measure to the closest. Options: A. table lamp B. box C. blanket D. window Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "table lamp",
+              "box",
+              "blanket",
+              "window",
+              "laptop"
+            ],
+            "answer_value": "D",
+            "answer_object": "window",
+            "options_map": {
+              "A": "table lamp",
+              "B": "box",
+              "C": "blanket",
+              "D": "window"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1b379f1114/01_mc_distance_compare_2d134e11.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/1b379f1114/frame_006258.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/1b379f1114/frame_006258.png",
+            "drawn_instances": [
+              {
+                "object_name": "table lamp",
+                "instance_id": 68,
+                "bbox_2d": [
+                  132,
+                  10,
+                  155,
+                  23
+                ],
+                "instance_rank": 1,
+                "area": 299
+              },
+              {
+                "object_name": "box",
+                "instance_id": 94,
+                "bbox_2d": [
+                  139,
+                  263,
+                  141,
+                  264
+                ],
+                "instance_rank": 1,
+                "area": 2
+              },
+              {
+                "object_name": "blanket",
+                "instance_id": 98,
+                "bbox_2d": [
+                  89,
+                  121,
+                  128,
+                  151
+                ],
+                "instance_rank": 1,
+                "area": 1170
+              },
+              {
+                "object_name": "window",
+                "instance_id": 35,
+                "bbox_2d": [
+                  0,
+                  74,
+                  123,
+                  178
+                ],
+                "instance_rank": 1,
+                "area": 12792
+              },
+              {
+                "object_name": "window",
+                "instance_id": 34,
+                "bbox_2d": [
+                  0,
+                  3,
+                  125,
+                  83
+                ],
+                "instance_rank": 2,
+                "area": 10000
+              },
+              {
+                "object_name": "laptop",
+                "instance_id": 45,
+                "bbox_2d": [
+                  260,
+                  231,
+                  300,
+                  342
+                ],
+                "instance_rank": 1,
+                "area": 4440
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "8ed28031-ece7-414e-a474-cb3484ddcf96",
+          "scene_name": "1b379f1114",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1b379f1114/02_pair_distance_8ed28031.jpg",
+          "best_frame_file": "color/train/1b379f1114/frame_003610.jpg",
+          "best_frame_score": 370.3139390317529,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the cabinet and the cutting board (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "cabinet",
+              "cutting board"
+            ],
+            "answer_value": "1.4",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1b379f1114/02_pair_distance_8ed28031.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/1b379f1114/frame_003610.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/1b379f1114/frame_003610.png",
+            "drawn_instances": [
+              {
+                "object_name": "cabinet",
+                "instance_id": 175,
+                "bbox_2d": [
+                  22,
+                  0,
+                  380,
+                  348
+                ],
+                "instance_rank": 1,
+                "area": 124584
+              },
+              {
+                "object_name": "cutting board",
+                "instance_id": 86,
+                "bbox_2d": [
+                  212,
+                  407,
+                  219,
+                  450
+                ],
+                "instance_rank": 1,
+                "area": 301
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "1d34f56de8",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/1d34f56de8.jpg",
+      "questions": [
+        {
+          "qa_id": "fb4a8852-5bd5-4572-ac71-a48236c1606c",
+          "scene_name": "1d34f56de8",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1d34f56de8/01_mc_distance_compare_fb4a8852.jpg",
+          "best_frame_file": "color/train/1d34f56de8/frame_008951.jpg",
+          "best_frame_score": 702.1321140986001,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (whiteboard, office chair, keyboard, box) is the closest to the file folder? If there are multiple instances of an object category, measure to the closest. Options: A. whiteboard B. office chair C. keyboard D. box Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "whiteboard",
+              "office chair",
+              "keyboard",
+              "box",
+              "file folder"
+            ],
+            "answer_value": "B",
+            "answer_object": "office chair",
+            "options_map": {
+              "A": "whiteboard",
+              "B": "office chair",
+              "C": "keyboard",
+              "D": "box"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1d34f56de8/01_mc_distance_compare_fb4a8852.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/1d34f56de8/frame_008951.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/1d34f56de8/frame_008951.png",
+            "drawn_instances": [
+              {
+                "object_name": "whiteboard",
+                "instance_id": 57,
+                "bbox_2d": [
+                  432,
+                  0,
+                  639,
+                  256
+                ],
+                "instance_rank": 1,
+                "area": 52992
+              },
+              {
+                "object_name": "office chair",
+                "instance_id": 5,
+                "bbox_2d": [
+                  20,
+                  245,
+                  331,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 72774
+              },
+              {
+                "object_name": "office chair",
+                "instance_id": 6,
+                "bbox_2d": [
+                  0,
+                  113,
+                  87,
+                  204
+                ],
+                "instance_rank": 2,
+                "area": 7917
+              },
+              {
+                "object_name": "office chair",
+                "instance_id": 3,
+                "bbox_2d": [
+                  35,
+                  87,
+                  94,
+                  179
+                ],
+                "instance_rank": 3,
+                "area": 5428
+              },
+              {
+                "object_name": "office chair",
+                "instance_id": 4,
+                "bbox_2d": [
+                  0,
+                  258,
+                  35,
+                  392
+                ],
+                "instance_rank": 4,
+                "area": 4690
+              },
+              {
+                "object_name": "keyboard",
+                "instance_id": 148,
+                "bbox_2d": [
+                  164,
+                  253,
+                  288,
+                  312
+                ],
+                "instance_rank": 1,
+                "area": 7316
+              },
+              {
+                "object_name": "keyboard",
+                "instance_id": 130,
+                "bbox_2d": [
+                  375,
+                  213,
+                  398,
+                  226
+                ],
+                "instance_rank": 2,
+                "area": 299
+              },
+              {
+                "object_name": "keyboard",
+                "instance_id": 123,
+                "bbox_2d": [
+                  30,
+                  132,
+                  41,
+                  134
+                ],
+                "instance_rank": 3,
+                "area": 22
+              },
+              {
+                "object_name": "box",
+                "instance_id": 105,
+                "bbox_2d": [
+                  0,
+                  159,
+                  99,
+                  186
+                ],
+                "instance_rank": 1,
+                "area": 2673
+              },
+              {
+                "object_name": "box",
+                "instance_id": 106,
+                "bbox_2d": [
+                  29,
+                  150,
+                  92,
+                  173
+                ],
+                "instance_rank": 2,
+                "area": 1449
+              },
+              {
+                "object_name": "file folder",
+                "instance_id": 111,
+                "bbox_2d": [
+                  16,
+                  86,
+                  43,
+                  117
+                ],
+                "instance_rank": 1,
+                "area": 837
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "c32d8889-11b1-41e3-9bb7-14909ac7a00f",
+          "scene_name": "1d34f56de8",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1d34f56de8/02_pair_distance_c32d8889.jpg",
+          "best_frame_file": "color/train/1d34f56de8/frame_010278.jpg",
+          "best_frame_score": 426.90474710949945,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the headphones and the window (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "headphones",
+              "window"
+            ],
+            "answer_value": "1.7",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/1d34f56de8/02_pair_distance_c32d8889.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/1d34f56de8/frame_010278.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/1d34f56de8/frame_010278.png",
+            "drawn_instances": [
+              {
+                "object_name": "headphones",
+                "instance_id": 146,
+                "bbox_2d": [
+                  90,
+                  257,
+                  144,
+                  327
+                ],
+                "instance_rank": 1,
+                "area": 3780
+              },
+              {
+                "object_name": "window",
+                "instance_id": 9,
+                "bbox_2d": [
+                  245,
+                  0,
+                  618,
+                  358
+                ],
+                "instance_rank": 1,
+                "area": 133534
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "268513240f",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/268513240f.jpg",
+      "questions": [
+        {
+          "qa_id": "441fc12b-6e2e-4501-ab5a-9b4dfde83a1a",
+          "scene_name": "268513240f",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/268513240f/01_pair_distance_441fc12b.jpg",
+          "best_frame_file": "color/train/268513240f/frame_008408.jpg",
+          "best_frame_score": 687.2543253555002,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the door and the bed (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "door",
+              "bed"
+            ],
+            "answer_value": "0.9",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/268513240f/01_pair_distance_441fc12b.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/268513240f/frame_008408.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/268513240f/frame_008408.png",
+            "drawn_instances": [
+              {
+                "object_name": "door",
+                "instance_id": 26,
+                "bbox_2d": [
+                  488,
+                  0,
+                  639,
+                  258
+                ],
+                "instance_rank": 1,
+                "area": 38958
+              },
+              {
+                "object_name": "bed",
+                "instance_id": 17,
+                "bbox_2d": [
+                  0,
+                  0,
+                  501,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 239979
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "276d5838-9651-465e-bf21-732cda25002e",
+          "scene_name": "268513240f",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/268513240f/02_pair_distance_276d5838.jpg",
+          "best_frame_file": "color/train/268513240f/frame_001051.jpg",
+          "best_frame_score": 612.185225752686,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the shelf and the blanket (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "shelf",
+              "blanket"
+            ],
+            "answer_value": "0.8",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/268513240f/02_pair_distance_276d5838.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/268513240f/frame_001051.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/268513240f/frame_001051.png",
+            "drawn_instances": [
+              {
+                "object_name": "shelf",
+                "instance_id": 8,
+                "bbox_2d": [
+                  0,
+                  0,
+                  189,
+                  293
+                ],
+                "instance_rank": 1,
+                "area": 55377
+              },
+              {
+                "object_name": "blanket",
+                "instance_id": 21,
+                "bbox_2d": [
+                  64,
+                  232,
+                  639,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 142025
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "3e9a598891",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/3e9a598891.jpg",
+      "questions": [
+        {
+          "qa_id": "4ec547c2-5dd0-45e1-b101-bce11fca0572",
+          "scene_name": "3e9a598891",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/3e9a598891/01_mc_distance_compare_4ec547c2.jpg",
+          "best_frame_file": "color/train/3e9a598891/frame_008577.jpg",
+          "best_frame_score": 1100.1963986829214,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (plant pot, heater, cabinet, monitor) is the closest to the window? If there are multiple instances of an object category, measure to the closest. Options: A. plant pot B. heater C. cabinet D. monitor Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "plant pot",
+              "heater",
+              "cabinet",
+              "monitor",
+              "window"
+            ],
+            "answer_value": "B",
+            "answer_object": "heater",
+            "options_map": {
+              "A": "plant pot",
+              "B": "heater",
+              "C": "cabinet",
+              "D": "monitor"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/3e9a598891/01_mc_distance_compare_4ec547c2.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/3e9a598891/frame_008577.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/3e9a598891/frame_008577.png",
+            "drawn_instances": [
+              {
+                "object_name": "plant pot",
+                "instance_id": 34,
+                "bbox_2d": [
+                  275,
+                  317,
+                  359,
+                  418
+                ],
+                "instance_rank": 1,
+                "area": 8484
+              },
+              {
+                "object_name": "heater",
+                "instance_id": 18,
+                "bbox_2d": [
+                  370,
+                  209,
+                  639,
+                  450
+                ],
+                "instance_rank": 1,
+                "area": 64829
+              },
+              {
+                "object_name": "heater",
+                "instance_id": 28,
+                "bbox_2d": [
+                  347,
+                  192,
+                  361,
+                  199
+                ],
+                "instance_rank": 2,
+                "area": 98
+              },
+              {
+                "object_name": "cabinet",
+                "instance_id": 35,
+                "bbox_2d": [
+                  1,
+                  283,
+                  602,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 117796
+              },
+              {
+                "object_name": "monitor",
+                "instance_id": 29,
+                "bbox_2d": [
+                  0,
+                  127,
+                  215,
+                  299
+                ],
+                "instance_rank": 1,
+                "area": 36980
+              },
+              {
+                "object_name": "monitor",
+                "instance_id": 30,
+                "bbox_2d": [
+                  171,
+                  112,
+                  346,
+                  249
+                ],
+                "instance_rank": 2,
+                "area": 23975
+              },
+              {
+                "object_name": "window",
+                "instance_id": 44,
+                "bbox_2d": [
+                  385,
+                  0,
+                  639,
+                  167
+                ],
+                "instance_rank": 1,
+                "area": 42418
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "c621eb94-c4dd-4a7f-80fa-d254285d3727",
+          "scene_name": "3e9a598891",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/3e9a598891/02_pair_distance_c621eb94.jpg",
+          "best_frame_file": "color/train/3e9a598891/frame_004980.jpg",
+          "best_frame_score": 397.95995214079176,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the blinds and the chair (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "blinds",
+              "chair"
+            ],
+            "answer_value": "2.6",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/3e9a598891/02_pair_distance_c621eb94.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/3e9a598891/frame_004980.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/3e9a598891/frame_004980.png",
+            "drawn_instances": [
+              {
+                "object_name": "blinds",
+                "instance_id": 49,
+                "bbox_2d": [
+                  304,
+                  11,
+                  639,
+                  200
+                ],
+                "instance_rank": 1,
+                "area": 63315
+              },
+              {
+                "object_name": "chair",
+                "instance_id": 51,
+                "bbox_2d": [
+                  62,
+                  313,
+                  191,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 21414
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "3ff873c77e",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/3ff873c77e.jpg",
+      "questions": [
+        {
+          "qa_id": "79255387-9b1c-490a-a5f5-4fbb6d76d25f",
+          "scene_name": "3ff873c77e",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/3ff873c77e/01_pair_distance_79255387.jpg",
+          "best_frame_file": "color/train/3ff873c77e/frame_001977.jpg",
+          "best_frame_score": 505.79376418850075,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the cabinet and the table (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "cabinet",
+              "table"
+            ],
+            "answer_value": "0.7",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/3ff873c77e/01_pair_distance_79255387.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/3ff873c77e/frame_001977.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/3ff873c77e/frame_001977.png",
+            "drawn_instances": [
+              {
+                "object_name": "cabinet",
+                "instance_id": 59,
+                "bbox_2d": [
+                  0,
+                  75,
+                  183,
+                  405
+                ],
+                "instance_rank": 1,
+                "area": 60390
+              },
+              {
+                "object_name": "table",
+                "instance_id": 56,
+                "bbox_2d": [
+                  350,
+                  245,
+                  639,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 67626
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "93b69304-b128-4e08-b333-772a3e2f59aa",
+          "scene_name": "3ff873c77e",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/3ff873c77e/02_pair_distance_93b69304.jpg",
+          "best_frame_file": "color/train/3ff873c77e/frame_000790.jpg",
+          "best_frame_score": 346.1236512073001,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the sink and the pot (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "sink",
+              "pot"
+            ],
+            "answer_value": "0.5",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/3ff873c77e/02_pair_distance_93b69304.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/3ff873c77e/frame_000790.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/3ff873c77e/frame_000790.png",
+            "drawn_instances": [
+              {
+                "object_name": "sink",
+                "instance_id": 15,
+                "bbox_2d": [
+                  270,
+                  158,
+                  639,
+                  344
+                ],
+                "instance_rank": 1,
+                "area": 68634
+              },
+              {
+                "object_name": "pot",
+                "instance_id": 3,
+                "bbox_2d": [
+                  0,
+                  81,
+                  118,
+                  141
+                ],
+                "instance_rank": 1,
+                "area": 7080
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "469f112e38",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/469f112e38.jpg",
+      "questions": [
+        {
+          "qa_id": "6b33a43c-1378-4f8a-95cf-823589cee19c",
+          "scene_name": "469f112e38",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/469f112e38/01_pair_distance_6b33a43c.jpg",
+          "best_frame_file": "color/train/469f112e38/frame_003894.jpg",
+          "best_frame_score": 319.83559459213484,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the trash can and the jacket (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "trash can",
+              "jacket"
+            ],
+            "answer_value": "0.8",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/469f112e38/01_pair_distance_6b33a43c.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/469f112e38/frame_003894.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/469f112e38/frame_003894.png",
+            "drawn_instances": [
+              {
+                "object_name": "trash can",
+                "instance_id": 178,
+                "bbox_2d": [
+                  185,
+                  219,
+                  256,
+                  330
+                ],
+                "instance_rank": 1,
+                "area": 7881
+              },
+              {
+                "object_name": "jacket",
+                "instance_id": 112,
+                "bbox_2d": [
+                  394,
+                  136,
+                  597,
+                  399
+                ],
+                "instance_rank": 1,
+                "area": 53389
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "bc70b8b8-4cb6-4172-b0b0-5d330514b1f2",
+          "scene_name": "469f112e38",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/469f112e38/02_pair_distance_bc70b8b8.jpg",
+          "best_frame_file": "color/train/469f112e38/frame_006165.jpg",
+          "best_frame_score": 319.45879508400424,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the curtain and the sink (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "curtain",
+              "sink"
+            ],
+            "answer_value": "0.8",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/469f112e38/02_pair_distance_bc70b8b8.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/469f112e38/frame_006165.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/469f112e38/frame_006165.png",
+            "drawn_instances": [
+              {
+                "object_name": "curtain",
+                "instance_id": 202,
+                "bbox_2d": [
+                  530,
+                  0,
+                  639,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 52211
+              },
+              {
+                "object_name": "sink",
+                "instance_id": 7,
+                "bbox_2d": [
+                  0,
+                  437,
+                  197,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 8274
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "51dc4178bd",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/51dc4178bd.jpg",
+      "questions": [
+        {
+          "qa_id": "3c3ae578-768c-4875-9111-4fc8a20757c2",
+          "scene_name": "51dc4178bd",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/51dc4178bd/01_pair_distance_3c3ae578.jpg",
+          "best_frame_file": "color/train/51dc4178bd/frame_007145.jpg",
+          "best_frame_score": 411.0575731052866,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the backpack and the window (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "backpack",
+              "window"
+            ],
+            "answer_value": "0.9",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/51dc4178bd/01_pair_distance_3c3ae578.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/51dc4178bd/frame_007145.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/51dc4178bd/frame_007145.png",
+            "drawn_instances": [
+              {
+                "object_name": "backpack",
+                "instance_id": 54,
+                "bbox_2d": [
+                  418,
+                  266,
+                  610,
+                  414
+                ],
+                "instance_rank": 1,
+                "area": 28416
+              },
+              {
+                "object_name": "window",
+                "instance_id": 13,
+                "bbox_2d": [
+                  0,
+                  0,
+                  175,
+                  336
+                ],
+                "instance_rank": 1,
+                "area": 58800
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "c3419007-ac20-4c3a-8ccb-0fdf66741ba3",
+          "scene_name": "51dc4178bd",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/51dc4178bd/02_pair_distance_c3419007.jpg",
+          "best_frame_file": "color/train/51dc4178bd/frame_008289.jpg",
+          "best_frame_score": 381.8101106196852,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the bed and the chair (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "bed",
+              "chair"
+            ],
+            "answer_value": "1.3",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/51dc4178bd/02_pair_distance_c3419007.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/51dc4178bd/frame_008289.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/51dc4178bd/frame_008289.png",
+            "drawn_instances": [
+              {
+                "object_name": "bed",
+                "instance_id": 27,
+                "bbox_2d": [
+                  0,
+                  93,
+                  223,
+                  399
+                ],
+                "instance_rank": 1,
+                "area": 68238
+              },
+              {
+                "object_name": "chair",
+                "instance_id": 8,
+                "bbox_2d": [
+                  528,
+                  255,
+                  639,
+                  386
+                ],
+                "instance_rank": 1,
+                "area": 14541
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "81a82c3618",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/81a82c3618.jpg",
+      "questions": [
+        {
+          "qa_id": "e58b072a-eec7-4322-b2d0-38ebeacce485",
+          "scene_name": "81a82c3618",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/81a82c3618/01_pair_distance_e58b072a.jpg",
+          "best_frame_file": "color/train/81a82c3618/frame_002274.jpg",
+          "best_frame_score": 415.05080654508305,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the microwave and the sink (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "microwave",
+              "sink"
+            ],
+            "answer_value": "0.4",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/81a82c3618/01_pair_distance_e58b072a.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/81a82c3618/frame_002274.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/81a82c3618/frame_002274.png",
+            "drawn_instances": [
+              {
+                "object_name": "microwave",
+                "instance_id": 83,
+                "bbox_2d": [
+                  0,
+                  0,
+                  161,
+                  105
+                ],
+                "instance_rank": 1,
+                "area": 16905
+              },
+              {
+                "object_name": "sink",
+                "instance_id": 19,
+                "bbox_2d": [
+                  65,
+                  302,
+                  524,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 81243
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "7c69ef7c-a6e7-45cf-bb42-75415c1e05f4",
+          "scene_name": "81a82c3618",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/81a82c3618/02_pair_distance_7c69ef7c.jpg",
+          "best_frame_file": "color/train/81a82c3618/frame_005912.jpg",
+          "best_frame_score": 143.93419530429253,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the microwave and the light switch (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "microwave",
+              "light switch"
+            ],
+            "answer_value": "1.5",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/81a82c3618/02_pair_distance_7c69ef7c.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/81a82c3618/frame_005912.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/81a82c3618/frame_005912.png",
+            "drawn_instances": [
+              {
+                "object_name": "microwave",
+                "instance_id": 83,
+                "bbox_2d": [
+                  565,
+                  145,
+                  639,
+                  290
+                ],
+                "instance_rank": 1,
+                "area": 10730
+              },
+              {
+                "object_name": "light switch",
+                "instance_id": 14,
+                "bbox_2d": [
+                  0,
+                  388,
+                  37,
+                  432
+                ],
+                "instance_rank": 1,
+                "area": 1628
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "aaa11940d3",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/aaa11940d3.jpg",
+      "questions": [
+        {
+          "qa_id": "5c4f6d1d-d5f3-4c07-990b-3660779d6f22",
+          "scene_name": "aaa11940d3",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/aaa11940d3/01_mc_distance_compare_5c4f6d1d.jpg",
+          "best_frame_file": "color/train/aaa11940d3/frame_000000.jpg",
+          "best_frame_score": 616.8037867575093,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (jacket, window, keyboard, monitor) is the closest to the blinds? If there are multiple instances of an object category, measure to the closest. Options: A. jacket B. window C. keyboard D. monitor Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "jacket",
+              "window",
+              "keyboard",
+              "monitor",
+              "blinds"
+            ],
+            "answer_value": "B",
+            "answer_object": "window",
+            "options_map": {
+              "A": "jacket",
+              "B": "window",
+              "C": "keyboard",
+              "D": "monitor"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/aaa11940d3/01_mc_distance_compare_5c4f6d1d.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/aaa11940d3/frame_000000.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/aaa11940d3/frame_000000.png",
+            "drawn_instances": [
+              {
+                "object_name": "jacket",
+                "instance_id": 16,
+                "bbox_2d": [
+                  105,
+                  215,
+                  197,
+                  307
+                ],
+                "instance_rank": 1,
+                "area": 8464
+              },
+              {
+                "object_name": "window",
+                "instance_id": 45,
+                "bbox_2d": [
+                  386,
+                  0,
+                  631,
+                  179
+                ],
+                "instance_rank": 1,
+                "area": 43855
+              },
+              {
+                "object_name": "window",
+                "instance_id": 43,
+                "bbox_2d": [
+                  249,
+                  30,
+                  380,
+                  236
+                ],
+                "instance_rank": 2,
+                "area": 26986
+              },
+              {
+                "object_name": "window",
+                "instance_id": 44,
+                "bbox_2d": [
+                  195,
+                  47,
+                  250,
+                  219
+                ],
+                "instance_rank": 3,
+                "area": 9460
+              },
+              {
+                "object_name": "keyboard",
+                "instance_id": 33,
+                "bbox_2d": [
+                  100,
+                  304,
+                  204,
+                  325
+                ],
+                "instance_rank": 1,
+                "area": 2184
+              },
+              {
+                "object_name": "keyboard",
+                "instance_id": 22,
+                "bbox_2d": [
+                  363,
+                  271,
+                  401,
+                  297
+                ],
+                "instance_rank": 2,
+                "area": 988
+              },
+              {
+                "object_name": "keyboard",
+                "instance_id": 31,
+                "bbox_2d": [
+                  195,
+                  282,
+                  212,
+                  284
+                ],
+                "instance_rank": 3,
+                "area": 34
+              },
+              {
+                "object_name": "monitor",
+                "instance_id": 39,
+                "bbox_2d": [
+                  199,
+                  197,
+                  306,
+                  301
+                ],
+                "instance_rank": 1,
+                "area": 11128
+              },
+              {
+                "object_name": "monitor",
+                "instance_id": 15,
+                "bbox_2d": [
+                  352,
+                  187,
+                  416,
+                  289
+                ],
+                "instance_rank": 2,
+                "area": 6528
+              },
+              {
+                "object_name": "blinds",
+                "instance_id": 42,
+                "bbox_2d": [
+                  570,
+                  0,
+                  639,
+                  257
+                ],
+                "instance_rank": 1,
+                "area": 17733
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "c02e0b28-8e16-452d-a6c4-06c24736b8b9",
+          "scene_name": "aaa11940d3",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/aaa11940d3/02_pair_distance_c02e0b28.jpg",
+          "best_frame_file": "color/train/aaa11940d3/frame_000000.jpg",
+          "best_frame_score": 183.82592226599198,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the heater and the jacket (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "heater",
+              "jacket"
+            ],
+            "answer_value": "1.8",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/aaa11940d3/02_pair_distance_c02e0b28.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/aaa11940d3/frame_000000.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/aaa11940d3/frame_000000.png",
+            "drawn_instances": [
+              {
+                "object_name": "heater",
+                "instance_id": 30,
+                "bbox_2d": [
+                  507,
+                  295,
+                  631,
+                  363
+                ],
+                "instance_rank": 1,
+                "area": 8432
+              },
+              {
+                "object_name": "jacket",
+                "instance_id": 16,
+                "bbox_2d": [
+                  105,
+                  215,
+                  197,
+                  307
+                ],
+                "instance_rank": 1,
+                "area": 8464
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "b73f5cdc41",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/b73f5cdc41.jpg",
+      "questions": [
+        {
+          "qa_id": "57767ca5-f2a7-4137-ac5a-05add4d81bb2",
+          "scene_name": "b73f5cdc41",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/b73f5cdc41/01_pair_distance_57767ca5.jpg",
+          "best_frame_file": "color/train/b73f5cdc41/frame_000893.jpg",
+          "best_frame_score": 350.74098889538965,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the sink and the microwave (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "sink",
+              "microwave"
+            ],
+            "answer_value": "1.3",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/b73f5cdc41/01_pair_distance_57767ca5.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/b73f5cdc41/frame_000893.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/b73f5cdc41/frame_000893.png",
+            "drawn_instances": [
+              {
+                "object_name": "sink",
+                "instance_id": 35,
+                "bbox_2d": [
+                  329,
+                  284,
+                  639,
+                  453
+                ],
+                "instance_rank": 1,
+                "area": 52390
+              },
+              {
+                "object_name": "microwave",
+                "instance_id": 27,
+                "bbox_2d": [
+                  0,
+                  0,
+                  128,
+                  116
+                ],
+                "instance_rank": 1,
+                "area": 14848
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "4ed7b73d-e5b8-49b3-9626-3ec652f5bbe7",
+          "scene_name": "b73f5cdc41",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/b73f5cdc41/02_pair_distance_4ed7b73d.jpg",
+          "best_frame_file": "color/train/b73f5cdc41/frame_002169.jpg",
+          "best_frame_score": 200.08234561250345,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the window and the tap (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "window",
+              "tap"
+            ],
+            "answer_value": "3.9",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/b73f5cdc41/02_pair_distance_4ed7b73d.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/b73f5cdc41/frame_002169.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/b73f5cdc41/frame_002169.png",
+            "drawn_instances": [
+              {
+                "object_name": "window",
+                "instance_id": 39,
+                "bbox_2d": [
+                  504,
+                  0,
+                  639,
+                  266
+                ],
+                "instance_rank": 1,
+                "area": 35910
+              },
+              {
+                "object_name": "tap",
+                "instance_id": 36,
+                "bbox_2d": [
+                  330,
+                  207,
+                  337,
+                  223
+                ],
+                "instance_rank": 1,
+                "area": 112
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "c465f388d1",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/c465f388d1.jpg",
+      "questions": [
+        {
+          "qa_id": "c6437a4d-e7bc-4150-a816-307b334adfdc",
+          "scene_name": "c465f388d1",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/c465f388d1/01_pair_distance_c6437a4d.jpg",
+          "best_frame_file": "color/train/c465f388d1/frame_011759.jpg",
+          "best_frame_score": 430.27342308762616,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the bed and the office chair (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "bed",
+              "office chair"
+            ],
+            "answer_value": "0.8",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/c465f388d1/01_pair_distance_c6437a4d.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/c465f388d1/frame_011759.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/c465f388d1/frame_011759.png",
+            "drawn_instances": [
+              {
+                "object_name": "bed",
+                "instance_id": 73,
+                "bbox_2d": [
+                  0,
+                  112,
+                  193,
+                  399
+                ],
+                "instance_rank": 1,
+                "area": 55391
+              },
+              {
+                "object_name": "office chair",
+                "instance_id": 2,
+                "bbox_2d": [
+                  482,
+                  237,
+                  639,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 37994
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "009af671-ab51-42bd-8fd2-2e5d8eae8ff7",
+          "scene_name": "c465f388d1",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/c465f388d1/02_pair_distance_009af671.jpg",
+          "best_frame_file": "color/train/c465f388d1/frame_004975.jpg",
+          "best_frame_score": 381.32163283316027,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the backpack and the curtain (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "backpack",
+              "curtain"
+            ],
+            "answer_value": "1.9",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/c465f388d1/02_pair_distance_009af671.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/c465f388d1/frame_004975.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/c465f388d1/frame_004975.png",
+            "drawn_instances": [
+              {
+                "object_name": "backpack",
+                "instance_id": 18,
+                "bbox_2d": [
+                  536,
+                  334,
+                  639,
+                  461
+                ],
+                "instance_rank": 1,
+                "area": 13081
+              },
+              {
+                "object_name": "curtain",
+                "instance_id": 7,
+                "bbox_2d": [
+                  55,
+                  0,
+                  277,
+                  321
+                ],
+                "instance_rank": 1,
+                "area": 71262
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "d14b81c0c2",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/d14b81c0c2.jpg",
+      "questions": [
+        {
+          "qa_id": "f118ef1c-7f18-4e2f-a3b5-f6a3dcf2d9ad",
+          "scene_name": "d14b81c0c2",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/d14b81c0c2/01_pair_distance_f118ef1c.jpg",
+          "best_frame_file": "color/train/d14b81c0c2/frame_002367.jpg",
+          "best_frame_score": 316.5296908152445,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the tv and the table (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "tv",
+              "table"
+            ],
+            "answer_value": "1.3",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/d14b81c0c2/01_pair_distance_f118ef1c.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/d14b81c0c2/frame_002367.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/d14b81c0c2/frame_002367.png",
+            "drawn_instances": [
+              {
+                "object_name": "tv",
+                "instance_id": 1,
+                "bbox_2d": [
+                  113,
+                  77,
+                  302,
+                  135
+                ],
+                "instance_rank": 1,
+                "area": 10962
+              },
+              {
+                "object_name": "table",
+                "instance_id": 28,
+                "bbox_2d": [
+                  353,
+                  176,
+                  637,
+                  334
+                ],
+                "instance_rank": 1,
+                "area": 44872
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "f6fc8996-ceee-475a-991c-1917c9dc53d8",
+          "scene_name": "d14b81c0c2",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/d14b81c0c2/02_pair_distance_f6fc8996.jpg",
+          "best_frame_file": "color/train/d14b81c0c2/frame_002367.jpg",
+          "best_frame_score": 241.12175764730725,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the speaker and the table (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "speaker",
+              "table"
+            ],
+            "answer_value": "1.5",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/d14b81c0c2/02_pair_distance_f6fc8996.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/d14b81c0c2/frame_002367.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/d14b81c0c2/frame_002367.png",
+            "drawn_instances": [
+              {
+                "object_name": "speaker",
+                "instance_id": 22,
+                "bbox_2d": [
+                  174,
+                  137,
+                  252,
+                  148
+                ],
+                "instance_rank": 1,
+                "area": 858
+              },
+              {
+                "object_name": "table",
+                "instance_id": 28,
+                "bbox_2d": [
+                  353,
+                  176,
+                  637,
+                  334
+                ],
+                "instance_rank": 1,
+                "area": 44872
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "e3c1da58dd",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/e3c1da58dd.jpg",
+      "questions": [
+        {
+          "qa_id": "036a40ff-02cc-4071-b1ea-9e512cb12397",
+          "scene_name": "e3c1da58dd",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e3c1da58dd/01_mc_distance_compare_036a40ff.jpg",
+          "best_frame_file": "color/train/e3c1da58dd/frame_004140.jpg",
+          "best_frame_score": 582.9271780691831,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (picture, monitor, paper towel, chair) is the closest to the window? If there are multiple instances of an object category, measure to the closest. Options: A. picture B. monitor C. paper towel D. chair Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "picture",
+              "monitor",
+              "paper towel",
+              "chair",
+              "window"
+            ],
+            "answer_value": "B",
+            "answer_object": "monitor",
+            "options_map": {
+              "A": "picture",
+              "B": "monitor",
+              "C": "paper towel",
+              "D": "chair"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e3c1da58dd/01_mc_distance_compare_036a40ff.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/e3c1da58dd/frame_004140.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/e3c1da58dd/frame_004140.png",
+            "drawn_instances": [
+              {
+                "object_name": "picture",
+                "instance_id": 57,
+                "bbox_2d": [
+                  0,
+                  149,
+                  198,
+                  385
+                ],
+                "instance_rank": 1,
+                "area": 46728
+              },
+              {
+                "object_name": "picture",
+                "instance_id": 55,
+                "bbox_2d": [
+                  0,
+                  236,
+                  54,
+                  426
+                ],
+                "instance_rank": 2,
+                "area": 10260
+              },
+              {
+                "object_name": "monitor",
+                "instance_id": 17,
+                "bbox_2d": [
+                  601,
+                  192,
+                  631,
+                  224
+                ],
+                "instance_rank": 1,
+                "area": 960
+              },
+              {
+                "object_name": "monitor",
+                "instance_id": 67,
+                "bbox_2d": [
+                  607,
+                  199,
+                  622,
+                  237
+                ],
+                "instance_rank": 2,
+                "area": 570
+              },
+              {
+                "object_name": "monitor",
+                "instance_id": 78,
+                "bbox_2d": [
+                  578,
+                  209,
+                  584,
+                  223
+                ],
+                "instance_rank": 3,
+                "area": 84
+              },
+              {
+                "object_name": "paper towel",
+                "instance_id": 33,
+                "bbox_2d": [
+                  570,
+                  224,
+                  587,
+                  241
+                ],
+                "instance_rank": 1,
+                "area": 289
+              },
+              {
+                "object_name": "chair",
+                "instance_id": 11,
+                "bbox_2d": [
+                  354,
+                  319,
+                  513,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 25440
+              },
+              {
+                "object_name": "chair",
+                "instance_id": 63,
+                "bbox_2d": [
+                  413,
+                  280,
+                  527,
+                  374
+                ],
+                "instance_rank": 2,
+                "area": 10716
+              },
+              {
+                "object_name": "window",
+                "instance_id": 47,
+                "bbox_2d": [
+                  517,
+                  74,
+                  639,
+                  224
+                ],
+                "instance_rank": 1,
+                "area": 18300
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "26887c90-08d1-4dcb-bf23-67fb10a02cd0",
+          "scene_name": "e3c1da58dd",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e3c1da58dd/02_pair_distance_26887c90.jpg",
+          "best_frame_file": "color/train/e3c1da58dd/frame_006670.jpg",
+          "best_frame_score": 400.81565346288545,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the laptop and the bookshelf (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "laptop",
+              "bookshelf"
+            ],
+            "answer_value": "1.8",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e3c1da58dd/02_pair_distance_26887c90.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/e3c1da58dd/frame_006670.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/e3c1da58dd/frame_006670.png",
+            "drawn_instances": [
+              {
+                "object_name": "laptop",
+                "instance_id": 20,
+                "bbox_2d": [
+                  430,
+                  323,
+                  590,
+                  473
+                ],
+                "instance_rank": 1,
+                "area": 24000
+              },
+              {
+                "object_name": "bookshelf",
+                "instance_id": 60,
+                "bbox_2d": [
+                  27,
+                  16,
+                  172,
+                  433
+                ],
+                "instance_rank": 1,
+                "area": 60465
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "e3ef8b690b",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/e3ef8b690b.jpg",
+      "questions": [
+        {
+          "qa_id": "e22c8c47-cb5d-4468-848d-c8fd9c07e73e",
+          "scene_name": "e3ef8b690b",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e3ef8b690b/01_mc_distance_compare_e22c8c47.jpg",
+          "best_frame_file": "color/train/e3ef8b690b/frame_001161.jpg",
+          "best_frame_score": 819.6912093386318,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (sofa, curtain, tv, pillow) is the closest to the table? If there are multiple instances of an object category, measure to the closest. Options: A. sofa B. curtain C. tv D. pillow Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "sofa",
+              "curtain",
+              "tv",
+              "pillow",
+              "table"
+            ],
+            "answer_value": "A",
+            "answer_object": "sofa",
+            "options_map": {
+              "A": "sofa",
+              "B": "curtain",
+              "C": "tv",
+              "D": "pillow"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e3ef8b690b/01_mc_distance_compare_e22c8c47.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/e3ef8b690b/frame_001161.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/e3ef8b690b/frame_001161.png",
+            "drawn_instances": [
+              {
+                "object_name": "sofa",
+                "instance_id": 3,
+                "bbox_2d": [
+                  0,
+                  119,
+                  234,
+                  216
+                ],
+                "instance_rank": 1,
+                "area": 22698
+              },
+              {
+                "object_name": "curtain",
+                "instance_id": 65,
+                "bbox_2d": [
+                  0,
+                  0,
+                  244,
+                  144
+                ],
+                "instance_rank": 1,
+                "area": 35136
+              },
+              {
+                "object_name": "tv",
+                "instance_id": 64,
+                "bbox_2d": [
+                  288,
+                  43,
+                  356,
+                  129
+                ],
+                "instance_rank": 1,
+                "area": 5848
+              },
+              {
+                "object_name": "pillow",
+                "instance_id": 22,
+                "bbox_2d": [
+                  0,
+                  137,
+                  38,
+                  170
+                ],
+                "instance_rank": 1,
+                "area": 1254
+              },
+              {
+                "object_name": "table",
+                "instance_id": 67,
+                "bbox_2d": [
+                  0,
+                  224,
+                  536,
+                  479
+                ],
+                "instance_rank": 1,
+                "area": 136680
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "68de823c-bd50-47ac-abb4-0a24ddcb154e",
+          "scene_name": "e3ef8b690b",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e3ef8b690b/02_pair_distance_68de823c.jpg",
+          "best_frame_file": "color/train/e3ef8b690b/frame_002613.jpg",
+          "best_frame_score": 535.2943286093482,
+          "parsed_question": {
+            "question_type": "pair_distance",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, what is the direct distance between the cabinet and the door (in meters)? Please answer the question using a single word or phrase.",
+            "relevant_objects": [
+              "cabinet",
+              "door"
+            ],
+            "answer_value": "0.4",
+            "answer_object": null,
+            "options_map": null
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e3ef8b690b/02_pair_distance_68de823c.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/e3ef8b690b/frame_002613.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/e3ef8b690b/frame_002613.png",
+            "drawn_instances": [
+              {
+                "object_name": "cabinet",
+                "instance_id": 85,
+                "bbox_2d": [
+                  283,
+                  58,
+                  544,
+                  308
+                ],
+                "instance_rank": 1,
+                "area": 65250
+              },
+              {
+                "object_name": "door",
+                "instance_id": 66,
+                "bbox_2d": [
+                  0,
+                  0,
+                  229,
+                  342
+                ],
+                "instance_rank": 1,
+                "area": 78318
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "scene_name": "e4007ff6b5",
+      "overview_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/scene_overviews/e4007ff6b5.jpg",
+      "questions": [
+        {
+          "qa_id": "fa4aceef-66ee-42c6-acd6-78b29b208505",
+          "scene_name": "e4007ff6b5",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e4007ff6b5/01_mc_distance_compare_fa4aceef.jpg",
+          "best_frame_file": "color/train/e4007ff6b5/frame_005709.jpg",
+          "best_frame_score": 520.9415634977538,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (ceiling lamp, paper towel, office chair, tap) is the closest to the window? If there are multiple instances of an object category, measure to the closest. Options: A. ceiling lamp B. paper towel C. office chair D. tap Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "ceiling lamp",
+              "paper towel",
+              "office chair",
+              "tap",
+              "window"
+            ],
+            "answer_value": "A",
+            "answer_object": "ceiling lamp",
+            "options_map": {
+              "A": "ceiling lamp",
+              "B": "paper towel",
+              "C": "office chair",
+              "D": "tap"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e4007ff6b5/01_mc_distance_compare_fa4aceef.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/e4007ff6b5/frame_005709.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/e4007ff6b5/frame_005709.png",
+            "drawn_instances": [
+              {
+                "object_name": "ceiling lamp",
+                "instance_id": 64,
+                "bbox_2d": [
+                  151,
+                  0,
+                  308,
+                  2
+                ],
+                "instance_rank": 1,
+                "area": 314
+              },
+              {
+                "object_name": "ceiling lamp",
+                "instance_id": 17,
+                "bbox_2d": [
+                  0,
+                  0,
+                  146,
+                  1
+                ],
+                "instance_rank": 2,
+                "area": 146
+              },
+              {
+                "object_name": "paper towel",
+                "instance_id": 24,
+                "bbox_2d": [
+                  428,
+                  201,
+                  454,
+                  266
+                ],
+                "instance_rank": 1,
+                "area": 1690
+              },
+              {
+                "object_name": "office chair",
+                "instance_id": 18,
+                "bbox_2d": [
+                  55,
+                  224,
+                  180,
+                  404
+                ],
+                "instance_rank": 1,
+                "area": 22500
+              },
+              {
+                "object_name": "office chair",
+                "instance_id": 19,
+                "bbox_2d": [
+                  102,
+                  218,
+                  172,
+                  356
+                ],
+                "instance_rank": 2,
+                "area": 9660
+              },
+              {
+                "object_name": "tap",
+                "instance_id": 77,
+                "bbox_2d": [
+                  546,
+                  211,
+                  589,
+                  238
+                ],
+                "instance_rank": 1,
+                "area": 1161
+              },
+              {
+                "object_name": "tap",
+                "instance_id": 76,
+                "bbox_2d": [
+                  576,
+                  160,
+                  601,
+                  197
+                ],
+                "instance_rank": 2,
+                "area": 925
+              },
+              {
+                "object_name": "window",
+                "instance_id": 6,
+                "bbox_2d": [
+                  0,
+                  33,
+                  322,
+                  243
+                ],
+                "instance_rank": 1,
+                "area": 67620
+              }
+            ]
+          }
+        },
+        {
+          "qa_id": "da5e7a40-ffdf-42c2-877a-641c950cd10a",
+          "scene_name": "e4007ff6b5",
+          "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e4007ff6b5/02_mc_distance_compare_da5e7a40.jpg",
+          "best_frame_file": "color/train/e4007ff6b5/frame_005709.jpg",
+          "best_frame_score": 458.93498426560717,
+          "parsed_question": {
+            "question_type": "mc_distance_compare",
+            "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (shelf, paper towel, ceiling lamp, tap) is the closest to the window? If there are multiple instances of an object category, measure to the closest. Options: A. shelf B. paper towel C. ceiling lamp D. tap Answer with the option's letter from the given choices directly.",
+            "relevant_objects": [
+              "shelf",
+              "paper towel",
+              "ceiling lamp",
+              "tap",
+              "window"
+            ],
+            "answer_value": "C",
+            "answer_object": "ceiling lamp",
+            "options_map": {
+              "A": "shelf",
+              "B": "paper towel",
+              "C": "ceiling lamp",
+              "D": "tap"
+            }
+          },
+          "render_info": {
+            "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/e4007ff6b5/02_mc_distance_compare_da5e7a40.jpg",
+            "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/e4007ff6b5/frame_005709.jpg",
+            "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/e4007ff6b5/frame_005709.png",
+            "drawn_instances": [
+              {
+                "object_name": "shelf",
+                "instance_id": 75,
+                "bbox_2d": [
+                  509,
+                  110,
+                  614,
+                  165
+                ],
+                "instance_rank": 1,
+                "area": 5775
+              },
+              {
+                "object_name": "shelf",
+                "instance_id": 74,
+                "bbox_2d": [
+                  387,
+                  126,
+                  512,
+                  170
+                ],
+                "instance_rank": 2,
+                "area": 5500
+              },
+              {
+                "object_name": "shelf",
+                "instance_id": 71,
+                "bbox_2d": [
+                  327,
+                  100,
+                  405,
+                  134
+                ],
+                "instance_rank": 3,
+                "area": 2652
+              },
+              {
+                "object_name": "shelf",
+                "instance_id": 73,
+                "bbox_2d": [
+                  330,
+                  140,
+                  408,
+                  174
+                ],
+                "instance_rank": 4,
+                "area": 2652
+              },
+              {
+                "object_name": "paper towel",
+                "instance_id": 24,
+                "bbox_2d": [
+                  428,
+                  201,
+                  454,
+                  266
+                ],
+                "instance_rank": 1,
+                "area": 1690
+              },
+              {
+                "object_name": "ceiling lamp",
+                "instance_id": 64,
+                "bbox_2d": [
+                  151,
+                  0,
+                  308,
+                  2
+                ],
+                "instance_rank": 1,
+                "area": 314
+              },
+              {
+                "object_name": "ceiling lamp",
+                "instance_id": 17,
+                "bbox_2d": [
+                  0,
+                  0,
+                  146,
+                  1
+                ],
+                "instance_rank": 2,
+                "area": 146
+              },
+              {
+                "object_name": "tap",
+                "instance_id": 77,
+                "bbox_2d": [
+                  546,
+                  211,
+                  589,
+                  238
+                ],
+                "instance_rank": 1,
+                "area": 1161
+              },
+              {
+                "object_name": "tap",
+                "instance_id": 76,
+                "bbox_2d": [
+                  576,
+                  160,
+                  601,
+                  197
+                ],
+                "instance_rank": 2,
+                "area": 925
+              },
+              {
+                "object_name": "window",
+                "instance_id": 6,
+                "bbox_2d": [
+                  0,
+                  33,
+                  322,
+                  243
+                ],
+                "instance_rank": 1,
+                "area": 67620
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

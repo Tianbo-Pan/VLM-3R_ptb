@@ -1,0 +1,521 @@
+{
+  "qa_id": "cac34684-312c-40d9-b3ed-1446f56fd2ef",
+  "scene_name": "06bd2cf800",
+  "prompt": "These are frames of a video. Measuring from the closest point of each object, which of these objects (pillow, bed, keyboard, cabinet) is the closest to the heater? If there are multiple instances of an object category, measure to the closest. Options: A. pillow B. bed C. keyboard D. cabinet Answer with the option's letter from the given choices directly.",
+  "prediction": "C",
+  "capture_source": "fusion_block",
+  "attention_meta": {
+    "num_frames": 32,
+    "num_query_tokens": 729,
+    "num_source_tokens": 730,
+    "num_patch_tokens": 729,
+    "patch_side": 27,
+    "has_camera_token": true
+  },
+  "best_frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+  "sampled_frame_paths": [
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000000.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000640.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000960.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001280.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001600.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001920.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002240.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002560.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002880.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003200.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003520.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003840.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004160.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004480.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004800.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005120.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005440.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005760.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006080.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006400.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006720.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007040.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007360.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007680.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008000.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008320.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008640.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008960.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009280.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009600.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009920.jpg"
+  ],
+  "grounding_summary": {
+    "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+    "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/06bd2cf800/frame_000320.png",
+    "threshold_quantile": 0.85,
+    "union_relevant_metrics": {
+      "area_pixels": 26140,
+      "area_fraction": 0.08509114583333334,
+      "attention_mass": 0.1011029269589874,
+      "attention_density": 1.1881721178959803,
+      "soft_dice": 0.17259921537909487,
+      "binary_iou": 0.04063400576368876,
+      "pointing_hit": 0.0,
+      "peak_xy": [
+        606,
+        57
+      ]
+    },
+    "background_metrics": {
+      "area_pixels": 281060,
+      "area_fraction": 0.9149088541666667,
+      "attention_mass": 0.8988970730410124,
+      "attention_density": 0.9824990423333061,
+      "soft_dice": 0.6320578585028972,
+      "binary_iou": 0.1523883330984923,
+      "pointing_hit": 1.0,
+      "peak_xy": [
+        606,
+        57
+      ]
+    },
+    "per_instance_metrics": [
+      {
+        "object_name": "pillow",
+        "instance_id": 40,
+        "bbox_2d": [
+          565,
+          279,
+          639,
+          350
+        ],
+        "used_mask_type": "instance_mask",
+        "instance_mask_available": true,
+        "region_metrics": {
+          "area_pixels": 935,
+          "area_fraction": 0.0030436197916666667,
+          "attention_mass": 0.0036958231468355585,
+          "attention_density": 1.2142854232169877,
+          "soft_dice": 0.007346571416306082,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 5254,
+          "area_fraction": 0.017102864583333332,
+          "attention_mass": 0.021048409268054794,
+          "attention_density": 1.230694961390642,
+          "soft_dice": 0.040693805656070114,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      },
+      {
+        "object_name": "bed",
+        "instance_id": 23,
+        "bbox_2d": [
+          387,
+          177,
+          639,
+          450
+        ],
+        "used_mask_type": "instance_mask",
+        "instance_mask_available": true,
+        "region_metrics": {
+          "area_pixels": 19694,
+          "area_fraction": 0.06410807291666666,
+          "attention_mass": 0.08329675928827057,
+          "attention_density": 1.299317784774892,
+          "soft_dice": 0.1475278516375935,
+          "binary_iou": 0.044794611938876,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 68796,
+          "area_fraction": 0.2239453125,
+          "attention_mass": 0.27304509091324286,
+          "attention_density": 1.2192489669246498,
+          "soft_dice": 0.37623828367059237,
+          "binary_iou": 0.0721645635779885,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      },
+      {
+        "object_name": "keyboard",
+        "instance_id": 34,
+        "bbox_2d": [
+          235,
+          173,
+          298,
+          186
+        ],
+        "used_mask_type": "instance_mask",
+        "instance_mask_available": true,
+        "region_metrics": {
+          "area_pixels": 452,
+          "area_fraction": 0.0014713541666666666,
+          "attention_mass": 0.0008661471022568762,
+          "attention_density": 0.5886734287905141,
+          "soft_dice": 0.0017271716244535297,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 819,
+          "area_fraction": 0.002666015625,
+          "attention_mass": 0.0016273205495156693,
+          "attention_density": 0.61039422809672,
+          "soft_dice": 0.00323724342275283,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      },
+      {
+        "object_name": "cabinet",
+        "instance_id": 4,
+        "bbox_2d": [
+          0,
+          0,
+          143,
+          479
+        ],
+        "used_mask_type": "instance_mask",
+        "instance_mask_available": true,
+        "region_metrics": {
+          "area_pixels": 1170,
+          "area_fraction": 0.00380859375,
+          "attention_mass": 0.0005481176940495302,
+          "attention_density": 0.14391603043762025,
+          "soft_dice": 0.0010878830254000887,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 68497,
+          "area_fraction": 0.22297200520833332,
+          "attention_mass": 0.12252529073904424,
+          "attention_density": 0.5495097495515773,
+          "soft_dice": 0.1690603984735386,
+          "binary_iou": 0.054454260997607216,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      },
+      {
+        "object_name": "heater",
+        "instance_id": 17,
+        "bbox_2d": [
+          111,
+          189,
+          172,
+          336
+        ],
+        "used_mask_type": "instance_mask",
+        "instance_mask_available": true,
+        "region_metrics": {
+          "area_pixels": 3889,
+          "area_fraction": 0.012659505208333333,
+          "attention_mass": 0.01269607972757484,
+          "attention_density": 1.0028890954772411,
+          "soft_dice": 0.0247602758883469,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 8967,
+          "area_fraction": 0.029189453125,
+          "attention_mass": 0.026844021365701392,
+          "attention_density": 0.919647971846043,
+          "soft_dice": 0.0507044672865666,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      }
+    ],
+    "per_object_metrics": [
+      {
+        "object_name": "pillow",
+        "num_instances": 1,
+        "region_metrics": {
+          "area_pixels": 935,
+          "area_fraction": 0.0030436197916666667,
+          "attention_mass": 0.0036958231468355585,
+          "attention_density": 1.2142854232169877,
+          "soft_dice": 0.007346571416306082,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 5254,
+          "area_fraction": 0.017102864583333332,
+          "attention_mass": 0.021048409268054794,
+          "attention_density": 1.230694961390642,
+          "soft_dice": 0.040693805656070114,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      },
+      {
+        "object_name": "bed",
+        "num_instances": 1,
+        "region_metrics": {
+          "area_pixels": 19694,
+          "area_fraction": 0.06410807291666666,
+          "attention_mass": 0.08329675928827057,
+          "attention_density": 1.299317784774892,
+          "soft_dice": 0.1475278516375935,
+          "binary_iou": 0.044794611938876,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 68796,
+          "area_fraction": 0.2239453125,
+          "attention_mass": 0.27304509091324286,
+          "attention_density": 1.2192489669246498,
+          "soft_dice": 0.37623828367059237,
+          "binary_iou": 0.0721645635779885,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      },
+      {
+        "object_name": "keyboard",
+        "num_instances": 1,
+        "region_metrics": {
+          "area_pixels": 452,
+          "area_fraction": 0.0014713541666666666,
+          "attention_mass": 0.0008661471022568762,
+          "attention_density": 0.5886734287905141,
+          "soft_dice": 0.0017271716244535297,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 819,
+          "area_fraction": 0.002666015625,
+          "attention_mass": 0.0016273205495156693,
+          "attention_density": 0.61039422809672,
+          "soft_dice": 0.00323724342275283,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      },
+      {
+        "object_name": "cabinet",
+        "num_instances": 1,
+        "region_metrics": {
+          "area_pixels": 1170,
+          "area_fraction": 0.00380859375,
+          "attention_mass": 0.0005481176940495302,
+          "attention_density": 0.14391603043762025,
+          "soft_dice": 0.0010878830254000887,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 68497,
+          "area_fraction": 0.22297200520833332,
+          "attention_mass": 0.12252529073904424,
+          "attention_density": 0.5495097495515773,
+          "soft_dice": 0.1690603984735386,
+          "binary_iou": 0.054454260997607216,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      },
+      {
+        "object_name": "heater",
+        "num_instances": 1,
+        "region_metrics": {
+          "area_pixels": 3889,
+          "area_fraction": 0.012659505208333333,
+          "attention_mass": 0.01269607972757484,
+          "attention_density": 1.0028890954772411,
+          "soft_dice": 0.0247602758883469,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        },
+        "bbox_metrics": {
+          "area_pixels": 8967,
+          "area_fraction": 0.029189453125,
+          "attention_mass": 0.026844021365701392,
+          "attention_density": 0.919647971846043,
+          "soft_dice": 0.0507044672865666,
+          "binary_iou": 0.0,
+          "pointing_hit": 0.0,
+          "peak_xy": [
+            606,
+            57
+          ]
+        }
+      }
+    ]
+  },
+  "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment1_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/best_frame_grounding_overlay.jpg",
+  "binary_overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment1_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/best_frame_attention_binary.jpg",
+  "attention_unit_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment1_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/best_frame_attention_unit.npy",
+  "manifest_question_entry": {
+    "qa_id": "cac34684-312c-40d9-b3ed-1446f56fd2ef",
+    "scene_name": "06bd2cf800",
+    "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/01_mc_distance_compare_cac34684.jpg",
+    "best_frame_file": "color/train/06bd2cf800/frame_000320.jpg",
+    "best_frame_score": 719.8061331800993,
+    "parsed_question": {
+      "question_type": "mc_distance_compare",
+      "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (pillow, bed, keyboard, cabinet) is the closest to the heater? If there are multiple instances of an object category, measure to the closest. Options: A. pillow B. bed C. keyboard D. cabinet Answer with the option's letter from the given choices directly.",
+      "relevant_objects": [
+        "pillow",
+        "bed",
+        "keyboard",
+        "cabinet",
+        "heater"
+      ],
+      "answer_value": "C",
+      "answer_object": "keyboard",
+      "options_map": {
+        "A": "pillow",
+        "B": "bed",
+        "C": "keyboard",
+        "D": "cabinet"
+      }
+    },
+    "render_info": {
+      "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/01_mc_distance_compare_cac34684.jpg",
+      "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+      "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/06bd2cf800/frame_000320.png",
+      "drawn_instances": [
+        {
+          "object_name": "pillow",
+          "instance_id": 40,
+          "bbox_2d": [
+            565,
+            279,
+            639,
+            350
+          ],
+          "instance_rank": 1,
+          "area": 5254
+        },
+        {
+          "object_name": "bed",
+          "instance_id": 23,
+          "bbox_2d": [
+            387,
+            177,
+            639,
+            450
+          ],
+          "instance_rank": 1,
+          "area": 68796
+        },
+        {
+          "object_name": "keyboard",
+          "instance_id": 34,
+          "bbox_2d": [
+            235,
+            173,
+            298,
+            186
+          ],
+          "instance_rank": 1,
+          "area": 819
+        },
+        {
+          "object_name": "cabinet",
+          "instance_id": 4,
+          "bbox_2d": [
+            0,
+            0,
+            143,
+            479
+          ],
+          "instance_rank": 1,
+          "area": 68497
+        },
+        {
+          "object_name": "heater",
+          "instance_id": 17,
+          "bbox_2d": [
+            111,
+            189,
+            172,
+            336
+          ],
+          "instance_rank": 1,
+          "area": 8967
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,2953 @@
+Under review.
+
+PATCH - AS -D ECODABLE -T OKEN : T OWARDS U NIFIED
+M ULTI -M ODAL V ISION TASKS IN MLLM S
+Yongyi Su1,2∗ Haojie Zhang1,3∗ Shijie Li2 Nanqing Liu4 Jingyi Liao2,5 Junyi Pan3
+Yuan Liu1 Xiaofen Xing1 Chong Sun3 Chen Li3 Nancy F. Chen2 Shuicheng Yan6
+Xulei Yang2 Xun Xu2
+1
+
+South China University of Technology
+Institute for Infocomm Research (I2 R), A*STAR
+3
+WeChat Vision, Tencent Inc.
+4
+Foshan University
+5
+Nanyang Technological University
+6
+National University of Singapore
+
+arXiv:2510.01954v1 [cs.CV] 2 Oct 2025
+
+2
+
+A BSTRACT
+Multimodal large language models (MLLMs) have advanced rapidly in recent
+years. However, existing approaches for vision tasks often rely on indirect representations, such as generating coordinates as text for detection, which limits
+performance and prevents dense prediction tasks like segmentation. To overcome these challenges, we introduce Patch-as-Decodable Token (PaDT), a unified
+paradigm that enables MLLMs to directly generate both textual and diverse visual
+outputs. Central to PaDT are Visual Reference Tokens (VRTs), derived from visual patch embeddings of query images and interleaved seamlessly with LLM’s
+output textual tokens. A lightweight decoder then transforms LLM’s outputs
+into detection, segmentation, and grounding predictions. Unlike prior methods,
+PaDT processes VRTs independently at each forward pass and dynamically expands the embedding table, thus improving localization and differentiation among
+similar objects. We further tailor a training strategy for PaDT by randomly selecting VRTs for supervised fine-tuning and introducing a robust per-token crossentropy loss. Our empirical studies across four visual perception and understanding tasks suggest PaDT consistently achieving state-of-the-art performance,
+even compared with significantly larger MLLM models. The code is available at
+https://github.com/Gorilla-Lab-SCUT/PaDT.
+
+1
+
+I NTRODUCTION
+
+Fine-grained image perception and understanding, which aim to associate specific image regions
+with contextual information, such as semantic or instance, is a fundamental task in computer vision
+and serves as a cornerstone for numerous applications. Classical vision models (Ren et al., 2015;
+Redmon et al., 2016; Carion et al., 2020) remain state-of-the-art for pure detection and segmentation
+tasks, but they lack flexible language interaction and understanding, thus prohibiting open vocabulary oriented visual reasoning tasks. At an earlier stage, inspired by CLIP (Radford et al., 2021),
+many vision-language detectors such as GLIP (Li et al., 2022b) and Grounding DINO (Ren et al.,
+2023) incorporate language information to detect arbitrary classes. However, these methods remain
+vision-centric backbones augmented with language, and thus struggle to handle more complex textual descriptions and are limited to structured output.
+Recent advances have led to powerful multi-modal large language models (MLLMs) (Alayrac et al.,
+2022; Li et al., 2023; Liu et al., 2024c; Bai et al., 2025; Zhu et al., 2025) that couple vision encoders
+with Large Language Models(LLMs). Pretrained on massive multimodal datasets, these models
+* Equal contribution. This work was done during Yongyi Su’s visit to I2 R and Haojie Zhang’s intern in
+WeChat Vision.
+
+1
+
+Under review.
+
+Open Vocabulary Detection
+
+Referring Expression Comprehension
+
+Referring Image Captioning
+
+Query: Please carefully check the image and
+detect
+the
+following
+objects:
+["person",
+"bicycle",…, "toothbrush"].
+Response: In this image, there are 2 “person” (
+,
+), 1 “sports ball” (
+) and 1
+"tennis racket" (
+).
+
+Query: Please carefully check the image and
+detect the object this sentence describes:
+"blue dish with cats painted on it".
+
+Query: Please describe this image.
+Response: A meal is set on a dining table (
+). It includes a bowl of salad (
+), a cup of soup (
+), and a
+sandwich with a sesame seed bun (
+). A wine glass (
+) and a bottle of
+sauce (
+) are also present. The table
+is neatly arranged with napkins and coasters,
+creating an elegant dining setup. The meal
+appears to be served in a restaurant or a
+formal dining environment.
+
+Image with visual
+reference tokens
+
+Image with bounding
+boxes
+
+Response: The "blue dish with cats painted
+on it" refers to
+in this image.
+
+Image with visual
+reference tokens
+
+Image with bounding
+box
+
+Referring Expression Segmentation
+Query: Please carefully check the image
+and detect the object this sentence
+describes: " silver suv with black roof
+rails".
+Response: The “silver suv with black roof
+rails” refers to
+in this image.
+
+Image with visual reference
+tokens
+
+Image with segmentation
+mask
+
+Mentioned Objects:
+• Dining Table:
+
+• Salad:
+
+• Soup:
+
+• Sandwich:
+
+• Wine Glass:
+
+• Sauce:
+
+Figure 1: Illustration of unified visual/textual token prediction for MLLM powered visual perception and
+understanding.
+
+encode rich prior knowledge and provide a strong foundation for visual perception and understanding, as illustrated in Fig. 1. To conform with the textual output space of LLMs, most existing
+MLLMs (Liu et al., 2025a; Bai et al., 2025; Zhu et al., 2025) serialize detected regions into bounding box coordinates, expressed in textual form, such as [x1 , y1 , x2 , y2 ]. While straightforward, this
+strategy introduces several challenges. First, output formats are often inconsistent across samples
+even under the same prompt, as illustrated in Fig. 2(a), thereby increasing the difficulty of parsing
+and structured output. Second, numerical coordinate representations provide precise spatial descriptions but lack semantic alignment between textual and visual modalities, as shown in Fig. 2(b). This
+inherent misalignment can lead to repetition or hallucination between coordinate and actual visual
+targets (Jiang et al., 2024b). Moreover, since numerical coordinate representations are mapped into
+discrete textual tokens, a single coordinate value may be split into several unrelated tokens, as shown
+in Fig. 2(b). These discontinuous coordinate tokens can hinder prediction accuracy, e.g., fragmented
+numbers.
+In this work, we introduce a unified paradigm, Patch-as-Decodable Token (PaDT), which enables
+MLLMs to directly generate both textual and diverse visual targets in a unified yet flexible way.
+For this purpose, we propose the Visual Reference Tokens (VRTs), which can be seamlessly interleaved with LLM’s output textual tokens. VRTs are generated by the proposed Dynamic Embedding
+Module, adapted directly from the original visual patch embeddings. In this way, they occur in a
+feature space consistent with the original LLM, while each VRT explicitly corresponds to a specific
+image patch within the query image. Thus, VRTs can be naturally interpreted within the LLM’s
+feature space, allowing detected objects to be represented by multiple VRTs in a fine-grained manner. Based on this design, PaDT owns the inherent ability to predict diverse visual outputs, e.g.
+semantic masks and bounding boxes. Specifically, MLLMs only need to predict a subset of VRTs,
+which are then decoded into the final structured visual outputs by a lightweight decoder. A prior
+art (Ma et al., 2025) attempted to empower LLMs to output image patch tokens, discretized by a
+global codebook, to represent the target within the image. However, this approach remains limited
+in flexibility and generality due to maintaining a global codebook. First, there is a risk of predicting
+visual tokens that do not appear in the query image. Moreover, the decoded visual token does not
+have unique correspondence in the query image, thus risking misalignment between predicted visual
+tokens and query image tokens, e.g. confusion between similar objects in the image. In contrast,
+PaDT processes VRTs independently at each forward pass, making it more efficient. By maintaining
+a high-level feature space aligned with that of LLMs and preserving unique positional information
+for each image region, PaDT ensures coherent predictions as illustrated Fig. 2(c). Moreover, as
+shown in Fig. 2(d), VRT predictions over objects exhibit great spatial continuity.
+To enable PaDT to achieve strong performance, we design an effective fine-tuning strategy and
+propose a robust per-token cross-entropy loss tailored for the proposed visual reference token, which
+stabilizes training and mitigates overfitting. Notably, our 3B model surpasses the previous state-ofthe-art by 19.0 mAP on COCO detection and achieves an average accuracy of 93.6 on the referring
+expression comprehension (REC) task, outperforming the much larger 78B InternVL3 model.
+2
+
+Under review.
+
+In this image, two zebras ([0.16,
+0.54, 0.38, 0.7] and [0.69, 0.56,
+0.85, 0.67]) are grazing in a grassy
+field. A wildebeest ([0.42, 0.55,
+0.59, 0.67]) is also present …
+
+Low Activated in image
+
+High Related with object
+
+float type, (0~1)
+In this image, a stop sign ([248, 0,
+346, 97]) is attached to a wooden
+pole ([250, 0, 472, 444]). The pole
+appears to be weathered …
+
+int type, (0~H/W)
+In this image, a giraffe toy (bbox:
+35, 84, 279, 236) stands to the left.
+Next to it, a cow toy (bbox: 79, 204,
+343, 410) is …
+
+Unexpected Format
+
+(a) Inconsistent Output
+
+Please carefully check the image and
+detect the object this sentence describes
+: ” r the guy with a camera ”. “‘ json
+[
+{” bbox _ 2 d ”: [ 4 8 9 , 2 1 , 6 0 7 , 4
+5 9 ], ” label ”: r the guy with a camera
+”}
+]
+Candidates are
+“‘
+not continuous
+Candidates : 4, 5, 0,
+
+(b) TAM of Qwen2.5-VL
+
+Please carefully check the image
+and detect the object this sentence
+describes:
+”rthe guy with a
+camera”.The ”rthe guy with a camera”
+refers to <|vrt_227|> <|vrt_204|>
+<|vrt_226|>
+<|vrt_272|>
+<|vrt_249|> in this image.
+Candidates : < |vrt_227| >, < |vrt_250| >,
+< |vrt_204| >,
+
+(c) TAM of Ours
+
+(d) Heat Map of
+VRT Candidates
+
+Figure 2: (a) Previous methods yield inconsistent output formats due to free-form box representations even
+under the same prompt. (b) Token Activation Map (TAM) (Li et al., 2025) reveals less semantic relationship
+between textual box representations and textual/visual information, while converting continuous numbers into
+discrete tokens further introduces discontinuities. (c) With PaDT denoting objects with VRTs, semantic alignment is preserved and the output becomes more unified and natural. (d) The heatmap of <VRT 227> further
+demonstrates continuous and object-consistent predictions within the input image.
+
+The main contributions of this work can be summarized as follows:
+• We introduce a unified paradigm, Patch-as-Decodable Token (PaDT), which enables
+MLLMs to directly generate both textual and diverse visual targets in a unified yet flexible way. With the proposed Visual Reference Token (VRT), our method achieves superior
+performance across diverse fine-grained image perception and understanding
+• We propose a lightweight yet robust VRT-based decoder, termed the PaDT Decoder. Given
+the generated VRTs, it can uniformly decode diverse fine-grained structured visual outputs,
+such as segmentation masks and bounding boxes.
+• We propose an effective fine-tuning strategy together with a robust per-token cross-entropy
+loss. PaDT achieves the state-of-the-art performance on a wide range of visual perception
+and understanding tasks. The effectiveness is validated beyond perception tasks but also a
+customized image captioning task.
+
+2
+
+R ELATED W ORK
+
+Multimodal Large Language Models. With the rapid development of large language models
+(LLMs), multimodal LLMs (MLLMs) have emerged as powerful systems for vision-language reasoning (Li et al., 2022a; Alayrac et al., 2022; Achiam et al., 2023; Liu et al., 2023; Zhu et al.,
+2023; Bai et al., 2025; Ye et al., 2023). Early milestones such as CLIP (Radford et al., 2021) and
+ALIGN (Jia et al., 2021) demonstrated the effectiveness of large-scale contrastive pretraining for
+joint vision-text representations. BLIP-2 (Li et al., 2022a) further improved alignment through the
+Q-former design. More recently, instruction-tuned MLLMs including LLaVA (Liu et al., 2023) and
+MiniGPT-4 (Zhu et al., 2023) leverage multimodal instruction data, yielding strong performance
+in open-ended visual question answering and reasoning. Building on these foundations, subsequent works extend capabilities to higher-resolution image understanding (e.g., LLaVA-Next (Liu
+et al., 2024c), LLaVA-UHD (Guo et al., 2024)), diverse instruction sets (Ye et al., 2023), multiimage (Jiang et al., 2024a; Li et al., 2024) and video inputs (Lin et al., 2023a; Chen et al., 2024a), as
+well as new pretraining objectives and architectural designs (Fang et al., 2023; Wang et al., 2023b).
+Collectively, these advances establish MLLMs as versatile general-purpose models for multimodal
+reasoning.
+MLLMs for Visual Perception & Understanding. Despite their broad capabilities, generalpurpose MLLMs remain limited in fine-grained perception tasks. This stems largely from vision
+encoders’ reliance on fixed patch grids (Dehghani et al., 2023; Fang et al., 2023; Wang et al., 2023b),
+which often blur local details and impair tasks such as object localization, counting, or OCR. To
+mitigate this, adaptive tiling strategies, such as NaViT-style patch dropping and AnyRes (Luo et al.,
+3
+
+Under review.
+
+1. Model Pipeline
+Hidden
+Features
+
+Light-Weight PaDT
+Decoder
+
+Index
+Select
+
+⋯
+
+Patch Features
+
+B M S
+VRT Hidden Features +
+Bbox Token +
+Mask Token +
+Score Token
+
+Visual Reference
+Tokens (VRT)
+
+There are 2 “bear” (
+
+,
+
+Patch-as-Decodable-Token (PaDT) Head
+Hidden
+Features
+
+3. PaDT Head
+
+𝑚𝑎𝑠𝑘 𝑙𝑜𝑔𝑖𝑡
+
+S
+
+𝑠𝑐𝑜𝑟𝑒
+
+B
+
+[𝑐𝑥, 𝑐𝑦, 𝑤, ℎ]
+
+Visual Reference
+Prototypes
+
+(
+𝑌 = 𝐻 ⋅ 𝑊#!
+
+⋯
+
+M
+
+Text
+Weights
+
+𝑊#$%#
+𝑊#! = 𝒫
+=
+&$'
+
+) in this image.
+
+Upsampling
+*2
+
+VRTs
+
+Bbox Mask Score
+
+Two-way Attention Block
+
+Index
+Select
+
+Obj N
+
+Two-way Attention Block
+
+VRTs
+
+4. Light-Weight PaDT Decoder
+Hidden
+Features
+
+Two-way Attention Block
+
+Obj 1
+
+2. Dynamic Embedding Module
+LLM Backbone
+
+⋯
+
+bear
+
+⋯
+Dynamically
+Construct
+
+≈ 150K Text Embed.
+LN
+Patch Features
+
+Text Token
+Visual Reference
+Token (VRT)
+
+U
+p
+
+zoo
+
+Prompt: Please detect the following
+objects: [”person”, “bear”, …].
+
+#
+
+!
+
+Vision Encoder
+𝑓!
+
+Dynamic Embedding
+Module
+
+“
+
+Patch / Token
+Features
+
+Projector 𝑓"
+
+Lo
+ok
+
+Token ID
+
+𝑊!
+
+𝑓!"
+
+𝑊"
+Visual Reference
+Prototypes 𝒫!"#
+
+Figure 3: The framework of PaDT model.
+
+2023; Chen et al., 2024b; Liu et al., 2024a), allow flexible handling of variable-resolution image
+tiles, leading to improved spatial resolution. Another line of work explores reinforcement learning
+to enhance perception and reasoning, exemplified by VLM-R1 (Shen et al., 2025), Visual-RFT (Liu
+et al., 2025b), VisRL (Chen et al., 2025), and Seg-R1 (You & Wu, 2025). These approaches achieve
+better generalization and emergent capabilities such as segmentation and grounding. Prior works
+have primarily relied on reinforcement learning (Chen et al., 2025) or instruction tuning (Jiang et al.,
+2024b) to strengthen visual reasoning, yet the potential of leveraging learned queries as anchors for
+visual perception remains underexplored. Moreover, designing a unified architecture that seamlessly
+accommodates diverse vision tasks continues to be an open challenge.
+Unified Visual Tokenization. A complementary research direction focuses on unifying visual and
+linguistic representations through multi-granular tokenization. At the region level, methods convert
+object boxes or masks into geometric tokens (Chen et al., 2023b; Xuan et al., 2024; Peng et al.,
+2023; You et al., 2023) or learnable proxies (Zhang et al., 2024a; Yuan et al., 2024; Chen et al.,
+2023a; Rasheed et al., 2024), often grounded by detectors or SAM (Kirillov et al., 2023), thereby
+enabling more precise vision-language grounding. At the patch level, models such as the Emu
+series (Sun et al., 2023) and LaVIT (Jin et al., 2024) treat CLIP-derived patch features as visual
+vocabularies for denser alignment. Recent works further introduce autoregressive quantization of
+image patches (Team, 2024; Sun et al., 2024), discretizing pixels into “visual sentences” to support efficient cross-modal modeling, with even finer-grained tokenization explored in (Ma et al.,
+2025). While these approaches approximate linguistic structures via region, instance, or pixel tokens, deeper semantic integration between vision and language is still limited. To address this, we
+propose a dynamic multimodal token space that enables close correspondence between language
+tokens and visual patches under a unified autoregressive modeling paradigm.
+
+3
+3.1
+
+M ETHODOLOGY
+R EVISITING M ULTIMODAL L ARGE L ANGUAGE M ODELS
+
+A Multimodal Large Language Model (MLLM) augments a Large Language Model (LLM) with a
+visual encoder, enabling it to perform not only general-purpose reasoning but also visual perception (Alayrac et al., 2022; Liu et al., 2024c; Bai et al., 2025). Given an image I ∈ H×W ×3
+and a text sequence T = (t1 , . . . , tm ), the MLLM autoregressively generates an output sequence
+Y = (y1 , . . . , yt ). An image encoder fv , typically a Vision Transformer (ViT) (Dosovitskiy et al.,
+2020), partitions I into N non-overlapping patches {Pn }N
+n=1 , which are subsequently encoded
+
+R
+
+4
+
+Under review.
+
+R
+
+into embeddings Fv = fv (I) ∈ N ×dv . A projector fp then aligns dimensions and downsam′
+ples, yielding Fpatch = fp (Fv ) ∈ N ×d . For instance, Qwen2.5-VL adopts nearest-neighbor
+patch merging in the 2D patch space, resulting in N ′ = 41 N . The image embeddings are then
+fused with the text embeddings Etext (T) ∈ m×d to form a hybrid textual-visual representation
+Z = [Fpatch ; Etext (T)]. Here, Etext ∈ Vtext ×d denotes the text embedding table that maps each
+text token to its corresponding feature vector. The resulting multimodal representation Z is subsequently fed into a transformer-based LLM (Alayrac et al., 2022; Liu et al., 2024c; Bai et al., 2025).
+At timestep t, the hidden state ht produces the next-token distribution:
+
+R
+
+R
+
+with Wtext ∈
+
+R
+
+Vtext ×d
+
+R
+
+p(yt |I, T, y<t ) = softmax(Wtext · ht ),
+
+(1)
+
+denoting classifier weights.
+
+Limitations of Text-based Vision Prediction. Current MLLMs are restricted to accepting textual–visual representations as input and producing only textual outputs, owing to their compatibility
+with the underlying LLM architecture. This limitation is suboptimal for structured vision tasks such
+as object detection and image segmentation. Specifically, current MLLMs (e.g., Qwen2.5-VL (Bai
+et al., 2025), InternVL3 (Zhu et al., 2025)) serialize visual targets into strings at output side. This
+leads to two major issues. First, outputs vary in format (absolute vs. normalized coordinates, JSONstyle vs. free-form), complicating parsing and structured output, as shown in Fig. 2(a). Second, numerical coordinate representations are mapped into discrete textual tokens which are generated digit
+by digit (e.g., “489” → “4, 8, 9”). This disrupts numerical continuity and may hinder prediction
+accuracy (Fig. 2(b)). More importantly, while this numerical representation effectively describes
+spatial information precisely, it lacks semantic information, which is crucial for image understanding tasks. This inherent mismatch, revealed through token activation analyses (Li et al., 2025) as
+illustrated in Fig. 2(b), can lead to errors such as repetition or hallucination in dense prediction
+tasks (Jiang et al., 2024b).
+3.2
+
+V ISUAL R EFERENCE T OKEN
+
+We propose the Patch-as-Decodable-Token (PaDT) framework, which introduces Visual Reference Tokens (VRTs), a unified tokenization scheme that embeds visual patches directly as decodable tokens within the autoregressive generation process. PaDT extends conventional MLLMs with
+three key components: (1) Dynamic Embedding Module augments the textual vocabulary codebook
+with visual patches, specific VRTs, at each forward pass, yielding a multi-modal codebook. (2)
+With this multi-modal codebook and the proposed PaDT Head, VRTs become both embeddable at
+the input side and decodable at the output side, resulting in a unified and natural format. (3) A
+lightweight PaDT Decoder is proposed to convert variable VRTs into diverse visual representations,
+such as bounding boxes and masks, enabling downstream tasks including detection, segmentation,
+and grounding. This further enhances both the robustness and flexibility of the proposed method.
+3.2.1
+
+U NIFIED M ULTI - MODAL FORMAT WITH VRT S
+
+A core challenge is to ensure that VRTs can by interpretable by LLMs, being both embeddable in
+the input space and decodable in the output space. Prior work, e.g., ClawMachine (Ma et al., 2025)
+relies on pretrained discrete visual tokenizers (Jin et al., 2024). It inserts the entire codebook, which
+contains a massive number of tokens, into the LLM embedding table and forces the LLM to map its
+high-level semantic feature space to tokens representing low-level image patches. Thus, this method
+is limited by (i) a fixed dataset-level codebook expansion which contains massive tokens that ignore
+patch-specific cues such as spatial location, and (ii) ambiguity arising from the lack of high-level
+semantics when visually similar patches from different objects maybe mapped to the same token.
+Dynamic Multi-Modal Codebook Expansion. To avoid the above limitations, rather than introducing a standalone codebook, we reuse the extracted visual tokens from the input image, which
+already preserve rich semantic information. Since each visual token explicitly corresponds to an
+image patch, at each forward pass only the tokens from the current query image are dynamically expanded into the original textual codebook, instead of memorizing all possible visual patterns through
+a fixed codebook. Specifically, in the proposed Dynamic Embedding Module, original patch features
+′
+Fpatch ∈ N ×d are projected by a lightweight module fvp into visual reference prototypes Pref .
+fvp consists of a LayerNorm and a low-rank linear projection. These prototypes are then concate-
+
+R
+
+5
+
+Under review.
+
+nated with text embeddings to form a dynamic embedding table as,
+Edyn = [Etext ; Pref ] ,
+
+Pref = fvp (Fpatch ) ∈
+
+RN ×d.
+′
+
+(2)
+
+Unified Input and Output Format. With the above Multi-Modal Codebook, both textual and
+visual information can be input and output in a unified way. On the input side, query image tokens
+are indexed in the Multi-Modal Codebook and converted into the corresponding VRTs, which are
+then embedded into the textual input to the LLM. Since VRTs are adapted from the original image
+tokens, they share a feature space that is similar to the LLM’s representation space, which simplifies
+training compared to ClawMachine (Ma et al., 2025). On the output side, to enable the original
+textual classifier to output expanded indices, the PaDT Head is proposed to augment the classifier
+with Pref , yielding
+′
+Wtv = [Wtext ; Pref ] ∈ (Vtext +N )×d .
+(3)
+
+R
+
+This joint design allows VRTs to be embedded as inputs and decoded as outputs, enabling the
+model to insert patch-level references directly into the autoregressive sequence. Building on this,
+we propose a robust strategy that represents detected objects with several (but not all) VRTs placed
+on them, and then decodes fine-grained representations such as bounding boxes or masks through
+the lightweight PaDT Decoder introduced below. This strategy is shown to be more robust and
+effective in our experiments. Template examples for each vision task are provided in Appendix A.2.
+3.2.2
+
+L IGHT- WEIGHT PA DT D ECODER
+
+Considering that only several VRTs on a detected
+Generated Token Sequence
+Output Patch Features
+Output Query
+B M S
+,
+object are predicted, a visual decoder is needed to
+convert these predicted VRTs into task-specific out𝑦"! ≥ 𝑉!"#!
+𝑦"! ≥ 𝑉!"#!
+Cross-Attention
+puts. For this purpose, we introduce a lightweight Split
+q
+k, v
+VRTs Text VRTs
+MLP
+vision task decoder, implemented as a stack of
+Token
+Obj 2
+Obj 1
+three two-way attention blocks (Fig. 4(b)). The deCross-Attention
+q
+k, v
+coder takes as input the hidden features of predicted
+predict
+predict
+Self-Attention
+VRTs from the final LLM layer. These features are
+Obj 1
+Obj 2
+grouped into object queries, where each group correB M S
+Query Feats
+Query Feats
+Input Query
+Input Patch Features
+sponds to a sequence of VRTs separated by interven(a)
+(b)
+ing text tokens (Fig. 4(a)). To enable task-specific
+Figure 4: Illustration for PaDT decoder.
+decoding, we inject three learnable tokens, bounding box, mask, and score tokens, into each group of object queries. After passing through the three
+attention blocks, each task token is projected into its respective output space, producing bounding
+boxes, segmentation masks, and confidence scores.
+3.2.3
+
+T RAINING S TRATEGY
+
+Robust Per-token Cross-Entropy Loss. For the autoregressive output of the MLLM, we adopt the
+standard supervised fine-tuning paradigm with a per-token cross-entropy loss:
+1X
+− log p(ŷt | I, T, y<t ) = − log softmaxGT (Wtv · ht ),
+(4)
+LCE =
+T t
+where ŷt denotes the ground-truth token at step t, ht is the hidden state, and Wtv projects to the
+token vocabulary. Unlike prior work that uses all foreground visual tokens as supervision (Ma et al.,
+2025), we propose to randomly sample Nvrt foreground tokens for each forward pass. This sampling
+strategy increases the diversity of supervision and prevents the model from overfitting to a fixed set
+of tokens, thereby improving generalization. To implement this, we introduce a foreground mask
+′
+M ∈ {0, 1}T ×N , where Mt,n = 1 indicates that token n at step t was not selected. For such tokens,
+we suppress their contribution to the loss by masking their logits:
+lt′ = Wtv · ht ,
+
+′
+lt,n+V
+= −∞ if Mt,n = 1.
+text
+
+(5)
+
+This effectively removes the masked tokens from the softmax normalization, ensuring they are neither rewarded nor penalized. The resulting robust cross-entropy loss is:
+Lrobust
+= − log softmaxGT (lt′ ).
+CE
+6
+
+(6)
+
+Under review.
+
+By combining random sampling with masked supervision, this objective improves robustness and
+encourages the model to explore diverse valid visual references during training.
+Task-specific Losses. For structured outputs from vision task decoder, we adopt task-specific objectives i.e. Lbbox , Lmask and Lscore following (Kamath et al., 2021; Kirillov et al., 2023). More
+implemented details about the task-specific losses are given in Appendix A.4. The final training
+objective of PaDT is
+L = Lrobust
++ Lbbox + Lmask + Lscore .
+CE
+
+4
+
+(7)
+
+E XPERIMENT
+
+Tasks and Datasets. We evaluate PaDT across a diverse set of visual perception & understanding
+tasks. Specifically, we consider: (i) referring expression comprehension and referring expression
+segmentation on RefCOCO, RefCOCO+, and RefCOCOg (Mao et al., 2016; Yu et al., 2016); (ii)
+open-vocabulary detection on COCO 2017 (Lin et al., 2014); and (iii) referring image captioning
+(RIC), for which we construct a new benchmark by re-annotating COCO with vision–language
+model (VLM) supervision. Further dataset details are provided in Appendix A.1.
+Architecture and Training Details. We adopt Qwen2.5-VL (Bai et al., 2025) as the base model and
+conduct experiments with both 3B and 7B variants to evaluate scalability. Based on existing dataset
+annotations, at each training step we randomly sample Nvrt = 5 visual reference tokens from the
+foreground mask of each target to construct the ground-truth MLLM sequence. If segmentation
+masks are unavailable, VRTs are instead sampled within the bounding box. The ground-truth token
+templates are provided in Appendix A.2. Training is performed on a single node with eight 96GB
+GPUs, using a batch size of 16 per GPU. We set the learning rate to 2 × 10−5 and apply gradient
+checkpointing together with bfloat16 mixed precision for memory efficiency. FlashAttention2 (Dao, 2023) is further employed to accelerate attention computation.
+Multi-Task Scalability. Joint training across tasks consistently improves performance, indicating
+strong cross-task generalization. To evaluate multi-task performance and analyze how performance
+scales with the number of tasks, we train PaDT jointly across all benchmarks, i.e., RefCOCO/+/g,
+COCO, and RIC, resulting in an enhanced multi-task variant denoted as PaDT Pro. Unlike taskspecific PaDT models, PaDT Pro can seamlessly switch between tasks by simply altering the prompt.
+Table 1: Results of referring expression comprehension task on RefCOCO/+/g datasets.
+Model Name
+
+Param.
+
+Grounding-DINO-L (Liu et al., 2024d)
+UNINEXT-H (Lin et al., 2023b)
+ONE-PEACE (Wang et al., 2023a)
+
+-
+
+InternVL3 (Zhu et al., 2025)
+InternVL3 (Zhu et al., 2025)
+Qwen2.5-VL (Bai et al., 2025)
+Qwen2.5-VL (SFT, (Shen et al., 2025))
+VLM-R1 (Shen et al., 2025)
+PaDT (Ours)
+PaDT Pro (Ours)
+
+RefCOCO
+RefCOCO+
+RefCOCOg
+Overall
+val test-A test-B val test-A test-B val
+test
+90.6 93.2
+92.6 94.3
+92.6 94.2
+
+88.2 82.8 89.0
+91.5 85.2 89.6
+89.3 88.8 92.2
+
+75.9 86.1
+79.8 88.7
+83.2 89.2
+
+87.0
+89.4
+89.3
+
+86.6
+88.9
+89.9
+
+1B
+2B
+3B
+3B
+3B
+3B
+3B
+
+85.8
+89.8
+89.1
+88.7
+90.1
+93.2
+96.0
+
+90.1
+92.6
+91.7
+92.3
+95.3
+95.5
+
+81.7
+86.4
+84.0
+85.2
+90.1
+95.0
+
+76.6
+84.0
+82.4
+82.3
+84.2
+88.5
+91.8
+
+84.1
+89.2
+88.0
+89.4
+92.4
+94.8
+
+69.2
+76.5
+74.1
+76.8
+83.5
+88.4
+
+82.8
+87.6
+85.2
+86.0
+85.6
+88.2
+93.6
+
+82.6
+87.2
+85.7
+86.8
+88.5
+94.0
+
+81.6
+86.7
+85.0
+86.3
+90.0
+93.6
+
+Shikra (Chen et al., 2023b)
+Ferret-v2 (You et al., 2023)
+TextHawk2 (Yu et al., 2024)
+ClawMachineX (Ma et al., 2025)
+Qwen2.5-VL (Bai et al., 2025)
+InternVL3 (Zhu et al., 2025)
+PaDT (Ours)
+PaDT Pro (Ours)
+
+7B
+7B
+7B
+7B
+7B
+8B
+7B
+7B
+
+87.0
+87.5
+91.9
+89.7
+90.0
+92.5
+93.1
+96.6
+
+90.6
+91.3
+93.0
+92.5
+92.5
+94.6
+97.2
+97.4
+
+80.2
+82.5
+87.6
+86.9
+85.4
+88.0
+90.4
+95.6
+
+81.6
+80.8
+86.2
+84.4
+94.2
+88.2
+88.8
+92.8
+
+87.4
+87.4
+90.0
+88.9
+89.1
+92.5
+92.8
+95.2
+
+72.1
+73.1
+80.4
+78.0
+76.9
+81.8
+83.2
+89.4
+
+82.3
+83.9
+88.2
+86.7
+87.2
+89.6
+88.2
+94.6
+
+82.2
+84.8
+88.1
+87.1
+87.2
+90.0
+88.8
+94.2
+
+82.9
+83.9
+88.2
+86.8
+86.6
+89.6
+90.1
+94.5
+
+Ferret-v2 (You et al., 2023)
+InternVL3 (Zhu et al., 2025)
+CogVLM-Grounding (Wang et al., 2024)
+InternVL3 (Zhu et al., 2025)
+
+13B
+14B
+17B
+78B
+
+92.6
+92.0
+92.8
+93.4
+
+95.0
+94.4
+94.8
+95.4
+
+88.9
+87.8
+89.0
+90.3
+
+87.4
+87.4
+88.7
+90.1
+
+92.1
+92.1
+92.9
+93.8
+
+81.4
+81.5
+83.4
+85.3
+
+89.4
+88.6
+89.8
+91.5
+
+90.0
+89.3
+90.8
+91.5
+
+89.6
+89.1
+90.3
+91.4
+
+7
+
+Under review.
+
+Table 2: Results of referring expression segmentation task on RefCOCO/+/g datasets.
+Model Name
+
+Param.
+
+RefCOCO
+RefCOCO+
+RefCOCOg
+Overall
+val testA testB val testA testB val
+test
+
+X-Decoder (Zou et al., 2023a)
+SEEM (Zou et al., 2023b)
+Seg-R1 (You & Wu, 2025)
+PaDT (Ours)
+PaDT Pro (Ours)
+
+3B
+3B
+3B
+
+64.6
+65.7
+69.9 76.0 64.9 59.1 66.8 50.9 67.3
+76.1 77.4 74.7 72.7 75.1 69.3 70.5
+81.3 81.5 82.2 77.6 79.4 76.3 78.1
+
+67.9
+71.1
+78.5
+
+65.4
+73.4
+79.4
+
+LAVT (Ye et al., 2023)
+LISA (Lai et al., 2024)
+PixelLM (Ren et al., 2024)
+OMG-LLaVA (Zhang et al., 2024b)
+Seg-R1 (You & Wu, 2025)
+Text4Seg + CRF (Lan et al., 2025)
+Text4Seg + SAM (Lan et al., 2025)
+PaDT (Ours)
+PaDT Pro (Ours)
+
+7B
+7B
+7B
+7B
+7B
+7B
+7B
+7B
+7B
+
+72.7
+74.1
+73.0
+75.6
+74.3
+71.3
+78.0
+78.5
+86.0
+
+66.0
+68.5
+70.5
+70.2
+71.4
+69.3
+74.7
+73.9
+83.3
+
+66.7
+67.9
+69.2
+70.0
+69.3
+68.9
+74.7
+75.8
+84.1
+
+75.8
+76.5
+76.5
+77.7
+78.7
+73.7
+80.9
+79.8
+86.1
+
+68.8
+71.1
+68.2
+71.2
+67.6
+69.6
+74.6
+77.3
+86.4
+
+62.1
+62.4
+66.3
+65.6
+62.6
+65.9
+71.6
+75.0
+82.5
+
+68.4
+67.5
+71.7
+69.7
+70.9
+70.4
+77.3
+77.7
+84.1
+
+55.1
+56.5
+58.3
+58.9
+57.9
+61.9
+66.0
+71.3
+80.7
+
+65.0
+66.4
+69.3
+70.7
+71.0
+69.3
+74.8
+73.0
+83.5
+
+Table 3: Results of open-vocabulary detection task on the whole COCO2017 validation set.
+Model Name
+
+Param. AP@[50:95] AP@50 AP@75 AR@[50:95] AR@50 AR@75
+
+InternVL3 (Zhu et al., 2025)
+Qwen2.5-VL (Bai et al., 2025)
+Qwen2.5-VL-SFT (Shen et al., 2025)
+VLM-R1 (Shen et al., 2025)
+PaDT (Ours)
+PaDT Pro (Ours)
+
+2B
+3B
+3B
+3B
+3B
+3B
+
+6.9
+13.7
+17.1
+19.2
+34.0
+38.2
+
+11.2
+22.1
+27.5
+33.1
+51.2
+54.9
+
+7.0
+14.2
+17.3
+19.0
+35.8
+40.5
+
+14.9
+21.8
+25.4
+32.2
+38.5
+43.9
+
+20.8
+30.5
+35.6
+46.9
+56.1
+60.6
+
+15.6
+23.3
+26.4
+33.6
+40.4
+46.4
+
+Qwen2.5-VL (Bai et al., 2025)
+LLaVa-NeXT (Liu et al., 2024b)
+LLaVa-OneVision (Li et al., 2024)
+InternVL3 (Zhu et al., 2025)
+PaDT (Ours)
+PaDT Pro (Ours)
+
+7B
+7B
+7B
+8B
+7B
+7B
+
+18.2
+0.7
+2.2
+17.5
+36.5
+39.0
+
+30.4
+2.2
+5.8
+26.6
+53.8
+56.2
+
+17.9
+0.3
+1.1
+18.2
+38.4
+41.5
+
+28.1
+1.3
+4.1
+28.0
+41.5
+44.8
+
+40.3
+3.3
+8.8
+37.3
+59.2
+61.8
+
+29.3
+0.8
+3.2
+29.7
+43.6
+47.6
+
+Table 4: Results of referring image captioning task on RIC validation set.
+Model Name
+
+Param.
+
+Text Metrics
+Detection Metrics
+CIDEr-D Meteor ROUGE-L BLEU-4 GP
+GR
+
+LLaVa-OneVision (Li et al., 2024)
+InternVL3 (Zhu et al., 2025)
+Qwen2.5-VL (Bai et al., 2025)
+PaDT (Ours)
+PaDT Pro (Ours)
+
+0.5B
+2B
+3B
+3B
+3B
+
+0.058
+0.315
+0.386
+1.450
+1.412
+
+0.088
+0.230
+0.241
+0.304
+0.300
+
+0.185
+0.374
+0.369
+0.501
+0.495
+
+0.052
+0.284
+0.261
+0.467
+0.458
+
+5.2
+42.4
+61.8
+81.6
+82.3
+
+0.5
+18.2
+6.2
+45.4
+45.1
+
+LLaVa-NeXT (Liu et al., 2024b)
+LLaVa-OneVision (Li et al., 2024)
+Qwen2.5-VL (Bai et al., 2025)
+InternVL3 (Zhu et al., 2025)
+LLaVa-NeXT (Liu et al., 2024b)
+PaDT (Ours)
+PaDT Pro (Ours)
+
+7B
+7B
+7B
+8B
+13B
+7B
+7B
+
+0.262
+0.172
+0.266
+0.208
+0.283
+1.445
+1.387
+
+0.200
+0.207
+0.251
+0.207
+0.212
+0.304
+0.299
+
+0.335
+0.330
+0.369
+0.373
+0.347
+0.500
+0.491
+
+0.178
+0.182
+0.257
+0.249
+0.172
+0.466
+0.449
+
+54.3
+32.5
+60.8
+56.6
+55.7
+77.0
+82.3
+
+10.6
+10.2
+19.8
+32.1
+6.2
+45.2
+45.8
+
+4.1
+
+V ISUAL P ERCEPTION & U NDERSTANDING TASKS
+
+Referring Expression Comprehension. The Referring Expression Comprehension (REC) task
+evaluates an MLLM’s ability to localize objects given natural language descriptions, where a prediction is considered correct if its IoU with the ground-truth box exceeds 50%. As shown in Tab. 1,
+PaDT and PaDT Pro achieve state-of-the-art performance at both 3B and 7B scales. In particular,
+PaDT Pro (3B) obtains 96.0/95.5/95.0 on RefCOCO, 91.8/94.8/88.4 on RefCOCO+, and 93.6/94.0
+on RefCOCOg, surpassing all previous MLLM methods. The overall average of PaDT Pro (3B)
+reaches 93.6, which is further boosted to 94.5 with the 7B model. Remarkably, both PaDT and
+8
+
+Under review.
+
+Table 5: The ablation study of the proposed components in PaDT.
+Visual Reference Token
+Training Strategy
+REC
+
+RES
+
+Lrobust
+CE
+–
+✓
+–
+–
+✓
+✓
+
+RefCOCO val
+–
+72.1
+75.2
+69.5
+19.8
+76.1
+
+using VRTs
+–
+✓
+✓
+✓
+✓
+✓
+
+fvp
+–
+–
+✓
+✓
+✓
+✓
+
+Task Decoder
+–
+PaDT Decoder
+PaDT Decoder
+PaDT Decoder
+PaDT Decoder
+PaDT Decoder
+
+VRTs Selection
+–
+✓
+✓
+All VRTs
+All VRTs
+✓
+
+RefCOCO val
+88.7
+91.1
+92.0
+76.5
+49.1
+93.2
+
+Figure 5: The illustrations of the mask generations.
+Decoder Output
+
+Only Points
+
+Table 6: Performance of using SAM2-L as mask
+
+Only Mask
+
+refiner with 3 types of prompts.
+
+cIoU: 87.8
+Only Box
+
+cIoU: 33.9
+Points + Box
+
+cIoU: 93.0
+
+cIoU: 91.3
+Points + Box + Mask
+
+cIoU: 91.9
+
+point
+
+box
+
+mask
+
+RefCOCOg val
+
+–
+✓
+–
+–
+✓
+✓
+
+–
+–
+✓
+–
+✓
+✓
+
+–
+–
+–
+✓
+–
+✓
+
+70.5
+69.9
+74.1
+74.0
+74.9
+76.3
+
+cIoU: 96.2
+
+PaDT Pro (3B) already outperform the much larger 78B InternVL3 model. These results demonstrate the effectiveness of the visual reference token paradigm, which substantially aligns textual
+semantics with image patches and thereby improves the precision of object localization in MLLMs.
+Referring Expression Segmentation. Similar to REC, the Referring Expression Segmentation
+(RES) task evaluates an MLLM’s ability to segment the target object mask given a natural language description. We adopt cIoU as the evaluation metric, and results are reported in Tab. 2. Both
+PaDT and PaDT Pro achieve the best performance compared with existing methods, even against approaches such as Seg-R1 and Text4Seg+SAM that leverage the powerful SAM segmentation model.
+With the lightweight PaDT decoder that translates unified visual reference tokens into segmentation masks, our models consistently outperform prior baselines. Additional qualitative examples are
+provided in Appendix A.6.
+Open-vocabulary Detection. This is a fundamental visual perception task that evaluates an
+MLLM’s ability to perform semantic grounding. As shown in Table 3, most existing MLLMs struggle with this task, showing low precision and recall. For instance, Qwen2.5-VL (3B) achieves only
+13.7 mAP, and InternVL3 (8B) reaches 17.5 mAP on the COCO2017 validation set. Our PaDT and
+PaDT Pro substantially advance the state of the art. PaDT Pro (3B) achieves 38.2 mAP, while the 7B
+variant further improves to 39.0 mAP, nearly doubling the performance of prior best methods. These
+gains highlight the effectiveness of visual reference tokens in strengthening semantic association and
+object localization.
+Referring Image Captioning. To validate both the visual understanding and grounding ability, we
+conduct experiments on our RIC dataset. As shown in Table 4, PaDT and PaDT Pro (3B) deliver
+strong improvements, reaching 1.45 CIDEr, 0.304 Meteor, 0.501 ROUGE-L, 0.467 BLEU-4, and
+top detection scores of 82.3% GreedyPrecision (GP) and 45.1% GreddyRecall (GR). The 7B models
+further extend performance, with PaDT Pro (7B) maintaining competitive caption quality, i.e. 1.39
+CIDEr, while achieving the best detection-oriented scores, i.e. 82.3% GP, 45.8% GR. These results
+suggest that PaDT generates not only fluent captions, but also semantically precise ones grounded
+in localized visual content.
+4.2
+
+A BLATION E XPERIMENTS
+
+Ablation study of Proposed Components in PaDT. We conduct detailed ablation studies in Tab. 5
+using the 3B model with the following observations. i) The first row without VRTs corresponds to
+supervised fine-tuning on Qwen2.5-VL, directly predicting bounding box coordinates. By inegrating VRTs with robust CE loss and random VRTs selection, we observe noticeable improvement
+9
+
+Under review.
+
+Table 7: The generalization analysis and finetuning result of PaDT on COCO2017 validation set.
+Model Name
+
+Objects365
+
+COCO2017
+
+AP@[50:95]
+
+AP@50
+
+AP@75
+
+AR@[50:95]
+
+AR@50
+
+AR@75
+
+–
+✓
+–
+✓
+
+–
+–
+✓
+✓
+
+13.7
+16.9
+34.0
+36.5
+
+22.1
+23.7
+51.2
+52.2
+
+14.2
+18.0
+35.8
+38.8
+
+21.8
+21.5
+38.5
+41.3
+
+30.5
+30.6
+56.1
+57.4
+
+23.3
+22.7
+40.4
+43.6
+
+Qwen2.5-VL
+PaDT (Zero Shot)
+PaDT (Task Specific)
+PaDT (FineTuned)
+
+in REC (detection task) and RES (segmentation task) being enabled. ii) We further notice that both
+projection module fvp and robust CE loss are necessary for achieving improved performance. iii) Alternative choice of including all foreground VRTs during training may even harm the performance,
+probably due to bias towards high density regions.
+Effectiveness of Mask Refinement with SAM2-L. We further analyze the compability of PaDT
+output with segmentation foundation model, SAM2-L under three schemes. i) Given the VRTs
+generated by PaDT, we extract their coordinates as point prompts to SAM2-L, denoted as point.
+ii) Using the bounding box and mask generated by PaDT, respectively, as prompt for SAM2-L. We
+explored different combinations with results in Tab. 6. First, we observe that using point prompt fails
+to improve upon PaDT, due to the sparse prior information. However, both box and mask prompts
+are conducive to further improving the results under the help of SAM. Combining multiple prompts
+yields more significant improvement. Visualizations in Fig. 5 corroborate these findings. The results
+suggest the segmentation performance can be further enhanced with expert foundation model at the
+expense of additional inference cost.
+Effectiveness of Pretraining and Task-specific Finetuning. To evaluate the generalization and
+data-scaling properties of the PaDT framework, we pretrain on Objects365 (Shao et al., 2019) and
+subsequently finetune on the COCO dataset. As shown in Tab. 7, PaDT exhibits stronger zero-shot
+performance than the Qwen2.5-VL base model, and its finetuned version consistently outperforms
+direct training on task-specific data.
+
+5
+
+C ONCLUSION
+
+In this work, we proposed Patch-as-Decodable Token (PaDT), a unified paradigm that equips
+MLLMs with the ability to generate both textual and visual outputs through Visual Reference Tokens
+(VRTs). By dynamically embedding VRTs into the LLM output space, PaDT ensures semantically
+coherent and visually grounded predictions, overcoming the inefficiency and misalignment issues
+of prior codebook-based methods. A light-weight decoder and an effective training strategy are
+further introduced to enable visual perception and understanding tasks within PaDT. Extensive experiments across detection, segmentation, grounding, and captioning demonstrate state-of-the-art
+performance, highlighting directly predicting visual tokens as an effective and scalable paradigm
+toward general-purpose multimodal reasoning systems.
+E THICS S TATEMENT
+We affirm that all authors have read and adhered to the ICLR Code of Ethics. Our research does
+not involve human subjects, personally identifiable data, or sensitive information. The datasets used
+are publicly available and cited appropriately. We have considered potential risks, including issues
+related to fairness, privacy, and security, and have taken steps to mitigate any possible negative
+impact. No conflicts of interest or external sponsorship have influenced the work. We commit to
+respecting research integrity and legal compliance throughout the research process.
+R EPRODUCIBILITY STATEMENT
+We are committed to ensuring the reproducibility of our results. The main text provides a detailed
+description of our proposed method and experimental setup, including all hyperparameters, datasets,
+and evaluation protocols. Additional results and dataset details are included in the appendix. We also
+provide the detailed process for constructing the Referring Image Caption dataset in the appendix.
+We will release all of our implemented code and reproduction instructions to further support the
+reproducibility of our findings.
+10
+
+Under review.
+
+R EFERENCES
+Josh Achiam, Steven Adler, Sandhini Agarwal, Lama Ahmad, Ilge Akkaya, Florencia Leoni Aleman, Diogo Almeida, Janko Altenschmidt, Sam Altman, Shyamal Anadkat, et al. GPT-4 Technical Report. arXiv preprint arXiv:2303.08774, 2023.
+Jean-Baptiste Alayrac, Giorgio Donato, and et al. Flamingo: a Visual Language Model for Few-Shot
+Learning. In Advances in Neural Information Processing Systems (NeurIPS), 2022.
+Shuai Bai, Keqin Chen, Xuejing Liu, Jialin Wang, Wenbin Ge, Sibo Song, Kai Dang, Peng Wang,
+Shijie Wang, Jun Tang, et al. Qwen2.5-VL Technical Report. arXiv preprint arXiv:2502.13923,
+2025.
+Nicolas Carion, Francisco Massa, Gabriel Synnaeve, Nicolas Usunier, Alexander Kirillov, and
+Sergey Zagoruyko. End-to-End Object Detection with Transformers. In European Conference on
+Computer Vision (ECCV), 2020.
+Chi Chen, Ruoyu Qin, Fuwen Luo, Xiaoyue Mi, Peng Li, Maosong Sun, and Yang Liu. PositionEnhanced Visual Instruction Tuning for Multimodal Large Language Models. arXiv preprint
+arXiv:2308.13437, 2023a.
+Keqin Chen, Zhao Zhang, Weili Zeng, Richong Zhang, Feng Zhu, and Rui Zhao. Shikra: Unleashing
+Multimodal LLM’s Referential Dialogue Magic. arXiv preprint arXiv:2306.15195, 2023b.
+Yukang Chen, Fuzhao Xue, Dacheng Li, Qinghao Hu, Ligeng Zhu, Xiuyu Li, Yunhao Fang, Haotian
+Tang, Shang Yang, Zhijian Liu, et al. LongVILA: Scaling Long-Context Visual Language Models
+for Long Videos. arXiv preprint arXiv:2408.10188, 2024a.
+Zhangquan Chen, Xufang Luo, and Dongsheng Li. VisRL: Intention-Driven Visual Perception via
+Reinforced Reasoning. arXiv preprint arXiv:2503.07523, 2025.
+Zhe Chen, Jiannan Wu, Wenhai Wang, Weijie Su, Guo Chen, Sen Xing, Muyan Zhong, Qinglong
+Zhang, Xizhou Zhu, Lewei Lu, et al. Intern VL: Scaling up Vision Foundation Models and
+Aligning for Generic Visual-Linguistic Tasks. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition, pp. 24185–24198, 2024b.
+Tri Dao. FlashAttention-2: Faster Attention with Better Parallelism and Work Partitioning. arXiv
+preprint arXiv:2307.08691, 2023.
+Mostafa Dehghani, Josip Djolonga, Basil Mustafa, Piotr Padlewski, Jonathan Heek, Justin Gilmer,
+Andreas Peter Steiner, Mathilde Caron, Robert Geirhos, Ibrahim Alabdulmohsin, et al. Scaling
+Vision Transformers to 22 Billion Parameters. In International Conference on Machine Learning,
+pp. 7480–7512. PMLR, 2023.
+Alexey Dosovitskiy, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas
+Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, et al. An
+Image is Worth 16x16 Words: Transformers for Image Recognition at Scale. arXiv preprint
+arXiv:2010.11929, 2020.
+Yuxin Fang, Wen Wang, Binhui Xie, Quan Sun, Ledell Wu, Xinggang Wang, Tiejun Huang, Xinlong
+Wang, and Yue Cao. EVA: Exploring the Limits of Masked Visual Representation Learning at
+Scale. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition,
+pp. 19358–19369, 2023.
+Zonghao Guo, Ruyi Xu, Yuan Yao, Junbo Cui, Zanlin Ni, Chunjiang Ge, Tat-Seng Chua, Zhiyuan
+Liu, and Gao Huang. LLaVA-UHD: an LMM Perceiving Any Aspect Ratio and High-Resolution
+Images. In European Conference on Computer Vision, pp. 390–406. Springer, 2024.
+Chao Jia, Yinfei Yang, Ye Xia, Yi-Ting Chen, Zarana Parekh, Hieu Pham, Quoc Le, Yun-Hsuan
+Sung, Zhen Li, and Tom Duerig. Scaling Up Visual and Vision-Language Representation Learning With Noisy Text Supervision. In International Conference on Machine Learning, pp. 4904–
+4916. PMLR, 2021.
+11
+
+Under review.
+
+Dongfu Jiang, Xuan He, Huaye Zeng, Cong Wei, Max Ku, Qian Liu, and Wenhu Chen. MANTIS:
+Interleaved Multi-Image Instruction Tuning. arXiv preprint arXiv:2405.01483, 2024a.
+Qing Jiang, Gen Luo, Yuqin Yang, Yuda Xiong, Yihao Chen, Zhaoyang Zeng, Tianhe Ren, and
+Lei Zhang. ChatRex: Taming Multimodal LLM for Joint Perception and Understanding. arXiv
+preprint arXiv:2411.18363, 2024b.
+Yang Jin, Kun Xu, Kun Xu, Liwei Chen, Chao Liao, Jianchao Tan, Quzhe Huang, Bin CHEN,
+Chengru Song, dai meng, Di ZHANG, Wenwu Ou, Kun Gai, and Yadong MU. Unified languagevision pretraining in LLM with dynamic discrete visual tokenization. In The Twelfth International
+Conference on Learning Representations, 2024. URL https://openreview.net/forum?
+id=FlvtjAB0gl.
+Aishwarya Kamath, Mannat Singh, Marcus Rohrbach, Nicolas Carion, Vedanuj Sharma, Zhecan
+Peng, Chunjie Li, Yuwei Kim, Alaaeldin El-Nouby, Ali Hassani, and et al. MDETR – Modulated
+Detection for End-to-End Multi-Modal Understanding. In Proceedings of the IEEE International
+Conference on Computer Vision (ICCV), 2021.
+Alexander Kirillov, Eric Mintun, Nikhila Ravi, Hanzi Mao, Courtney Rolland, Lucas Gustafson,
+Tete Xiao, Spencer Whitehead, Alexander Berg, Wan-Yen Lo, and et al. Segment Anything. In
+Proceedings of the IEEE International Conference on Computer Vision (ICCV), 2023.
+Xin Lai, Zhuotao Tian, Yukang Chen, Yanwei Li, Yuhui Yuan, Shu Liu, and Jiaya Jia. LISA: Reasoning Segmentation via Large Language Model. In Proceedings of the IEEE/CVF Conference
+on Computer Vision and Pattern Recognition, pp. 9579–9589, 2024.
+Mengcheng Lan, Chaofeng Chen, Yue Zhou, Jiaxing Xu, Yiping Ke, Xinjiang Wang, Litong
+Feng, and Wayne Zhang. Text4Seg: Reimagining Image Segmentation as Text Generation. In
+The Thirteenth International Conference on Learning Representations, 2025. URL https:
+//openreview.net/forum?id=vkakKdznFS.
+Bo Li, Yuanhan Zhang, Dong Guo, Renrui Zhang, Feng Li, Hao Zhang, Kaichen Zhang, Peiyuan
+Zhang, Yanwei Li, Ziwei Liu, et al. LLaVA-OneVision: Easy Visual Task Transfer. arXiv preprint
+arXiv:2408.03326, 2024.
+Junnan Li, Dongxu Li, Caiming Xiong, and Steven Hoi. BLIP: Bootstrapping Language-Image Pretraining for Unified Vision-Language Understanding and Generation. In International Conference
+on Machine Learning, pp. 12888–12900. PMLR, 2022a.
+Junnan Li, Dongxu Li, Caiming Xiong, and Steven Hoi. BLIP-2: Bootstrapping Language-Image
+Pre-training with Frozen Image Encoders and Large Language Models. In International Conference on Machine Learning (ICML), 2023.
+Xiang Li, Wenhai Zhang, Yue Cao, Han Hu, Jinhui Guo, Haibing Ling, and Wei Fudan. Grounded
+Language-Image Pre-training. In Proceedings of the IEEE Conference on Computer Vision and
+Pattern Recognition (CVPR), 2022b.
+Yi Li, Hualiang Wang, Xinpeng Ding, Haonan Wang, and Xiaomeng Li. Token Activation Map
+to Visually Explain Multimodal LLMs, 2025. URL https://arxiv.org/abs/2506.
+23270.
+Bin Lin, Yang Ye, Bin Zhu, Jiaxi Cui, Munan Ning, Peng Jin, and Li Yuan. Video-LLaVA: Learning
+United Visual Representation by Alignment Before Projection. arXiv preprint arXiv:2311.10122,
+2023a.
+Fangjian Lin, Jianlong Yuan, Sitong Wu, Fan Wang, and Zhibin Wang. UniNeXt: Exploring A
+Unified Architecture for Vision Recognition. In Proceedings of the 31st ACM International Conference on Multimedia, pp. 3200–3208, 2023b.
+Tsung-Yi Lin, Michael Maire, Serge Belongie, James Hays, Pietro Perona, Deva Ramanan, Piotr
+Dollár, and C Lawrence Zitnick. Microsoft COCO: Common Objects in Context. In European
+Conference on Computer Vision, pp. 740–755. Springer, 2014.
+12
+
+Under review.
+
+Haotian Liu, Chunyuan Li, Qingyang Wu, and Yong Jae Lee. Visual Instruction Tuning. Advances
+in Neural Information Processing Systems (NeurIPS), 36:34892–34916, 2023.
+Haotian Liu, Chunyuan Li, Yuheng Li, and Yong Jae Lee. Improved Baselines with Visual Instruction Tuning. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern
+Recognition, pp. 26296–26306, 2024a.
+Haotian Liu, Chunyuan Li, Yuheng Li, Bo Li, Yuanhan Zhang, Sheng Shen, and Yong Jae Lee.
+LLaVA-NeXT: Improved reasoning, OCR, and world knowledge, January 2024b. URL https:
+//llava-vl.github.io/blog/2024-01-30-llava-next/.
+Shilong Liu, Hao Cheng, Haotian Liu, Hao Zhang, Feng Li, Tianhe Ren, Xueyan Zou, Jianwei Yang,
+Hang Su, Jun Zhu, et al. LLaVA-Plus: Learning to Use Tools for Creating Multimodal Agents.
+In European Conference on Computer Vision, pp. 126–142. Springer, 2024c.
+Shilong Liu, Zhaoyang Zeng, Tianhe Ren, Feng Li, Hao Zhang, Jie Yang, Qing Jiang, Chunyuan Li,
+Jianwei Yang, Hang Su, et al. Grounding DINO: Marrying DINO with Grounded Pre-Training for
+Open-Set Object Detection. In European Conference on Computer Vision, pp. 38–55. Springer,
+2024d.
+Yuqi Liu, Tianyuan Qu, Zhisheng Zhong, Bohao Peng, Shu Liu, Bei Yu, and Jiaya Jia. VisionReasoner: Unified Visual Perception and Reasoning via Reinforcement Learning. arXiv preprint
+arXiv:2505.12081, 2025a.
+Ziyu Liu, Zeyi Sun, Yuhang Zang, Xiaoyi Dong, Yuhang Cao, Haodong Duan, Dahua Lin, and Jiaqi
+Wang. Visual-RFT: Visual Reinforcement Fine-Tuning. arXiv preprint arXiv:2503.01785, 2025b.
+Gen Luo, Yiyi Zhou, Tianhe Ren, Shengxin Chen, Xiaoshuai Sun, and Rongrong Ji. Cheap and
+Quick: Efficient Vision-Language Instruction Tuning for Large Language Models. Advances in
+Neural Information Processing Systems, 36:29615–29627, 2023.
+Tianren Ma, Lingxi Xie, Yunjie Tian, Boyu Yang, and Qixiang Ye. ClawMachine: Learning to
+Fetch Visual Tokens for Referential Comprehension. In The Thirteenth International Conference on Learning Representations, 2025. URL https://openreview.net/forum?id=
+TOtk9dTYGG.
+Junhua Mao, Jonathan Huang, Alexander Toshev, Oana Camburu, Alan L Yuille, and Kevin Murphy.
+Generation and Comprehension of Unambiguous Object Descriptions. In Proceedings of the
+IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp. 11–20, 2016.
+Bo Peng, Dongdong Yu, et al. Kosmos-2: Grounding Multimodal Large Language Models to the
+World. arXiv preprint arXiv:2306.14824, 2023.
+Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal,
+Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, et al. Learning Transferable Visual
+Models From Natural Language Supervision. In International Conference on Machine Learning,
+pp. 8748–8763. PmLR, 2021.
+Hanoona Rasheed, Muhammad Maaz, Sahal Shaji, Abdelrahman Shaker, Salman Khan, Hisham
+Cholakkal, Rao M Anwer, Eric Xing, Ming-Hsuan Yang, and Fahad S Khan. GLaMM: Pixel
+Grounding Large Multimodal Model. In Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition, pp. 13009–13018, 2024.
+Joseph Redmon, Santosh Divvala, Ross Girshick, and Ali Farhadi. You Only Look Once: Unified,
+Real-Time Object Detection. In Proceedings of the IEEE Conference on Computer Vision and
+Pattern Recognition (CVPR), 2016.
+Shaoqing Ren, Kaiming He, Ross Girshick, and Jian Sun. Faster R-CNN: Towards Real-Time
+Object Detection with Region Proposal Networks. In Advances in Neural Information Processing
+Systems (NeurIPS), 2015.
+Tianhe Ren, Jinyu Zhao, Shilong Yang, Feng Li, Xiang Li, and Han Hu. Grounding DINO: Marrying
+DINO with Grounded Pre-Training for Open-Set Object Detection. In Proceedings of the IEEE
+Conference on Computer Vision and Pattern Recognition (CVPR), 2023.
+13
+
+Under review.
+
+Zhongwei Ren, Zhicheng Huang, Yunchao Wei, Yao Zhao, Dongmei Fu, Jiashi Feng, and Xiaojie
+Jin. PixelLM: Pixel Reasoning with Large Multimodal Model. In Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition, pp. 26374–26383, 2024.
+Shuai Shao, Zeming Li, Tianyuan Zhang, Chao Peng, Gang Yu, Xiangyu Zhang, Jing Li, and Jian
+Sun. Objects365: A large-scale, high-quality dataset for object detection. In Proceedings of the
+IEEE/CVF international conference on computer vision, pp. 8430–8439, 2019.
+Haozhan Shen, Peng Liu, Jingcheng Li, Chunxin Fang, Yibo Ma, Jiajia Liao, Qiaoli Shen, Zilun
+Zhang, Kangjia Zhao, Qianqian Zhang, et al. VLM-R1: A Stable and Generalizable R1-style
+Large Vision-Language Model. arXiv preprint arXiv:2504.07615, 2025.
+Peize Sun, Yi Jiang, Shoufa Chen, Shilong Zhang, Bingyue Peng, Ping Luo, and Zehuan Yuan.
+Autoregressive Model Beats Diffusion: Llama for Scalable Image Generation. arXiv preprint
+arXiv:2406.06525, 2024.
+Quan Sun, Qiying Yu, Yufeng Cui, Fan Zhang, Xiaosong Zhang, Yueze Wang, Hongcheng Gao,
+Jingjing Liu, Tiejun Huang, and Xinlong Wang. Emu: Generative Pretraining in Multimodality.
+arXiv preprint arXiv:2307.05222, 2023.
+Chameleon Team. Chameleon: Mixed-Modal Early-Fusion Foundation Models. arXiv preprint
+arXiv:2405.09818, 2024.
+Peng Wang, Shijie Wang, Junyang Lin, Shuai Bai, Xiaohuan Zhou, Jingren Zhou, Xinggang Wang,
+and Chang Zhou. ONE-PEACE: Exploring One General Representation Model Toward Unlimited
+Modalities. arXiv preprint arXiv:2305.11172, 2023a.
+Weihan Wang, Qingsong Lv, Wenmeng Yu, Wenyi Hong, Ji Qi, Yan Wang, Junhui Ji, Zhuoyi Yang,
+Lei Zhao, Song XiXuan, et al. CogVLM: Visual Expert for Pretrained Language Models. Advances in Neural Information Processing Systems, 37:121475–121499, 2024.
+Wenhai Wang, Jifeng Dai, Zhe Chen, Zhenhang Huang, Zhiqi Li, Xizhou Zhu, Xiaowei Hu, Tong
+Lu, Lewei Lu, Hongsheng Li, et al. InternImage: Exploring Large-Scale Vision Foundation Models with Deformable Convolutions. In Proceedings of the IEEE/CVF Conference on Computer
+Vision and Pattern Recognition, pp. 14408–14419, 2023b.
+Shiyu Xuan, Qingpei Guo, Ming Yang, and Shiliang Zhang. Pink: Unveiling the Power of Referential Comprehension for Multi-modal LLMs. In Proceedings of the IEEE/CVF Conference on
+Computer Vision and Pattern Recognition, pp. 13838–13848, 2024.
+Qinghao Ye, Haiyang Xu, Guohai Xu, Jiabo Ye, Ming Yan, Yiyang Zhou, Junyang Wang, Anwen
+Hu, Pengcheng Shi, Yaya Shi, et al. mPLUG-Owl: Modularization Empowers Large Language
+Models with Multimodality. arXiv preprint arXiv:2304.14178, 2023.
+Haoxuan You, Haotian Zhang, Zhe Gan, Xianzhi Du, Bowen Zhang, Zirui Wang, Liangliang Cao,
+Shih-Fu Chang, and Yinfei Yang. Ferret: Refer and ground anything anywhere at any granularity.
+In The Twelfth International Conference on Learning Representations, 2023.
+Zuyao You and Zuxuan Wu. Seg-r1: Segmentation can be surprisingly simple with reinforcement
+learning. arXiv preprint arXiv:2506.22624, 2025.
+Licheng Yu, Patrick Poirson, Shan Yang, Alexander C Berg, and Tamara L Berg. Modeling Context
+in Referring Expressions. In European Conference on Computer Vision, pp. 69–85. Springer,
+2016.
+Ya-Qi Yu, Minghui Liao, Jiwen Zhang, and Jihao Wu. TextHawk2: A Large Vision-Language
+Model Excels in Bilingual OCR and Grounding with 16x Fewer Tokens. arXiv preprint
+arXiv:2410.05261, 2024.
+Yuqian Yuan, Wentong Li, Jian Liu, Dongqi Tang, Xinjie Luo, Chi Qin, Lei Zhang, and Jianke Zhu.
+Osprey: Pixel Understanding with Visual Instruction Tuning. In Proceedings of the IEEE/CVF
+Conference on Computer Vision and Pattern Recognition, pp. 28202–28211, 2024.
+14
+
+Under review.
+
+Shilong Zhang, Peize Sun, Shoufa Chen, Min Xiao, Wenqi Shao, Wenwei Zhang, Yu Liu, Kai Chen,
+and Ping Luo. GPT4RoI: Instruction Tuning Large Language Model on Region-of-Interest. In
+European Conference on Computer Vision, pp. 52–70. Springer, 2024a.
+Tao Zhang, Xiangtai Li, Hao Fei, Haobo Yuan, Shengqiong Wu, Shunping Ji, Chen Change Loy, and
+Shuicheng Yan. OMG-LLaVA: Bridging Image-level, Object-level, Pixel-level Reasoning and
+Understanding. Advances in Neural Information Processing Systems, 37:71737–71767, 2024b.
+Deyao Zhu, Jun Chen, Xiaoqian Shen, Xiang Li, and Mohamed Elhoseiny. MiniGPT-4: Enhancing Vision-Language Understanding with Advanced Large Language Models. arXiv preprint
+arXiv:2304.10592, 2023.
+Jinguo Zhu, Weiyun Wang, Zhe Chen, Zhaoyang Liu, Shenglong Ye, Lixin Gu, Hao Tian, Yuchen
+Duan, Weijie Su, Jie Shao, et al. InternVL3: Exploring Advanced Training and Test-Time Recipes
+for Open-Source Multimodal Models. arXiv preprint arXiv:2504.10479, 2025.
+Xueyan Zou, Zi-Yi Dou, Jianwei Yang, Zhe Gan, Linjie Li, Chunyuan Li, Xiyang Dai, Harkirat
+Behl, Jianfeng Wang, Lu Yuan, et al. Generalized Decoding for Pixel, Image, and Language.
+In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition, pp.
+15116–15127, 2023a.
+Xueyan Zou, Jianwei Yang, Hao Zhang, Feng Li, Linjie Li, Jianfeng Wang, Lijuan Wang, Jianfeng
+Gao, and Yong Jae Lee. Segment Everything Everywhere All at Once. Advances in Neural
+Information Processing Systems, 36:19769–19782, 2023b.
+
+15
+
+Under review.
+
+A
+
+A PPENDIX
+
+A.1
+A.1.1
+
+R EFERRING I MAGE C APTIONING (RIC) DATASET
+DATASET C ONSTRUCTION
+
+Image captioning is a fundamental benchmark for evaluating the vision understanding ability of
+MLLMs. In the conventional setting, given an input image, the model generates a pure textual description that summarizes the main subject and its activity, trained on large-scale image–text pairs.
+However, such descriptions provide little supervision regarding object-level grounding, making it
+difficult to assess whether the model accurately captures the spatial locations of entities. To address this limitation, we re-annotate the COCO2017 dataset with more fine-grained annotations and
+propose our Referring Image Captioning (RIC) dataset. Specifically, we leverage Qwen2.5-VL-72B
+(prompt provided below) and feed each image together with its box-level annotations, instructing the
+model to produce enriched captions that explicitly reference the corresponding box IDs. Examples
+of the resulting training samples are shown in Fig. 6.
+Prompt for generating RIC dataset
+Prompt: <image>Please describe the image, focusing on the main objects (instances) present. After
+mentioning an object in the caption, immediately append its instance ID(s) in parentheses, using the
+format (<box id: ID/>). You MUST ONLY use the instance IDs provided in the list below. Do NOT
+invent or make up any IDs. If there are multiple instance IDs for the same object, list all IDs within
+the same parentheses, separated by commas. For example: ’A man (<box id: ID/>) is standing by
+the table (<box id: ID/>). Two ovens (<box id: ID/>, <box id: ID/>) are visible.’ Here are the
+optional instances in the image (id: ID, format: category: name, bbox: [x1, y1, x2, y2]):
+- 200887, person, [389, 70, 498, 348]
+- {list all annotations within this query image.}
+IMPORTANT: Only use the instance IDs listed above in your caption. Do NOT invent or
+make up any new IDs. Generate a fluent English caption that includes the main objects and their
+instance IDs as specified.You don’t have to include all instances from the list above, as they are
+optional; only describe the main elements of the image. The caption should be no more than 100
+words and should not contain any information irrelevant to the image.
+Qwen2.5-VL-72B: (Example) A bustling kitchen scene features a person (<box id: 200887/>)
+working near a sink (<box id: 2196309/>). The dining table (<box id: 119568/>) holds various cooking items, including a bowl (<box id: 713388/>) and a bottle (<box id: 82445/>). Two
+ovens (<box id: 1125079/>, <box id: 2139366/>) are visible in the background. Another person
+(<box id: 1218137/>) appears partially on the left. The table also has a cup (<box id: 1883614/>)
+and a knife (<box id: 693231/>). The kitchen is equipped with hanging pots and a well-used
+workspace, emphasizing a busy cooking environment.
+
+A.2
+
+T EMPLATE E XAMPLE FOR EACH VISION TASK
+
+Here we present the interaction templates used in our PaDT framework, covering open-vocabulary
+detection, referring expression comprehension, and referring image captioning tasks. The prompts
+are designed to be concise and efficient, allowing PaDT to naturally interleave textual tokens and
+VRT predictions during task training.
+Open Vocabulary Detection Task
+USER: <image>Please carefully check the image and detect the following objects: [{target list}].
+ASSISTANT: In this image, there are {number} “{category}” (<VRT 0><VRT 1><VRT 2>
+<VRT 3><VRT 4>, <VRT 5><VRT 6><VRT 7><VRT 8><VRT 9>, ...) and ...
+Referring Expression Comprehension / Segmentation Task
+USER: <image>Please carefully check the image and detect the object this sentence describes:
+“{question}”.
+ASSISTANT: The “{question}” refers to <VRT 0><VRT 1><VRT 2><VRT 3><VRT 4> in
+this image.
+
+16
+
+Under review.
+
+A man (<0>) rides a motorcycle (<1>) on a dirt path. He
+is wearing a red shirt, black shorts, and a helmet. The
+motorcycle has a rugged design with a rear storage
+box. The background features lush greenery, a large
+mountain partially covered in mist, and a bridge
+spanning the scene. Another person (<2>) and a bicycle
+(<3>) are visible in the distance, adding to the rural
+setting. The atmosphere is serene, with natural
+elements dominating the landscape.
+A man (<0>) is riding a bicycle
+(<1>) on a path near a train
+(<2>). The train, with a red
+and
+white
+design,
+is
+positioned on the tracks
+behind the cyclist. A stop
+sign (<3>) is visible to the
+right of the man, and
+overhead electrical lines run
+above the train. The scene is
+set in a well-lit area with
+some greenery along the
+path. The overall atmosphere
+suggests a calm, possibly
+suburban environment.
+
+A woman (<0>) stands in a
+kitchen, holding a cat (<1>).
+She is near a sink (<2>)
+with a bowl of oranges
+(<3>) and a bottle (<4>). A
+refrigerator (<5>) is visible
+to her right. A handbag
+(<6>) rests on the floor by
+her feet. The kitchen
+features wooden cabinets
+and a stove with a pan
+(<7>). A potted plant (<8>)
+and a clock (<9>) adorn the
+counter. The scene is
+warm and homey.
+
+A young girl (<0>) is eagerly eating from a bowl
+(<1>) on a dining table (<2>). She uses a spoon
+(<3>) to scoop food, which appears to be melting.
+The table is covered with a red-checkered
+tablecloth. In the background, an adult (<4>) sits
+with arms crossed, and a wine glass (<5>) is
+partially visible. The scene is illuminated by
+natural light, creating a warm and casual dining
+atmosphere.
+
+A woman (<0>) is eating from a spoon (<1>) in
+a kitchen. She holds a plate of food,
+including what appears to be broccoli.
+Behind her, there is an oven (<2>) and a
+microwave (<3>). A bottle (<4>) is visible on
+the counter near the oven. The setting is a
+home kitchen with light-colored cabinets
+and a tiled backsplash. The woman is
+wearing glasses and a blue top.
+Figure 6: The training samples of RIC dataset. For each image, there are 3-5 captions, in which we
+ask the MLLMs to refer to the object (via bounding box or visual reference tokens) following each
+object’s subject.
+
+Referring Image Captioning Task
+USER: <image>Please describe this image.
+ASSISTANT: ... {object1} (<VRT 0><VRT 1><VRT 2><VRT 3><VRT 4>) ... {object2}
+(<VRT 5><VRT 6><VRT 7><VRT 8><VRT 9>) ...
+
+17
+
+Under review.
+
+A.3
+
+P ROMPT USED FOR COMPETING METHODS
+
+To guide MLLMs (e.g., Qwen2.5-VL (Bai et al., 2025), InternVL3 (Zhu et al., 2025), and the LLaVA
+series (Liu et al., 2024c)) in predicting bounding box coordinates in each task, we append a boxspecific and format-specific instruction to the task prompt, as detailed below.
+Open Vocabulary Detection Task (with box and format instruction)
+USER: <image>Please carefully check the image and detect the following objects: [{target list}].
+Output each detected target’s bbox coordinates in JSON format. For example, “‘json
+[{”bbox 2d”: [x1, y1, x2, y2], ”label”: ”target name”}]
+“‘. If no targets are detected in the image, simply respond with None.
+Referring Expression Comprehension / Segmentation Task (with format instruction)
+USER: <image>Please carefully check the image and detect the object this sentence describes:
+“{question}”. Output the final answer in JSON format.
+Referring Image Captioning Task (with box instruction)
+USER: <image>Please describe this image. You should include the corresponding bounding box of
+the objects within the sentence. For example, ”In this image, a cat ([x1, y1, x2, y2]) is sitting on the
+wooden table ([x1, y1, x2, y2]), ...”.
+
+A.4
+
+T HE FORMULA OF THE TASK - SPECIFIC LOSSES ON THE PA DT DECODER OUTPUT
+
+R
+
+R
+
+Let B pred ∈ L×4 denote predicted bounding boxes with ground truth B gt , Mpred ∈ L×H×W
+predicted masks with ground truth Mgt , and S pred ∈ L×1 predicted confidence scores with
+ground truth S gt . The Lbbox , Lmask and Lscore objectives are:
+
+R
+
+L
+
+Lbbox =
+
+Lmask =
+
+1X
+Liou (Blpred , Blgt ) + ||Blpred − Blgt ||1 ,
+L
+
+(8)
+
+l
+
+L
+
+L
+
+l
+
+l
+
+X
+1X
+Ldice (Mpred
+, Mgt
+Lf ocal (Mpred
+, Mgt
+l
+l )+
+l
+l ),
+L
+
+(9)
+
+L
+
+Lscore =
+A.5
+A.5.1
+
+1 X pred
+||Sl
+− Slgt ||22 .
+L
+
+(10)
+
+l
+
+A DDITIONAL A BLATION S TUDY
+T OKEN ACTIVATION M AP A NALYSIS
+
+We provide additional Token Activation Map (TAM) visualizations, as illustrated in Fig. 7, comparing Qwen2.5-VL and the PaDT Pro 7B model, showing that visual reference tokens establish much
+stronger associations with target image patches than digit-by-digit coordinate predictions. These
+results further highlight the robust semantic alignment and precise object localization achieved by
+visual reference tokens.
+A.5.2
+
+A BLATION S TUDY OF OTHER USED LOSSES
+
+As shown in Table 8, we conduct ablations on the loss components Lbbox , Lmask , and Lscore .
+PaDT achieves the best average performance when all visual task losses are combined. In particular,
+removing the dynamic embedding module or omitting any individual loss (Lmask , Lbbox , Lscore )
+consistently degrades performance on both referring expression comprehension and segmentation.
+Notably, using all components yields the highest accuracy (93.2% REC and 76.1 mask cIoU) and the
+strongest multi-task ability, underscoring that each module and loss is essential and complementary
+for optimal task performance.
+18
+
+PaDT Pro 7B
+
+Qwen2.5-VL 7B
+
+Under review.
+
+Batter 2ns up on
+Left
+
+Big One
+
+Right Toilet
+
+55 Bus
+
+All of the Pizza d
+
+Please carefully check the image
+and detect the object this sentence
+describes: ”big one”.“‘json
+[
+ĉ”bbox_2d”:
+[263, 28, 551, 439],
+”label”: ”big one”
+]
+“‘
+Candidates : 2, 1, 3,
+
+Please carefully check the image
+and detect the object this sentence
+describes: ”right toilet”.“‘json
+[
+ĉ”bbox_2d”: [330, 184, 500, 567],
+”label”: ”right toilet”
+]
+“‘
+Candidates : 3, 2, 1,
+
+Please carefully check the image
+and detect the object this sentence
+describes: ”55 bus”.“‘json
+[
+ĉ”bbox_2d”:
+[89, 116, 509, 430],
+”label”: ”55 bus”
+]
+“‘
+Candidates : 8, 9, 1,
+
+Please carefully check the image
+and detect the object this sentence
+describes: ”all of the pizza d”.“‘json
+[
+ĉ”bbox_2d”: [1, 0, 504, 360], ”label”:
+”all of the pizza d”
+]
+“‘
+Candidates : 2, 1, 0,
+
+Please carefully check the image
+and detect the object this sentence
+describes: ”batter 2ns up on left”.“‘json
+[
+ĉ”bbox_2d”:
+[0, 314, 295, 518],
+”label”: ”batter 2ns up on left”
+]
+“‘
+Candidates : 2, 0, 1,
+
+Please carefully check the image
+and detect the object this sentence
+describes: ”big one”.The ”big one”
+refers to <VRT_176> <VRT_200>
+<VRT_201>
+<VRT_154>
+<VRT_132> in this image.
+Candidates : < V RT _176 >, < V RT _200 >,
+< V RT _201 >,
+
+Please carefully check the image
+and detect the object this sentence
+describes:
+”right toilet”.The ”right
+toilet” refers to
+<VRT_246>
+<VRT_245>
+<VRT_269>
+<VRT_176> <VRT_223> in this
+image.
+Candidates : < V RT _246 >, < V RT _245 >,
+< V RT _223 >,
+
+Please carefully check the image
+and detect the object this sentence
+describes:
+”55 bus”.The ”55 bus”
+refers to <VRT_168> <VRT_167>
+<VRT_240>
+<VRT_213>
+<VRT_170> in this image.
+Candidates : < V RT _168 >, < V RT _167 >,
+< V RT _213 >,
+
+Please carefully check the image
+and detect the object this sentence
+describes: ”all of the pizza d”.The ”all
+of the pizza d” refers to <VRT_116>
+<VRT_141>
+<VRT_116>
+<VRT_42> <VRT_116> in this
+image.
+Candidates : < V RT _116 >, < V RT _141 >,
+< V RT _42 >,
+
+Please carefully check the image
+and detect the object this sentence
+describes: ”batter 2ns up on left”.The
+”batter 2ns up on left” refers
+to
+<VRT_398>
+<VRT_277>
+<VRT_279>
+<VRT_278>
+<VRT_281> in this image.
+Candidates : < V RT _398 >, < V RT _277 >,
+< V RT _279 >,
+
+Figure 7: More TAM visualizations of Qwen2.5-VL and our PaDT Pro 7B models.
+
+Table 8: Ablation study of each individual components (with the analysis of additional losses).
+VRT
+
+Dynamic Embedding Module
+fvp
+
+–
+✓
+✓
+✓
+✓
+✓
+
+–
+–
+✓
+✓
+✓
+✓
+
+A.5.3
+
+Visual Task Loss
+Lmask Lbbox Lscore
+–
+✓
+–
+✓
+✓
+✓
+
+–
+✓
+✓
+–
+✓
+✓
+
+–
+✓
+✓
+–
+–
+✓
+
+Detection
+RefCOCO val (REC) COCO val
+88.7
+91.1
+91.7
+–
+92.7
+93.2
+
+17.1
+27.5
+32.3
+–
+24.4
+34.0
+
+Segmentation
+RefCOCO val (RES)
+–
+72.1
+–
+78.0
+75.2
+76.1
+
+A BLATION S TUDY OF THE NUMBER OF SELECTED VRT S PER TARGET
+
+We analyze how the number of selected visual patches per target impacts performance. As shown
+in Table 9, increasing the number of patches from 1 to 5 steadily improves both bounding box
+accuracy and mask cIoU across all datasets. The best results are obtained with 5 patches per target,
+while further increasing to 8 patches yields diminishing or even negative returns. This indicates
+that a moderate number of representative patches provides richer representations, whereas excessive
+patches introduce noise and redundancy, leading to unstable training of PaDT.
+We also investigate the case of using all foreground patches as ground-truth VRTs during training.
+As shown in Fig. 8, this configuration produces the worst results. Although the number of output
+VRTs increases, the PaDT decoder exhibits clear performance degradation. We attribute this to the
+redundancy (that makes the PaDT hard to predict all VRTs at the inference stage) and low resolution
+of patch-level features: when all foreground patches are used, the decoder is forced to decode trivial
+and overlapping regions, which prevents it from learning accurate target boundaries and masks,
+especially when only a limited number of VRTs are predicted at inference. Consequently, selecting
+a moderate number of informative patches proves more effective than training with all foreground
+patches.
+19
+
+Under review.
+
+Table 9: Ablation study of the number of selected visual patches per target.
+#Patches / Target
+
+1
+
+3
+
+5
+
+8
+
+ALL
+
+RefCOCO val
+
+Bbox Acc@0.5
+Bbox Acc@0.75
+Mask cIoU
+
+92.4
+82.7
+67.3
+
+93.2
+86.1
+75.2
+
+93.2
+87.1
+76.1
+
+92.6
+85.9
+75.7
+
+49.1
+15.5
+19.8
+
+RefCOCO+ val
+
+Bbox Acc@0.5
+Bbox Acc@0.75
+Mask cIoU
+
+87.5
+78.8
+63.7
+
+88.1
+82.1
+71.4
+
+88.5
+82.8
+72.7
+
+87.5
+81.7
+71.6
+
+–
+–
+–
+
+RefCOCOg val
+
+Bbox Acc@0.5
+Bbox Acc@0.75
+Mask cIoU
+
+88.1
+78.7
+62.7
+
+88.2
+80.7
+69.7
+
+88.2
+81.1
+70.5
+
+86.8
+79.9
+70.0
+
+–
+–
+
+❌ PaDT trained with all
+foreground VRTs
+
+✅ PaDT trained with 5
+random foreground VRTs
+
+Please
+carefully
+check the image and
+detect the object
+this
+sentence
+describes:
+"white
+car on the left”.
+
+Please
+carefully
+check the image and
+detect the object
+this
+sentence
+describes:
+"white
+car on the left”.
+
+Please
+carefully
+check the image and
+detect the object
+this
+sentence
+describes:
+"front
+bowl wcarrots in it”.
+
+Please
+carefully
+check the image and
+detect the object
+this
+sentence
+describes:
+"front
+bowl wcarrots in it”.
+
+Please
+carefully
+check the image and
+detect the object
+this
+sentence
+describes:
+"tall
+suitcase”.
+
+Please
+carefully
+check the image and
+detect the object
+this
+sentence
+describes:
+"tall
+suitcase”.
+
+Figure 8: Qualitative analysis between training PaDT with all foreground VRTs and 5 randomly
+selected foreground VRTs.
+20
+
+Under review.
+
+A.6
+A.6.1
+
+Q UALITATIVE E VALUATION
+O PEN VOCABULARY D ETECTION ON COCO2017 DATASET
+
+Comparison with representative MLLMs. In this section, we present qualitative results for openvocabulary detection on the COCO2017 dataset, comparing PaDT against representative MLLMs.
+As shown in Fig. 9, several key observations can be made.
+• Higher recall. PaDT consistently detects a larger number of objects in the scene, demonstrating stronger recall. This improvement stems from its ability to directly predict visual
+reference tokens (VRTs) that are anchored to image patches, enabling more reliable coverage of relevant objects.
+• Robustness in cluttered scenes. Competing MLLMs, which predict serialized bounding
+box coordinates, often struggle in scenes with many repetitive or similar-looking objects.
+Their predictions may miss valid instances or collapse onto a few candidates, whereas
+PaDT maintains distinct references to multiple targets.
+• Avoiding invalid outputs. Existing MLLMs occasionally fail to produce valid detections,
+labeled as “Error” in Fig. 9. In such cases, the models tend to generate repetitive text
+sequences until reaching the maximum output length, i.e. 2048 tokens. PaDT avoids this
+failure mode by grounding predictions directly in visual tokens rather than relying solely
+on text-based serialization.
+Overall, these qualitative comparisons reinforce the advantages of PaDT: directly predicting visual
+tokens not only improves recall but also enhances robustness and stability in open-vocabulary detection.
+Visualization of PaDT results on REC/RES and OVD tasks. In Fig. 10, we present extensive
+qualitative examples generated by the proposed PaDT framework. For Referring Expression Comprehension (REC) and Referring Expression Segmentation (RES), PaDT first parses the user query
+and identifies the corresponding target within the image. As illustrated in the top-left subfigure of
+each example, PaDT generates five visual reference tokens (VRTs), each directly correlated with
+specific image patches and thus easily localizable. These VRTs are subsequently passed into the
+PaDT decoder to produce the corresponding bounding box and segmentation mask. The overall
+pipeline is simple yet effective. Compared to character-by-character coordinate generation, PaDT
+requires far fewer tokens (only five VRTs per target) while providing stronger semantic and spatial
+grounding with respect to the object.
+Similar observations are made in the Open-Vocabulary Detection (OVD) task. Unlike REC/RES,
+OVD requires PaDT to predict multiple targets along with their category labels. In our response
+template, both categories and VRTs are naturally interleaved within the output sequence, enabling
+efficient multimodal reasoning. This training strategy strengthens the semantic alignment between
+text and image patches, thereby improving both precision and recall in detection task.
+A.6.2
+
+R EFERRING I MAGE C APTIONING ON RIC DATASET
+
+Comparison with representative MLLMs. In this section, we present qualitative results for openvocabulary detection on the Referring Image Captioning (RIC) dataset, comparing PaDT with representative MLLMs, including InternVL3 8B and Qwen2.5-VL 7B models. As shown in Fig. 11,
+PaDT exhibits clear advantages in both bounding box accuracy and object recall. Detailed qualitative
+comparisons are provided in the figure, further demonstrating the effectiveness of leveraging visual
+reference tokens as a bridge between high-level text semantics and low-level object localization.
+Visualization of PaDT results on RIC task. We further present qualitative examples generated
+by the proposed PaDT framework. As shown in Fig. 12, visual reference tokens are automatically
+generated alongside the subject, illustrating a natural interleaving between semantic text and image
+patches. This design further enhances object-level alignment between textual descriptions and visual
+elements, thereby strengthening the co-reasoning ability across text and image modalities.
+
+21
+
+Under review.
+
+Image
+
+GT
+
+PaDT Pro 7B
+
+InternVL3 8B
+
+Qwen2.5-VL 7B
+
+VLM-R1
+
+Error
+
+Error
+
+Error
+
+Error
+
+Error
+
+Figure 9: Qualitative comparison on COCO2017 open-vocabulary detection. We compare PaDT
+with representative MLLMs including InternVL3 and Qwen2.5-VL. Competing models frequently
+fail to produce valid outputs, leading to “Error” cases or repetitive text generation. In contrast,
+PaDT achieves higher recall and correctly identifies multiple objects, even in cluttered scenes with
+repetitive instances. These results highlight the benefit of directly predicting visual reference tokens
+over serialized bounding box coordinates.
+
+22
+
+Under review.
+
+Referring Expression Comprehension / Segmentation
+User: Please carefully check the
+image and detect the object this
+sentence describes: "a pizza with
+
+User: Please carefully check the
+image and detect the object this
+sentence describes: "a dark gray
+couch”.
+
+fresh mozzarella and halved cherry
+tomatoes”.
+
+Assistant: The "a dark gray couch"
+refers to
+<VRT_202><VRT_224><VRT_250><VR
+T_272><VRT_297> in this image.
+
+Assistant: The "a pizza with fresh
+mozzarella and halved cherry
+tomatoes" refers to
+<VRT_176><VRT_199><VRT_222><VRT
+_153><VRT_151> in this image.
+
+User: Please carefully check
+the image and detect the
+object this sentence
+describes: "a bowl of healthy
+
+food with a spoon and napkin
+next to it”.
+
+Assistant: The "a bowl of
+healthy food with a spoon
+and napkin next to it" refers
+to
+<VRT_170><VRT_183><VRT_2
+13><VRT_228><VRT_258> in
+this image.
+
+Open Vocabulary Detection
+In this image, there are 3 "person" (<VRT_109><VRT_86><VRT_42><VRT_41><VRT_19>,
+<VRT_66><VRT_67><VRT_46><VRT_1><VRT_89>, <VRT_31><VRT_10><VRT_32><VRT_10><VRT_9>), 2 "cup"
+(<VRT_242><VRT_243><VRT_222><VRT_177><VRT_244>, <VRT_94><VRT_93><VRT_138><VRT_314><VRT_293>),
+3 "fork" (<VRT_325><VRT_276><VRT_277><VRT_325><VRT_325>,
+<VRT_303><VRT_255><VRT_326><VRT_302><VRT_278>,
+<VRT_373><VRT_350><VRT_395><VRT_373><VRT_373>), 1 "cake"
+(<VRT_388><VRT_387><VRT_363><VRT_409><VRT_343>), 5 "chair"
+(<VRT_150><VRT_128><VRT_149><VRT_150><VRT_106>, <VRT_101><VRT_78><VRT_76><VRT_77><VRT_99>,
+<VRT_17><VRT_39><VRT_17><VRT_17><VRT_17>, <VRT_60><VRT_38><VRT_15><VRT_37><VRT_15>,
+<VRT_197><VRT_197><VRT_219><VRT_175><VRT_197>) and 2 "dining table"
+(<VRT_296><VRT_212><VRT_188><VRT_190><VRT_217>, <VRT_65><VRT_42><VRT_65><VRT_65><VRT_65>).
+
+In this image, there are 2 "apple"
+(<VRT_130><VRT_148><VRT_147><VRT_186><VRT_1
+49>,
+<VRT_66><VRT_84><VRT_86><VRT_102><VRT_119>
+) and 5 "orange"
+(<VRT_191><VRT_175><VRT_194><VRT_176><VRT_1
+95>,
+<VRT_152><VRT_134><VRT_153><VRT_170><VRT_1
+17>,
+<VRT_80><VRT_61><VRT_116><VRT_79><VRT_115>,
+<VRT_45><VRT_44><VRT_42><VRT_26><VRT_62>,
+<VRT_93><VRT_94><VRT_92><VRT_112><VRT_75>).
+
+There are 6 "donut"
+(<VRT_282><VRT_283><VRT_28
+4><VRT_334><VRT_318>,
+<VRT_361><VRT_327><VRT_33
+0><VRT_347><VRT_364>,
+<VRT_247><VRT_213><VRT_24
+8><VRT_215><VRT_230>,
+<VRT_192><VRT_191><VRT_211>
+<VRT_175><VRT_226>,
+<VRT_105><VRT_103><VRT_104
+><VRT_57><VRT_56>,
+<VRT_62><VRT_63><VRT_61><V
+RT_78><VRT_77>) in this image.
+
+Figure 10: Qualitative visualization of PaDT generated examples on referring expression comprehension/segmentation tasks.
+23
+
+Under review.
+
+PaDT Pro 7B
+
+InternVL3 8B
+
+Qwen2.5-VL 7B
+
+A group of young tennis players and their
+coaches are posing on a tennis court. The
+players, dressed in white shirts and dark
+skirts, are holding tennis rackets (<0>, <1>,
+<2>, <3>, <4>, <5>, <6>, <7>, <8>). The coaches,
+standing behind the players, are also
+holding rackets. The background features a
+chain-link fence and trees. The image
+captures a moment of camaraderie and
+sportsmanship, with the players and
+coaches (<9>, <10>, <11>, <12>, <13>, <14>, <15>,
+<16>, <17>, <18>) smiling for the camera.
+
+In this image, a group of women
+tennis players (<0>) is posing on a
+tennis court. They are wearing
+matching white polo shirts and
+dark skirts, holding tennis
+rackets. The background shows
+a tennis net (<1>) and a chain-link
+fence (<2>) with trees and a
+cloudy sky beyond.
+
+The image shows a group of nine individuals, likely a tennis team,
+posing together on a tennis court. They are dressed in matching
+uniforms consisting of white shirts and dark skirts or shorts.
+Each person is holding a tennis racket. The setting appears to be
+outdoors with trees and a fence visible in the background. The
+photo is in black and white, giving it a vintage feel.
+
+In a bustling kitchen, chefs (<0>, <1>, <2>,
+<3>, <4>, <5>) work diligently at their
+stations. Stainless steel surfaces gleam
+under the bright lights. A chef prepares
+food near a sink (<6>), while another bends
+over a counter. Various fruits, including
+apples (<7>, <8>, <9>, <10>, <11>, <12>) and
+bananas (<13>, <14>, <15>) are displayed on a
+prep area. Bowls (<16>, <17>) and bottles
+(<18>, <19>) are scattered across the
+workspace. The scene captures the
+organized chaos of a professional kitchen
+in action.
+
+In this image, a chef (<0>) is working in a
+professional kitchen (<1>). The kitchen is
+bustling with activity, featuring multiple
+chefs preparing food. The scene includes
+various kitchen equipment and ingredients,
+such as a stainless steel counter (<2>) and a
+display case with fruits like bananas (<3>).
+Plates are stacked on the counter (<4>), and
+there are bottles and other kitchen
+supplies scattered around.
+
+The image shows a busy professional kitchen with chefs
+working at their stations. The chefs are wearing white
+uniforms and hats, indicative of a formal culinary setting.
+The kitchen is equipped with stainless steel appliances,
+including large hoods above the stoves and a sink area in
+the foreground. There are stacks of plates and other
+kitchen tools visible on the counters. In the background,
+there's a display case filled with fresh fruits like bananas
+and apples, suggesting a high-end restaurant environment.
+The lighting is dim, focusing attention on the chefs and
+the food preparation areas.
+
+A workspace features three laptops
+(<0>, <1>, <2>) and a central monitor (<3>).
+A keyboard (<4>) and mouse (<5>) are
+placed on the desk. A desk lamp
+illuminates the area, while a framed
+picture hangs on the wall. A bookshelf
+holds books (<6>, <7>, <8>, <9>, <10>, <11>,
+<12>) and a bottle (<13>) is on the desk.
+A cup (<14>) sits near the edge. The
+setup is organized, with a mix of
+technology and personal touches.
+
+In this image, a workspace setup is shown with multiple laptops
+and a desktop monitor on a desk. The desk is positioned against a
+wall with a window covered by blinds and sheer curtains. Here's a
+detailed description:
+
+The image shows a workspace setup with multiple
+electronic devices and accessories. Here's a detailed
+description:
+
+- **Laptops**: There are three laptops on the desk. One is on
+the left side of the desk, another is in the center, and the third
+is on the right side. Each laptop is open and appears to be in use.
+- Left laptop: Located on the left side of the desk, with its
+screen displaying some text and graphics (<0>).
+- Center laptop: Positioned in the middle of the desk, slightly to
+the left, with its screen showing a desktop interface (<1>).
+- Right laptop: Situated on the right side of the desk, with its
+screen displaying a webpage or document (<2>).
+- **Desktop Monitor**: A larger desktop monitor is placed in the
+center of the desk, showing a scenic image of a sunset over
+water (<3>).
+- **Keyboard and Mouse**: A keyboard and mouse are centrally located on the desk, in front of the desktop monitor (<4>).
+- **Lamp**: A desk lamp with a black shade is positioned on the left side of the monitor, extending over the desk (<5>).
+- **Clock**: A digital clock is placed between the left and center laptops, showing the time as 17:05 (<6>).
+- **Books and Accessories**: Various books and accessories are on the desk and a shelf to the right. The shelf holds a camera tripod and
+other items (<7>).
+- **Beverage and Glass**: A bottle of soda and a glass are on the right side of the desk (<8>).
+- **Picture Frame**: A framed picture hangs on the wall above the desk, to the left of the window (<9>).
+- **Shelf**: A black shelving unit is on the right side of the desk, holding various items including books and a camera tripod (<10>).
+- **Cushion**: A purple cushion is placed in front of the keyboard on the desk (<11>).
+
+Here's the bounding box description:
+- **Group of people**: Bounding box for the entire group (9
+individuals) - <0>
+- **Tennis rackets**: Each individual is holding one tennis
+racket, which can be seen in their hands.
+- **Court net**: The net of the tennis court is visible at the
+bottom of the image.
+- **Trees and fence**: These elements are part of the
+background, located behind the group.
+
+Bounding boxes:
+- Chefs: <0>
+- Kitchen equipment: <1>
+- Display case: <2>
+
+- **Desk**: The main surface is a dark wooden desk.
+- **Monitors**: There are two monitors placed side by
+side in the center of the desk. The left monitor displays a
+text-based interface, while the right one shows an image
+of a beach scene.
+- **Laptops**: Two laptops are positioned on either side
+of the monitors:
+- On the left: A laptop with a visible screen displaying a
+text-based interface.
+- On the right: Another laptop with a screen showing a
+webpage or document.
+- **Keyboard and Mouse**: A large keyboard is placed in
+front of the monitors, and a mouse is located to the right
+of it.
+- **Lamp**: A desk lamp is situated between the two
+monitors, providing light for the workspace.
+- **Other Items**:
+- A small clock is placed near the center of the desk.
+- A water bottle is on the right side of the desk.
+- A glass is also present on the right side.
+- A wallet or pouch is on the right side of the desk.
+- A framed picture hangs on the wall above the desk.
+- A shelf with books and other items is visible on the
+far right.
+This workspace appears organized and functional, suitable
+for multitasking or work that requires multiple screens.
+
+- **Digital Tablet**: A digital tablet is on the right side of the desk, next to the right laptop (<12>).
+The workspace appears organized and well-equipped for multitasking.
+
+Figure 11: Qualitative comparison on the Referring Image Captioning (RIC) dataset. We compare
+PaDT with representative MLLMs, including InternVL3 and Qwen2.5-VL. PaDT shows clear advantages in both bounding box accuracy and object recall over competing methods.
+Referring Image Captioning
+A
+car
+(<VRT_204><VRT_251><VRT_179><VRT_178><VR
+T_201>) is parked on a narrow road, with several
+horses blocking the way. The horses
+(<VRT_199><VRT_151><VRT_198><VRT_174><VRT
+_176>,
+<VRT_150><VRT_196><VRT_173><VRT_197><VRT
+_196>,
+<VRT_155><VRT_155><VRT_155><VRT_155><VRT
+_155>,
+<VRT_172><VRT_171><VRT_171><VRT_171><VRT_
+171>,
+<VRT_170><VRT_170><VRT_170><VRT_170><VRT
+_170>) are standing calmly, some near the
+center of the road while others are closer to
+the fence. The road is lined with a wooden fence
+on one side and trees on the other, creating a
+shaded, rural setting. The scene suggests a
+peaceful interaction between the vehicle and
+the animals in a countryside environment.
+
+A
+cat
+(<VRT_62><VRT_81><VRT_80><VRT_6
+2><VRT_62>) is lounging on the hood
+of a black Mercedes-Benz car
+(<VRT_187><VRT_205><VRT_169><VR
+T_84><VRT_183>). The car's shiny
+surface reflects the surrounding
+buildings and greenery. The cat, with
+its orange and white fur, appears
+relaxed as it gazes into the distance.
+Behind the car, a fence and lush
+bushes add a touch of nature to the
+urban setting. The scene captures a
+peaceful moment in a residential area.
+
+A
+person
+(<VRT_166><VRT_189><VRT_143><VR
+T_145><VRT_168>) is driving a horsedrawn racing cart. The horse
+(<VRT_216><VRT_153><VRT_176><VR
+T_105><VRT_127>) is a bay with a
+white blaze on its face, wearing a
+bridle and harness. The cart is red
+and white, and the driver is wearing a
+helmet and a yellow and blue jacket.
+They are on a dirt track with grassy
+areas and advertisements in the
+background. The scene suggests a
+harness racing event. The horse
+appears to be in motion, pulling the
+cart steadily.
+
+A
+small
+dog
+(<VRT_248><VRT_249><VRT_23
+5><VRT_236><VRT_275>)
+is
+lying on a rug in a bathroom,
+looking up. The bathroom
+features
+a
+white
+sink
+(<VRT_176><VRT_176><VRT_163
+><VRT_162><VRT_150>) with a
+faucet and a bottle of soap
+(<VRT_153><VRT_153><VRT_153
+><VRT_153><VRT_153>) on it. A
+toilet
+(<VRT_246><VRT_243><VRT_28
+2><VRT_259><VRT_246>)
+is
+positioned next to the sink. An
+orange curtain hangs from the
+ceiling, partially covering the
+shower area. The floor is
+wooden, and a small white toilet
+brush is placed near the toilet.
+The scene is cozy and well-lit.
+
+A
+white
+bird
+(<VRT_79><VRT_134><VRT_135>
+<VRT_116><VRT_153>) perches
+gracefully on the roof of a car
+(<VRT_227><VRT_229><VRT_20
+7><VRT_208><VRT_226>). The
+car is parked in a lot with a
+building and trees in the
+background.
+The
+bird's
+reflection is visible on the car's
+shiny surface. Another car
+(<VRT_161><VRT_161><VRT_161>
+<VRT_161><VRT_161>)
+is
+partially visible in the distance.
+The scene captures a serene
+moment in an outdoor setting,
+with the bird as the focal point.
+
+In the image, a serene rural scene unfolds
+with
+a
+horse
+(<VRT_296><VRT_181><VRT_205><VRT_20
+4><VRT_203>) in the foreground, partially
+obstructed by a wooden fence. Another
+horse
+(<VRT_236><VRT_235><VRT_282><VRT_2
+59><VRT_212>) grazes peacefully in the
+background.
+A
+third
+horse
+(<VRT_186><VRT_208><VRT_209><VRT_18
+4><VRT_185>) is visible further back, near
+a rustic stone building. The backdrop
+features a weathered castle ruin, adding a
+touch of historical charm to the
+landscape. The dark, moody sky enhances
+the atmospheric quality of the scene,
+while the lush green grass contrasts
+beautifully with the earthy tones of the
+architecture and animals.
+
+Figure 12: Qualitative visualization of PaDT generated examples on referring image captioning task.
+
+24
+
+

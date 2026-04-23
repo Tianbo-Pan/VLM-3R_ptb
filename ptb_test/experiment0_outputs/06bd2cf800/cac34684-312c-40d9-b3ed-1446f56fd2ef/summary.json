@@ -1,0 +1,435 @@
+{
+  "qa_id": "cac34684-312c-40d9-b3ed-1446f56fd2ef",
+  "scene_name": "06bd2cf800",
+  "prompt": "These are frames of a video. Measuring from the closest point of each object, which of these objects (pillow, bed, keyboard, cabinet) is the closest to the heater? If there are multiple instances of an object category, measure to the closest. Options: A. pillow B. bed C. keyboard D. cabinet Answer with the option's letter from the given choices directly.",
+  "prediction": "C",
+  "best_frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+  "best_frame_name": "frame_000320.jpg",
+  "sampled_frame_paths": [
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000000.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000640.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000960.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001280.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001600.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001920.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002240.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002560.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002880.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003200.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003520.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003840.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004160.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004480.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004800.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005120.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005440.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005760.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006080.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006400.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006720.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007040.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007360.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007680.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008000.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008320.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008640.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008960.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009280.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009600.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009920.jpg"
+  ],
+  "capture_source": "fusion_block",
+  "attention_meta": {
+    "num_frames": 32,
+    "num_query_tokens": 729,
+    "num_source_tokens": 730,
+    "num_patch_tokens": 729,
+    "patch_side": 27,
+    "has_camera_token": true
+  },
+  "contact_sheet_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/all_sampled_frames_attention.jpg",
+  "per_frame_stats": [
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000000.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_000000_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013702592471696242,
+      "max": 0.0017889596056193113,
+      "min": 0.0009959765011444688,
+      "entropy": 6.5788573093963
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_000320_attn.jpg",
+      "is_best_frame": true,
+      "mean": 0.0013703506630596248,
+      "max": 0.0017415506299585104,
+      "min": 0.0010079157073050737,
+      "entropy": 6.581301640657662
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000640.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_000640_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.001370346823429998,
+      "max": 0.0016079695196822286,
+      "min": 0.0010890810517594218,
+      "entropy": 6.58887709465867
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000960.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_000960_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013699859389664786,
+      "max": 0.0015536610735580325,
+      "min": 0.0012012444203719497,
+      "entropy": 6.590502216097269
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001280.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_001280_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013702377844320812,
+      "max": 0.0016661429544910789,
+      "min": 0.0011413225438445807,
+      "entropy": 6.586006299564126
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001600.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_001600_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013700580294339806,
+      "max": 0.001626200508326292,
+      "min": 0.0012085840571671724,
+      "entropy": 6.58982357520028
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001920.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_001920_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013699475669433632,
+      "max": 0.0016380618326365948,
+      "min": 0.0011568095069378614,
+      "entropy": 6.588360201599382
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002240.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_002240_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.00136995953807942,
+      "max": 0.0016676532104611397,
+      "min": 0.001141113811172545,
+      "entropy": 6.587634264184528
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002560.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_002560_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.001370113996938331,
+      "max": 0.0015896507538855076,
+      "min": 0.0011250878451392055,
+      "entropy": 6.588322621998591
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002880.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_002880_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.001370211461314929,
+      "max": 0.0017210603691637516,
+      "min": 0.0012218909105286002,
+      "entropy": 6.589804737089068
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003200.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_003200_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013701136040965042,
+      "max": 0.00168377545196563,
+      "min": 0.001186677603982389,
+      "entropy": 6.589895941066944
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003520.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_003520_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.001369954666361693,
+      "max": 0.001840577693656087,
+      "min": 0.001133228070102632,
+      "entropy": 6.584794999677644
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003840.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_003840_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013702271425705633,
+      "max": 0.001803400693461299,
+      "min": 0.0011149767087772489,
+      "entropy": 6.583355325231658
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004160.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_004160_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.001370187773431852,
+      "max": 0.001807667431421578,
+      "min": 0.0011404715478420258,
+      "entropy": 6.585366654108407
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004480.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_004480_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013699078191753951,
+      "max": 0.001992319943383336,
+      "min": 0.001074488740414381,
+      "entropy": 6.584874014625456
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004800.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_004800_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013697694447939125,
+      "max": 0.001987096155062318,
+      "min": 0.0010693201329559088,
+      "entropy": 6.58392750437493
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005120.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_005120_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013700103812336166,
+      "max": 0.0018171054543927312,
+      "min": 0.0010736254043877125,
+      "entropy": 6.585840885854965
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005440.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_005440_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013702188037841775,
+      "max": 0.0017610688228160143,
+      "min": 0.0010591691825538874,
+      "entropy": 6.582608625954405
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005760.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_005760_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013701328697942698,
+      "max": 0.0019090113928541541,
+      "min": 0.001056222477927804,
+      "entropy": 6.581697278082743
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006080.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_006080_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013701415659709028,
+      "max": 0.0020014222245663404,
+      "min": 0.0010335082188248634,
+      "entropy": 6.581252910825909
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006400.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_006400_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013698080427809241,
+      "max": 0.002096442971378565,
+      "min": 0.0011167009361088276,
+      "entropy": 6.584194391451547
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006720.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_006720_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013697298822684318,
+      "max": 0.0016554752364754677,
+      "min": 0.0011949107283726335,
+      "entropy": 6.589377013927683
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007040.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_007040_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013697545227130928,
+      "max": 0.0019671365153044462,
+      "min": 0.0010925588430836797,
+      "entropy": 6.585032341060224
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007360.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_007360_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.00137010959343696,
+      "max": 0.0016733871307224035,
+      "min": 0.001057782443240285,
+      "entropy": 6.58699893489048
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007680.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_007680_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013699938628735694,
+      "max": 0.0017450146842747927,
+      "min": 0.0010644863359630108,
+      "entropy": 6.5849603894029425
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008000.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_008000_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013701332600810278,
+      "max": 0.0018230818677693605,
+      "min": 0.0010847345693036914,
+      "entropy": 6.584828712008033
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008320.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_008320_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013699484337504509,
+      "max": 0.002134918235242367,
+      "min": 0.0010921736247837543,
+      "entropy": 6.582841608210512
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008640.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_008640_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013700325823860404,
+      "max": 0.0017818795749917626,
+      "min": 0.0011296075535938144,
+      "entropy": 6.584525949664599
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008960.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_008960_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.001369908028052269,
+      "max": 0.0018937891582027078,
+      "min": 0.0010862520430237055,
+      "entropy": 6.584640956453463
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009280.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_009280_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.001370152141560324,
+      "max": 0.001766773290000856,
+      "min": 0.00100888276938349,
+      "entropy": 6.582803340583133
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009600.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_009600_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.00136989340331758,
+      "max": 0.002052206313237548,
+      "min": 0.0010790242813527584,
+      "entropy": 6.579623552826694
+    },
+    {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009920.jpg",
+      "overlay_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment0_outputs/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/per_frame/frame_009920_attn.jpg",
+      "is_best_frame": false,
+      "mean": 0.0013701953774762682,
+      "max": 0.0017471110913902521,
+      "min": 0.0009670401341281831,
+      "entropy": 6.583110521659307
+    }
+  ],
+  "manifest_question_entry": {
+    "qa_id": "cac34684-312c-40d9-b3ed-1446f56fd2ef",
+    "scene_name": "06bd2cf800",
+    "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/01_mc_distance_compare_cac34684.jpg",
+    "best_frame_file": "color/train/06bd2cf800/frame_000320.jpg",
+    "best_frame_score": 719.8061331800993,
+    "parsed_question": {
+      "question_type": "mc_distance_compare",
+      "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (pillow, bed, keyboard, cabinet) is the closest to the heater? If there are multiple instances of an object category, measure to the closest. Options: A. pillow B. bed C. keyboard D. cabinet Answer with the option's letter from the given choices directly.",
+      "relevant_objects": [
+        "pillow",
+        "bed",
+        "keyboard",
+        "cabinet",
+        "heater"
+      ],
+      "answer_value": "C",
+      "answer_object": "keyboard",
+      "options_map": {
+        "A": "pillow",
+        "B": "bed",
+        "C": "keyboard",
+        "D": "cabinet"
+      }
+    },
+    "render_info": {
+      "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/01_mc_distance_compare_cac34684.jpg",
+      "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+      "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/06bd2cf800/frame_000320.png",
+      "drawn_instances": [
+        {
+          "object_name": "pillow",
+          "instance_id": 40,
+          "bbox_2d": [
+            565,
+            279,
+            639,
+            350
+          ],
+          "instance_rank": 1,
+          "area": 5254
+        },
+        {
+          "object_name": "bed",
+          "instance_id": 23,
+          "bbox_2d": [
+            387,
+            177,
+            639,
+            450
+          ],
+          "instance_rank": 1,
+          "area": 68796
+        },
+        {
+          "object_name": "keyboard",
+          "instance_id": 34,
+          "bbox_2d": [
+            235,
+            173,
+            298,
+            186
+          ],
+          "instance_rank": 1,
+          "area": 819
+        },
+        {
+          "object_name": "cabinet",
+          "instance_id": 4,
+          "bbox_2d": [
+            0,
+            0,
+            143,
+            479
+          ],
+          "instance_rank": 1,
+          "area": 68497
+        },
+        {
+          "object_name": "heater",
+          "instance_id": 17,
+          "bbox_2d": [
+            111,
+            189,
+            172,
+            336
+          ],
+          "instance_rank": 1,
+          "area": 8967
+        }
+      ]
+    }
+  }
+}

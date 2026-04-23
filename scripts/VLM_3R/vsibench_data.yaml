@@ -1,0 +1,8 @@
+datasets:
+  # scannet
+  - json_path: data/vlm_3r_data/vsibench/merged_qa_scannet_train.json
+  # scannetpp
+  - json_path: data/vlm_3r_data/vsibench/merged_qa_scannetpp_train.json
+
+  # route plan
+  - json_path: data/vlm_3r_data/vsibench/merged_qa_route_plan_train.json
