@@ -1,0 +1,15 @@
+[submodule "datasets/ScanNet"]
+	path = datasets/ScanNet
+	url = https://github.com/ScanNet/ScanNet.git
+[submodule "datasets/ARKitScenes"]
+	path = datasets/ARKitScenes
+	url = https://github.com/apple/ARKitScenes.git
+[submodule "datasets/3RScan"]
+	path = datasets/3RScan
+	url = https://github.com/WaldJohannaU/3RScan
+[submodule "datasets/ScanNetPP"]
+	path = datasets/ScanNetPP
+	url = https://github.com/scannetpp/scannetpp
+[submodule "datasets/spar"]
+	path = datasets/spar
+	url = https://github.com/fudan-zvg/spar.git

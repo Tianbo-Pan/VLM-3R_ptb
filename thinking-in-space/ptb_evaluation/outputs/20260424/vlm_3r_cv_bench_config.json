@@ -1,0 +1,23 @@
+{
+  "model_path": "Journey9ni/vlm-3r-llava-qwen2-lora",
+  "model_base": "lmms-lab/LLaVA-NeXT-Video-7B-Qwen2",
+  "conv_mode": "qwen_1_5",
+  "dataset_path": "nyu-visionx/CV-Bench",
+  "split": "test",
+  "cache_dir": null,
+  "output_dir": "ptb_evaluation/outputs/20260424",
+  "output_name": "vlm_3r_cv_bench",
+  "limit": null,
+  "temperature": 0.0,
+  "top_p": 0.1,
+  "num_beams": 1,
+  "max_new_tokens": 16,
+  "device": "cuda",
+  "load_8bit": false,
+  "overwrite": false,
+  "mm_spatial_pool_stride": 4,
+  "mm_spatial_pool_mode": "average",
+  "mm_newline_position": "no_token",
+  "pre_prompt": "",
+  "mca_post_prompt": "Answer with the option's letter from the given choices directly."
+}

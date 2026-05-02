@@ -1,0 +1,1986 @@
+{
+  "qa_id": "cac34684-312c-40d9-b3ed-1446f56fd2ef",
+  "scene_name": "06bd2cf800",
+  "prompt": "These are frames of a video. Measuring from the closest point of each object, which of these objects (pillow, bed, keyboard, cabinet) is the closest to the heater? If there are multiple instances of an object category, measure to the closest. Options: A. pillow B. bed C. keyboard D. cabinet Answer with the option's letter from the given choices directly.",
+  "prediction": "C",
+  "capture_source": "fusion_block",
+  "sampled_frame_paths": [
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000000.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000640.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000960.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001280.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001600.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001920.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002240.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002560.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002880.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003200.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003520.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003840.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004160.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004480.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004800.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005120.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005440.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005760.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006080.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006400.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006720.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007040.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007360.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007680.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008000.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008320.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008640.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008960.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009280.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009600.jpg",
+    "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009920.jpg"
+  ],
+  "best_frame_local_index": 1,
+  "best_frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+  "attention_meta": {
+    "num_frames": 32,
+    "num_query_tokens": 729,
+    "num_source_tokens": 730,
+    "num_patch_tokens": 729,
+    "patch_side": 27,
+    "has_camera_token": true
+  },
+  "patch_selection_meta": {
+    "grid_size": 27,
+    "fine_topk": 16,
+    "scoring_mode": "question_cosine",
+    "fine_scale": 1.0,
+    "coarse_token_count": 5824,
+    "fine_token_count": 544,
+    "combined_token_count": 6368
+  },
+  "score_stats_per_frame": [
+    {
+      "frame_index": 0,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000000.jpg",
+      "mean": -0.00040100147733362635,
+      "std": 0.019574173111247362,
+      "min": -0.04584677144885063,
+      "max": 0.06315890699625015,
+      "entropy": 6.59148116334026,
+      "softmax_entropy": 6.59148116334026,
+      "top1": 0.06315890699625015,
+      "top5_mean": 0.05758880451321602,
+      "top10_mean": 0.05417582280933857,
+      "top16_mean": 0.05197655875235796,
+      "margin_top1_top2": 0.004892423748970032,
+      "positive_fraction": 0.4663923182441701
+    },
+    {
+      "frame_index": 1,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+      "mean": -0.0016613886159856195,
+      "std": 0.019700970756819803,
+      "min": -0.0558178573846817,
+      "max": 0.06267997622489929,
+      "entropy": 6.591478937940921,
+      "softmax_entropy": 6.591478937940921,
+      "top1": 0.06267997622489929,
+      "top5_mean": 0.05648120865225792,
+      "top10_mean": 0.05307702831923962,
+      "top16_mean": 0.05045427568256855,
+      "margin_top1_top2": 0.005500275641679764,
+      "positive_fraction": 0.4224965706447188
+    },
+    {
+      "frame_index": 2,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000640.jpg",
+      "mean": 0.00035622424931669114,
+      "std": 0.01917107746790993,
+      "min": -0.04752185940742493,
+      "max": 0.06271018087863922,
+      "entropy": 6.591489094287846,
+      "softmax_entropy": 6.591489094287846,
+      "top1": 0.06271018087863922,
+      "top5_mean": 0.057826296985149385,
+      "top10_mean": 0.05467465408146381,
+      "top16_mean": 0.05214561382308602,
+      "margin_top1_top2": 0.005017269402742386,
+      "positive_fraction": 0.47050754458161864
+    },
+    {
+      "frame_index": 3,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000960.jpg",
+      "mean": 0.009647299650211279,
+      "std": 0.017792014044597744,
+      "min": -0.02584034577012062,
+      "max": 0.06620930880308151,
+      "entropy": 6.591514111018618,
+      "softmax_entropy": 6.591514111018618,
+      "top1": 0.06620930880308151,
+      "top5_mean": 0.06410102248191833,
+      "top10_mean": 0.061848375201225284,
+      "top16_mean": 0.06018955260515213,
+      "margin_top1_top2": 0.0008473396301269531,
+      "positive_fraction": 0.6474622770919067
+    },
+    {
+      "frame_index": 4,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001280.jpg",
+      "mean": -0.0009365919530688719,
+      "std": 0.019594189140015057,
+      "min": -0.047003693878650665,
+      "max": 0.06629850715398788,
+      "entropy": 6.591481272781867,
+      "softmax_entropy": 6.591481272781867,
+      "top1": 0.06629850715398788,
+      "top5_mean": 0.05853128060698509,
+      "top10_mean": 0.05369015373289585,
+      "top16_mean": 0.050031910883262753,
+      "margin_top1_top2": 0.006324712187051773,
+      "positive_fraction": 0.4883401920438957
+    },
+    {
+      "frame_index": 5,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001600.jpg",
+      "mean": 0.014463193130985078,
+      "std": 0.01770005365429085,
+      "min": -0.0239948108792305,
+      "max": 0.06742347031831741,
+      "entropy": 6.591516323775574,
+      "softmax_entropy": 6.591516323775574,
+      "top1": 0.06742347031831741,
+      "top5_mean": 0.06606708168983459,
+      "top10_mean": 0.06485725045204163,
+      "top16_mean": 0.061611205572262406,
+      "margin_top1_top2": 0.001020573079586029,
+      "positive_fraction": 0.7791495198902606
+    },
+    {
+      "frame_index": 6,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001920.jpg",
+      "mean": 0.010042698236061924,
+      "std": 0.018077119660855533,
+      "min": -0.025249173864722252,
+      "max": 0.07643887400627136,
+      "entropy": 6.591508450303836,
+      "softmax_entropy": 6.591508450303836,
+      "top1": 0.07643887400627136,
+      "top5_mean": 0.06939784437417984,
+      "top10_mean": 0.06589373983442784,
+      "top16_mean": 0.06325796619057655,
+      "margin_top1_top2": 0.005324766039848328,
+      "positive_fraction": 0.6899862825788752
+    },
+    {
+      "frame_index": 7,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002240.jpg",
+      "mean": 0.013649603227949962,
+      "std": 0.018729809924089805,
+      "min": -0.02267473191022873,
+      "max": 0.07497350871562958,
+      "entropy": 6.591496921230465,
+      "softmax_entropy": 6.591496921230465,
+      "top1": 0.07497350871562958,
+      "top5_mean": 0.07132043540477753,
+      "top10_mean": 0.06864054203033447,
+      "top16_mean": 0.06620912184007466,
+      "margin_top1_top2": 0.002153463661670685,
+      "positive_fraction": 0.7558299039780522
+    },
+    {
+      "frame_index": 8,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002560.jpg",
+      "mean": 0.015786481379091853,
+      "std": 0.020570571888152436,
+      "min": -0.03787386044859886,
+      "max": 0.07138896733522415,
+      "entropy": 6.591461823708864,
+      "softmax_entropy": 6.591461823708864,
+      "top1": 0.07138896733522415,
+      "top5_mean": 0.06900169551372529,
+      "top10_mean": 0.0669817641377449,
+      "top16_mean": 0.06455758400261402,
+      "margin_top1_top2": 0.002123326063156128,
+      "positive_fraction": 0.7832647462277091
+    },
+    {
+      "frame_index": 9,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002880.jpg",
+      "mean": 0.01611762008745037,
+      "std": 0.02039502719823048,
+      "min": -0.02977461740374565,
+      "max": 0.07626504451036453,
+      "entropy": 6.591465173801821,
+      "softmax_entropy": 6.591465173801821,
+      "top1": 0.07626504451036453,
+      "top5_mean": 0.06968602687120437,
+      "top10_mean": 0.06634478121995926,
+      "top16_mean": 0.0639672672841698,
+      "margin_top1_top2": 0.0057915374636650085,
+      "positive_fraction": 0.766803840877915
+    },
+    {
+      "frame_index": 10,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003200.jpg",
+      "mean": 0.01328557752724673,
+      "std": 0.01851038404456983,
+      "min": -0.029837634414434433,
+      "max": 0.06815183907747269,
+      "entropy": 6.59150148813484,
+      "softmax_entropy": 6.59150148813484,
+      "top1": 0.06815183907747269,
+      "top5_mean": 0.06540800631046295,
+      "top10_mean": 0.0633508175611496,
+      "top16_mean": 0.06086770002730191,
+      "margin_top1_top2": 0.0018777698278427124,
+      "positive_fraction": 0.7407407407407407
+    },
+    {
+      "frame_index": 11,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003520.jpg",
+      "mean": 0.013030966314615233,
+      "std": 0.01657195962948527,
+      "min": -0.02285364270210266,
+      "max": 0.07408138364553452,
+      "entropy": 6.5915354369442305,
+      "softmax_entropy": 6.5915354369442305,
+      "top1": 0.07408138364553452,
+      "top5_mean": 0.06738729625940323,
+      "top10_mean": 0.06336839571595192,
+      "top16_mean": 0.06037338566966355,
+      "margin_top1_top2": 0.006614625453948975,
+      "positive_fraction": 0.7791495198902606
+    },
+    {
+      "frame_index": 12,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003840.jpg",
+      "mean": 0.007193164394041638,
+      "std": 0.017754071417517777,
+      "min": -0.030577844008803368,
+      "max": 0.06901262700557709,
+      "entropy": 6.591515121407914,
+      "softmax_entropy": 6.591515121407914,
+      "top1": 0.06901262700557709,
+      "top5_mean": 0.06518723219633102,
+      "top10_mean": 0.060813716053962706,
+      "top16_mean": 0.05752490763552487,
+      "margin_top1_top2": 0.0012474432587623596,
+      "positive_fraction": 0.6310013717421125
+    },
+    {
+      "frame_index": 13,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004160.jpg",
+      "mean": 0.0003933885219353296,
+      "std": 0.01984859938316172,
+      "min": -0.04420219361782074,
+      "max": 0.07166885584592819,
+      "entropy": 6.5914755221599135,
+      "softmax_entropy": 6.5914755221599135,
+      "top1": 0.07166885584592819,
+      "top5_mean": 0.06569588929414749,
+      "top10_mean": 0.05949150361120701,
+      "top16_mean": 0.055832078447565436,
+      "margin_top1_top2": 0.0013600289821624756,
+      "positive_fraction": 0.4732510288065844
+    },
+    {
+      "frame_index": 14,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004480.jpg",
+      "mean": 0.005489259342016558,
+      "std": 0.018784765315710928,
+      "min": -0.03322301805019379,
+      "max": 0.06747754663228989,
+      "entropy": 6.591495658604012,
+      "softmax_entropy": 6.591495658604012,
+      "top1": 0.06747754663228989,
+      "top5_mean": 0.0650823824107647,
+      "top10_mean": 0.06289072558283806,
+      "top16_mean": 0.06029498903080821,
+      "margin_top1_top2": 0.00045549869537353516,
+      "positive_fraction": 0.5665294924554184
+    },
+    {
+      "frame_index": 15,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004800.jpg",
+      "mean": 0.0005893376257445597,
+      "std": 0.0206747261353293,
+      "min": -0.04488934949040413,
+      "max": 0.09476282447576523,
+      "entropy": 6.591458168037203,
+      "softmax_entropy": 6.591458168037203,
+      "top1": 0.09476282447576523,
+      "top5_mean": 0.07200694680213929,
+      "top10_mean": 0.06581320837140084,
+      "top16_mean": 0.06105916458182037,
+      "margin_top1_top2": 0.02594635635614395,
+      "positive_fraction": 0.46227709190672156
+    },
+    {
+      "frame_index": 16,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005120.jpg",
+      "mean": 0.006817844048353546,
+      "std": 0.019289416557797916,
+      "min": -0.0416005402803421,
+      "max": 0.06905804574489594,
+      "entropy": 6.59148745159689,
+      "softmax_entropy": 6.59148745159689,
+      "top1": 0.06905804574489594,
+      "top5_mean": 0.06280921772122383,
+      "top10_mean": 0.057648425176739695,
+      "top16_mean": 0.05406322004273534,
+      "margin_top1_top2": 0.004278950393199921,
+      "positive_fraction": 0.6474622770919067
+    },
+    {
+      "frame_index": 17,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005440.jpg",
+      "mean": 0.006409376463230025,
+      "std": 0.019280205508442578,
+      "min": -0.036122262477874756,
+      "max": 0.0654667466878891,
+      "entropy": 6.591486454315029,
+      "softmax_entropy": 6.591486454315029,
+      "top1": 0.0654667466878891,
+      "top5_mean": 0.06419922560453414,
+      "top10_mean": 0.061181535199284556,
+      "top16_mean": 0.05868111387826502,
+      "margin_top1_top2": 0.0006245747208595276,
+      "positive_fraction": 0.5857338820301783
+    },
+    {
+      "frame_index": 18,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005760.jpg",
+      "mean": 0.009306652524520672,
+      "std": 0.01962171815130574,
+      "min": -0.029740065336227417,
+      "max": 0.0675293505191803,
+      "entropy": 6.591479825055265,
+      "softmax_entropy": 6.591479825055265,
+      "top1": 0.0675293505191803,
+      "top5_mean": 0.06459280475974083,
+      "top10_mean": 0.06270090751349926,
+      "top16_mean": 0.06025423901155591,
+      "margin_top1_top2": 0.001607351005077362,
+      "positive_fraction": 0.6378600823045267
+    },
+    {
+      "frame_index": 19,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006080.jpg",
+      "mean": 0.0092964338982511,
+      "std": 0.017475839670723893,
+      "min": -0.028943238779902458,
+      "max": 0.07057687640190125,
+      "entropy": 6.591520148803102,
+      "softmax_entropy": 6.591520148803102,
+      "top1": 0.07057687640190125,
+      "top5_mean": 0.06519291922450066,
+      "top10_mean": 0.06130911372601986,
+      "top16_mean": 0.05807865830138326,
+      "margin_top1_top2": 0.005168333649635315,
+      "positive_fraction": 0.6803840877914952
+    },
+    {
+      "frame_index": 20,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006400.jpg",
+      "mean": 0.01668697300773313,
+      "std": 0.014979103344408023,
+      "min": -0.03115145117044449,
+      "max": 0.06665400415658951,
+      "entropy": 6.591561353844076,
+      "softmax_entropy": 6.591561353844076,
+      "top1": 0.06665400415658951,
+      "top5_mean": 0.06137297004461288,
+      "top10_mean": 0.05878721252083778,
+      "top16_mean": 0.056019119918346405,
+      "margin_top1_top2": 0.004878494888544083,
+      "positive_fraction": 0.8614540466392319
+    },
+    {
+      "frame_index": 21,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006720.jpg",
+      "mean": 0.008100247286775613,
+      "std": 0.018831537867974917,
+      "min": -0.0347510427236557,
+      "max": 0.06778990477323532,
+      "entropy": 6.591495180786259,
+      "softmax_entropy": 6.591495180786259,
+      "top1": 0.06778990477323532,
+      "top5_mean": 0.06472355127334595,
+      "top10_mean": 0.062017977237701416,
+      "top16_mean": 0.05927026504650712,
+      "margin_top1_top2": 0.0008210763335227966,
+      "positive_fraction": 0.6378600823045267
+    },
+    {
+      "frame_index": 22,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007040.jpg",
+      "mean": 0.005925353771217412,
+      "std": 0.020095188059105963,
+      "min": -0.03507969528436661,
+      "max": 0.0799085721373558,
+      "entropy": 6.591470164021741,
+      "softmax_entropy": 6.591470164021741,
+      "top1": 0.0799085721373558,
+      "top5_mean": 0.07158267050981522,
+      "top10_mean": 0.06639772318303586,
+      "top16_mean": 0.06256144540384412,
+      "margin_top1_top2": 0.0038003623485565186,
+      "positive_fraction": 0.5761316872427984
+    },
+    {
+      "frame_index": 23,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007360.jpg",
+      "mean": 0.003010823497014051,
+      "std": 0.01755826540155167,
+      "min": -0.04265689477324486,
+      "max": 0.059077534824609756,
+      "entropy": 6.591519055951128,
+      "softmax_entropy": 6.591519055951128,
+      "top1": 0.059077534824609756,
+      "top5_mean": 0.055021222680807114,
+      "top10_mean": 0.053113602101802826,
+      "top16_mean": 0.04962188005447388,
+      "margin_top1_top2": 0.0043506622314453125,
+      "positive_fraction": 0.5445816186556928
+    },
+    {
+      "frame_index": 24,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007680.jpg",
+      "mean": 0.007227034287216444,
+      "std": 0.016739380996261953,
+      "min": -0.026893330737948418,
+      "max": 0.07176884263753891,
+      "entropy": 6.59153243412065,
+      "softmax_entropy": 6.59153243412065,
+      "top1": 0.07176884263753891,
+      "top5_mean": 0.06568736210465431,
+      "top10_mean": 0.05982662625610828,
+      "top16_mean": 0.05583074386231601,
+      "margin_top1_top2": 0.004939936101436615,
+      "positive_fraction": 0.6255144032921811
+    },
+    {
+      "frame_index": 25,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008000.jpg",
+      "mean": 0.0007674974283658285,
+      "std": 0.01852878369703746,
+      "min": -0.042767465114593506,
+      "max": 0.0663134828209877,
+      "entropy": 6.5915007181743075,
+      "softmax_entropy": 6.5915007181743075,
+      "top1": 0.0663134828209877,
+      "top5_mean": 0.06302472725510597,
+      "top10_mean": 0.059670695662498476,
+      "top16_mean": 0.05563985579647124,
+      "margin_top1_top2": 0.001442044973373413,
+      "positive_fraction": 0.45953360768175583
+    },
+    {
+      "frame_index": 26,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008320.jpg",
+      "mean": 0.01436931637578244,
+      "std": 0.016384971731118757,
+      "min": -0.020195186138153076,
+      "max": 0.07518075406551361,
+      "entropy": 6.591538456195682,
+      "softmax_entropy": 6.591538456195682,
+      "top1": 0.07518075406551361,
+      "top5_mean": 0.06864005476236343,
+      "top10_mean": 0.06507282592356205,
+      "top16_mean": 0.06194423069246113,
+      "margin_top1_top2": 0.007565930485725403,
+      "positive_fraction": 0.8010973936899863
+    },
+    {
+      "frame_index": 27,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008640.jpg",
+      "mean": 0.009986190937977828,
+      "std": 0.017926780546410396,
+      "min": -0.027773896232247353,
+      "max": 0.07719211280345917,
+      "entropy": 6.591511743143963,
+      "softmax_entropy": 6.591511743143963,
+      "top1": 0.07719211280345917,
+      "top5_mean": 0.06856426149606705,
+      "top10_mean": 0.06489040851593017,
+      "top16_mean": 0.061607851181179285,
+      "margin_top1_top2": 0.008878223598003387,
+      "positive_fraction": 0.6844993141289437
+    },
+    {
+      "frame_index": 28,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008960.jpg",
+      "mean": 0.007683989622637205,
+      "std": 0.01711224436623904,
+      "min": -0.030934499576687813,
+      "max": 0.0666600912809372,
+      "entropy": 6.591526119434475,
+      "softmax_entropy": 6.591526119434475,
+      "top1": 0.0666600912809372,
+      "top5_mean": 0.0628729410469532,
+      "top10_mean": 0.06007878035306931,
+      "top16_mean": 0.057094041258096695,
+      "margin_top1_top2": 0.0010928213596343994,
+      "positive_fraction": 0.6419753086419753
+    },
+    {
+      "frame_index": 29,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009280.jpg",
+      "mean": 0.0010777067673163915,
+      "std": 0.018347731466485658,
+      "min": -0.04214854538440704,
+      "max": 0.06458653509616852,
+      "entropy": 6.5915040126648385,
+      "softmax_entropy": 6.5915040126648385,
+      "top1": 0.06458653509616852,
+      "top5_mean": 0.06202128753066063,
+      "top10_mean": 0.0571101825684309,
+      "top16_mean": 0.05399717134423554,
+      "margin_top1_top2": 0.0002227574586868286,
+      "positive_fraction": 0.48559670781893005
+    },
+    {
+      "frame_index": 30,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009600.jpg",
+      "mean": 0.006129080328588286,
+      "std": 0.01846521131260003,
+      "min": -0.034411653876304626,
+      "max": 0.06647796928882599,
+      "entropy": 6.591501761590624,
+      "softmax_entropy": 6.591501761590624,
+      "top1": 0.06647796928882599,
+      "top5_mean": 0.06288113296031952,
+      "top10_mean": 0.059655511379241945,
+      "top16_mean": 0.057739357464015484,
+      "margin_top1_top2": 0.0013491734862327576,
+      "positive_fraction": 0.5857338820301783
+    },
+    {
+      "frame_index": 31,
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009920.jpg",
+      "mean": -0.0014266950890021999,
+      "std": 0.01870715035360779,
+      "min": -0.038428910076618195,
+      "max": 0.06248489394783974,
+      "entropy": 6.591497170042927,
+      "softmax_entropy": 6.591497170042927,
+      "top1": 0.06248489394783974,
+      "top5_mean": 0.05801355317234993,
+      "top10_mean": 0.055229001119732855,
+      "top16_mean": 0.05285652447491884,
+      "margin_top1_top2": 0.0036255083978176117,
+      "positive_fraction": 0.401920438957476
+    }
+  ],
+  "score_attention_alignment": {
+    "per_frame": [
+      {
+        "frame_index": 0,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000000.jpg",
+        "pearson": -0.37190118134087874,
+        "cosine": -0.07871176830017716,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          }
+        ]
+      },
+      {
+        "frame_index": 1,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+        "pearson": -0.1977339692473325,
+        "cosine": -0.11111721415537633,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 1,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          },
+          {
+            "k": 8,
+            "overlap_count": 1,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 16,
+            "overlap_count": 3,
+            "overlap_ratio": 0.1875,
+            "jaccard": 0.10344827586206896
+          },
+          {
+            "k": 32,
+            "overlap_count": 6,
+            "overlap_ratio": 0.1875,
+            "jaccard": 0.10344827586206896
+          }
+        ]
+      },
+      {
+        "frame_index": 2,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000640.jpg",
+        "pearson": 0.2726540202875755,
+        "cosine": 0.03879096842594533,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 1,
+            "overlap_ratio": 0.0625,
+            "jaccard": 0.03225806451612903
+          },
+          {
+            "k": 32,
+            "overlap_count": 2,
+            "overlap_ratio": 0.0625,
+            "jaccard": 0.03225806451612903
+          }
+        ]
+      },
+      {
+        "frame_index": 3,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000960.jpg",
+        "pearson": 0.05229394279125144,
+        "cosine": 0.4783303302651711,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 2,
+            "overlap_ratio": 0.0625,
+            "jaccard": 0.03225806451612903
+          }
+        ]
+      },
+      {
+        "frame_index": 4,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001280.jpg",
+        "pearson": 0.12136706510842653,
+        "cosine": -0.03458970460625859,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 1,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 16,
+            "overlap_count": 2,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 32,
+            "overlap_count": 4,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          }
+        ]
+      },
+      {
+        "frame_index": 5,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001600.jpg",
+        "pearson": 0.27311631076474313,
+        "cosine": 0.6444313394064892,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 1,
+            "overlap_ratio": 0.0625,
+            "jaccard": 0.03225806451612903
+          },
+          {
+            "k": 32,
+            "overlap_count": 8,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          }
+        ]
+      },
+      {
+        "frame_index": 6,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001920.jpg",
+        "pearson": 0.12832908960511924,
+        "cosine": 0.4931378336475283,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 5,
+            "overlap_ratio": 0.15625,
+            "jaccard": 0.0847457627118644
+          }
+        ]
+      },
+      {
+        "frame_index": 7,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002240.jpg",
+        "pearson": 0.41534609644361425,
+        "cosine": 0.6166145263749779,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 1,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 16,
+            "overlap_count": 3,
+            "overlap_ratio": 0.1875,
+            "jaccard": 0.10344827586206896
+          },
+          {
+            "k": 32,
+            "overlap_count": 5,
+            "overlap_ratio": 0.15625,
+            "jaccard": 0.0847457627118644
+          }
+        ]
+      },
+      {
+        "frame_index": 8,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002560.jpg",
+        "pearson": 0.37646379420416143,
+        "cosine": 0.6310971544622733,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 1,
+            "overlap_ratio": 0.0625,
+            "jaccard": 0.03225806451612903
+          },
+          {
+            "k": 32,
+            "overlap_count": 2,
+            "overlap_ratio": 0.0625,
+            "jaccard": 0.03225806451612903
+          }
+        ]
+      },
+      {
+        "frame_index": 9,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002880.jpg",
+        "pearson": 0.150779270152462,
+        "cosine": 0.6261290568376042,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          }
+        ]
+      },
+      {
+        "frame_index": 10,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003200.jpg",
+        "pearson": -0.03125103757095293,
+        "cosine": 0.5805411907261451,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 1,
+            "overlap_ratio": 0.03125,
+            "jaccard": 0.015873015873015872
+          }
+        ]
+      },
+      {
+        "frame_index": 11,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003520.jpg",
+        "pearson": 0.37165735994464516,
+        "cosine": 0.6482618218324726,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 1,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          },
+          {
+            "k": 8,
+            "overlap_count": 2,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          },
+          {
+            "k": 16,
+            "overlap_count": 2,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 32,
+            "overlap_count": 8,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          }
+        ]
+      },
+      {
+        "frame_index": 12,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003840.jpg",
+        "pearson": -0.1335965207803381,
+        "cosine": 0.3563853145252962,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 3,
+            "overlap_ratio": 0.09375,
+            "jaccard": 0.04918032786885246
+          }
+        ]
+      },
+      {
+        "frame_index": 13,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004160.jpg",
+        "pearson": -0.05086767580228916,
+        "cosine": 0.013962598651846127,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 3,
+            "overlap_ratio": 0.375,
+            "jaccard": 0.23076923076923078
+          },
+          {
+            "k": 16,
+            "overlap_count": 3,
+            "overlap_ratio": 0.1875,
+            "jaccard": 0.10344827586206896
+          },
+          {
+            "k": 32,
+            "overlap_count": 5,
+            "overlap_ratio": 0.15625,
+            "jaccard": 0.0847457627118644
+          }
+        ]
+      },
+      {
+        "frame_index": 14,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004480.jpg",
+        "pearson": -0.008156569910216465,
+        "cosine": 0.27765210427504405,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 1,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 16,
+            "overlap_count": 4,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          },
+          {
+            "k": 32,
+            "overlap_count": 8,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          }
+        ]
+      },
+      {
+        "frame_index": 15,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004800.jpg",
+        "pearson": -0.11374729779542067,
+        "cosine": 0.014101829669463233,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 3,
+            "overlap_ratio": 0.1875,
+            "jaccard": 0.10344827586206896
+          },
+          {
+            "k": 32,
+            "overlap_count": 5,
+            "overlap_ratio": 0.15625,
+            "jaccard": 0.0847457627118644
+          }
+        ]
+      },
+      {
+        "frame_index": 16,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005120.jpg",
+        "pearson": 0.22671572217393005,
+        "cosine": 0.3544523660945197,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 4,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          }
+        ]
+      },
+      {
+        "frame_index": 17,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005440.jpg",
+        "pearson": -0.11570985488482458,
+        "cosine": 0.29797251972058,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 1,
+            "overlap_ratio": 0.03125,
+            "jaccard": 0.015873015873015872
+          }
+        ]
+      },
+      {
+        "frame_index": 18,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005760.jpg",
+        "pearson": -0.009377439434278594,
+        "cosine": 0.4230333370153531,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          }
+        ]
+      },
+      {
+        "frame_index": 19,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006080.jpg",
+        "pearson": 0.23653395871482996,
+        "cosine": 0.49505684436386943,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          }
+        ]
+      },
+      {
+        "frame_index": 20,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006400.jpg",
+        "pearson": 0.28128505941726856,
+        "cosine": 0.761725996864872,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 3,
+            "overlap_ratio": 0.09375,
+            "jaccard": 0.04918032786885246
+          }
+        ]
+      },
+      {
+        "frame_index": 21,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006720.jpg",
+        "pearson": 0.2014824775855283,
+        "cosine": 0.40677292453297875,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 2,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 32,
+            "overlap_count": 4,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          }
+        ]
+      },
+      {
+        "frame_index": 22,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007040.jpg",
+        "pearson": 0.1636852621032324,
+        "cosine": 0.2991415451449945,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 1,
+            "overlap_ratio": 0.0625,
+            "jaccard": 0.03225806451612903
+          },
+          {
+            "k": 32,
+            "overlap_count": 4,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          }
+        ]
+      },
+      {
+        "frame_index": 23,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007360.jpg",
+        "pearson": 0.20117025985127696,
+        "cosine": 0.1872547040092604,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 1,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 16,
+            "overlap_count": 5,
+            "overlap_ratio": 0.3125,
+            "jaccard": 0.18518518518518517
+          },
+          {
+            "k": 32,
+            "overlap_count": 8,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          }
+        ]
+      },
+      {
+        "frame_index": 24,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007680.jpg",
+        "pearson": -0.13078600851454844,
+        "cosine": 0.3798682126764732,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 1,
+            "overlap_ratio": 0.03125,
+            "jaccard": 0.015873015873015872
+          }
+        ]
+      },
+      {
+        "frame_index": 25,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008000.jpg",
+        "pearson": -0.06852297999906772,
+        "cosine": 0.03309892735625995,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 1,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          },
+          {
+            "k": 8,
+            "overlap_count": 1,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 16,
+            "overlap_count": 3,
+            "overlap_ratio": 0.1875,
+            "jaccard": 0.10344827586206896
+          },
+          {
+            "k": 32,
+            "overlap_count": 3,
+            "overlap_ratio": 0.09375,
+            "jaccard": 0.04918032786885246
+          }
+        ]
+      },
+      {
+        "frame_index": 26,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008320.jpg",
+        "pearson": 0.36465040056312353,
+        "cosine": 0.6903415239009615,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 1,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          },
+          {
+            "k": 8,
+            "overlap_count": 2,
+            "overlap_ratio": 0.25,
+            "jaccard": 0.14285714285714285
+          },
+          {
+            "k": 16,
+            "overlap_count": 2,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 32,
+            "overlap_count": 7,
+            "overlap_ratio": 0.21875,
+            "jaccard": 0.12280701754385964
+          }
+        ]
+      },
+      {
+        "frame_index": 27,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008640.jpg",
+        "pearson": 0.4090074826981045,
+        "cosine": 0.5260300770574833,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 1,
+            "overlap_ratio": 0.03125,
+            "jaccard": 0.015873015873015872
+          }
+        ]
+      },
+      {
+        "frame_index": 28,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008960.jpg",
+        "pearson": 0.06296751758201906,
+        "cosine": 0.4135564796575159,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 32,
+            "overlap_count": 1,
+            "overlap_ratio": 0.03125,
+            "jaccard": 0.015873015873015872
+          }
+        ]
+      },
+      {
+        "frame_index": 29,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009280.jpg",
+        "pearson": 0.010652714245205521,
+        "cosine": 0.0595286972415504,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 2,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 32,
+            "overlap_count": 5,
+            "overlap_ratio": 0.15625,
+            "jaccard": 0.0847457627118644
+          }
+        ]
+      },
+      {
+        "frame_index": 30,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009600.jpg",
+        "pearson": -0.11572738863919371,
+        "cosine": 0.2942468292541287,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 1,
+            "overlap_ratio": 0.0625,
+            "jaccard": 0.03225806451612903
+          },
+          {
+            "k": 32,
+            "overlap_count": 4,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          }
+        ]
+      },
+      {
+        "frame_index": 31,
+        "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009920.jpg",
+        "pearson": 0.10405602953858607,
+        "cosine": -0.06206556170615872,
+        "topk_overlap": [
+          {
+            "k": 4,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 8,
+            "overlap_count": 0,
+            "overlap_ratio": 0.0,
+            "jaccard": 0.0
+          },
+          {
+            "k": 16,
+            "overlap_count": 2,
+            "overlap_ratio": 0.125,
+            "jaccard": 0.06666666666666667
+          },
+          {
+            "k": 32,
+            "overlap_count": 7,
+            "overlap_ratio": 0.21875,
+            "jaccard": 0.12280701754385964
+          }
+        ]
+      }
+    ],
+    "summary_by_k": {
+      "4": {
+        "num_frames": 32,
+        "mean_overlap_ratio": 0.03125,
+        "std_overlap_ratio": 0.08267972847076846,
+        "mean_jaccard": 0.017857142857142856,
+        "std_jaccard": 0.04724555912615341
+      },
+      "8": {
+        "num_frames": 32,
+        "mean_overlap_ratio": 0.05078125,
+        "std_overlap_ratio": 0.09301469452961451,
+        "mean_jaccard": 0.02864010989010989,
+        "std_jaccard": 0.05433956961855098
+      },
+      "16": {
+        "num_frames": 32,
+        "mean_overlap_ratio": 0.080078125,
+        "std_overlap_ratio": 0.08732456603948499,
+        "mean_jaccard": 0.04395543843541619,
+        "std_jaccard": 0.049450874326276525
+      },
+      "32": {
+        "num_frames": 32,
+        "mean_overlap_ratio": 0.1142578125,
+        "std_overlap_ratio": 0.08028626722291829,
+        "mean_jaccard": 0.06253854018096996,
+        "std_jaccard": 0.04579580586105382
+      }
+    },
+    "mean_pearson": 0.09615112218299257,
+    "std_pearson": 0.19622308262611998,
+    "mean_cosine": 0.33609477516322145,
+    "std_cosine": 0.25608194858366196
+  },
+  "best_frame_gt_patch_coverage": {
+    "gt_meta": {
+      "frame_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+      "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/06bd2cf800/frame_000320.png",
+      "height": 480,
+      "width": 640
+    },
+    "per_instance_meta": [
+      {
+        "object_name": "pillow",
+        "instance_id": 40,
+        "bbox_2d": [
+          565,
+          279,
+          639,
+          350
+        ],
+        "used_mask_type": "instance_mask",
+        "pixel_area": 935
+      },
+      {
+        "object_name": "bed",
+        "instance_id": 23,
+        "bbox_2d": [
+          387,
+          177,
+          639,
+          450
+        ],
+        "used_mask_type": "instance_mask",
+        "pixel_area": 19694
+      },
+      {
+        "object_name": "keyboard",
+        "instance_id": 34,
+        "bbox_2d": [
+          235,
+          173,
+          298,
+          186
+        ],
+        "used_mask_type": "instance_mask",
+        "pixel_area": 452
+      },
+      {
+        "object_name": "cabinet",
+        "instance_id": 4,
+        "bbox_2d": [
+          0,
+          0,
+          143,
+          479
+        ],
+        "used_mask_type": "instance_mask",
+        "pixel_area": 1170
+      },
+      {
+        "object_name": "heater",
+        "instance_id": 17,
+        "bbox_2d": [
+          111,
+          189,
+          172,
+          336
+        ],
+        "used_mask_type": "instance_mask",
+        "pixel_area": 3889
+      }
+    ],
+    "selected_patch_summary": {
+      "selected_patch_count": 16,
+      "mean_selected_patch_coverage": 0.006774607114493847,
+      "max_selected_patch_coverage": 0.10144927352666855,
+      "selected_patch_hit_fraction_any": 0.1875,
+      "selected_patch_hit_fraction_25": 0.0,
+      "selected_patch_hit_fraction_50": 0.0
+    },
+    "metrics": {
+      "overall": {
+        "mean_patch_coverage": 0.08523998409509659,
+        "max_patch_coverage": 0.8695651888847351,
+        "positive_patch_fraction_any": 0.29766803840877915,
+        "positive_patch_fraction_25": 0.13168724279835392,
+        "positive_patch_fraction_50": 0.08093278463648834
+      },
+      "per_threshold": {
+        "0.0": [
+          {
+            "k": 4,
+            "gt_positive_patch_count": 217,
+            "selected_gt_hit_count": 1,
+            "precision": 0.25,
+            "recall": 0.004608294930875576,
+            "mean_selected_patch_coverage": 0.0011574074160307646,
+            "max_selected_patch_coverage": 0.004629629664123058,
+            "coverage_sum": 0.004629629664123058
+          },
+          {
+            "k": 8,
+            "gt_positive_patch_count": 217,
+            "selected_gt_hit_count": 2,
+            "precision": 0.25,
+            "recall": 0.009216589861751152,
+            "mean_selected_patch_coverage": 0.013259862549602985,
+            "max_selected_patch_coverage": 0.10144927352666855,
+            "coverage_sum": 0.10607890039682388
+          },
+          {
+            "k": 16,
+            "gt_positive_patch_count": 217,
+            "selected_gt_hit_count": 3,
+            "precision": 0.1875,
+            "recall": 0.013824884792626729,
+            "mean_selected_patch_coverage": 0.006774607114493847,
+            "max_selected_patch_coverage": 0.10144927352666855,
+            "coverage_sum": 0.10839371383190155
+          },
+          {
+            "k": 32,
+            "gt_positive_patch_count": 217,
+            "selected_gt_hit_count": 7,
+            "precision": 0.21875,
+            "recall": 0.03225806451612903,
+            "mean_selected_patch_coverage": 0.009139559231698513,
+            "max_selected_patch_coverage": 0.10144927352666855,
+            "coverage_sum": 0.2924658954143524
+          }
+        ],
+        "0.25": [
+          {
+            "k": 4,
+            "gt_positive_patch_count": 96,
+            "selected_gt_hit_count": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "mean_selected_patch_coverage": 0.0011574074160307646,
+            "max_selected_patch_coverage": 0.004629629664123058,
+            "coverage_sum": 0.004629629664123058
+          },
+          {
+            "k": 8,
+            "gt_positive_patch_count": 96,
+            "selected_gt_hit_count": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "mean_selected_patch_coverage": 0.013259862549602985,
+            "max_selected_patch_coverage": 0.10144927352666855,
+            "coverage_sum": 0.10607890039682388
+          },
+          {
+            "k": 16,
+            "gt_positive_patch_count": 96,
+            "selected_gt_hit_count": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "mean_selected_patch_coverage": 0.006774607114493847,
+            "max_selected_patch_coverage": 0.10144927352666855,
+            "coverage_sum": 0.10839371383190155
+          },
+          {
+            "k": 32,
+            "gt_positive_patch_count": 96,
+            "selected_gt_hit_count": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "mean_selected_patch_coverage": 0.009139559231698513,
+            "max_selected_patch_coverage": 0.10144927352666855,
+            "coverage_sum": 0.2924658954143524
+          }
+        ],
+        "0.5": [
+          {
+            "k": 4,
+            "gt_positive_patch_count": 59,
+            "selected_gt_hit_count": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "mean_selected_patch_coverage": 0.0011574074160307646,
+            "max_selected_patch_coverage": 0.004629629664123058,
+            "coverage_sum": 0.004629629664123058
+          },
+          {
+            "k": 8,
+            "gt_positive_patch_count": 59,
+            "selected_gt_hit_count": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "mean_selected_patch_coverage": 0.013259862549602985,
+            "max_selected_patch_coverage": 0.10144927352666855,
+            "coverage_sum": 0.10607890039682388
+          },
+          {
+            "k": 16,
+            "gt_positive_patch_count": 59,
+            "selected_gt_hit_count": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "mean_selected_patch_coverage": 0.006774607114493847,
+            "max_selected_patch_coverage": 0.10144927352666855,
+            "coverage_sum": 0.10839371383190155
+          },
+          {
+            "k": 32,
+            "gt_positive_patch_count": 59,
+            "selected_gt_hit_count": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "mean_selected_patch_coverage": 0.009139559231698513,
+            "max_selected_patch_coverage": 0.10144927352666855,
+            "coverage_sum": 0.2924658954143524
+          }
+        ]
+      }
+    },
+    "selected_indices": [
+      708,
+      706,
+      721,
+      79,
+      134,
+      707,
+      25,
+      162,
+      80,
+      26,
+      726,
+      725,
+      135,
+      724,
+      21,
+      701
+    ],
+    "selected_scores": [
+      0.06267997622489929,
+      0.05717970058321953,
+      0.055684953927993774,
+      0.05346677079796791,
+      0.05339464172720909,
+      0.051783736795186996,
+      0.05097069591283798,
+      0.05015118420124054,
+      0.047994665801525116,
+      0.04746395722031593,
+      0.04724341630935669,
+      0.04663772135972977,
+      0.04628942906856537,
+      0.0462823249399662,
+      0.046097949147224426,
+      0.043947286903858185
+    ]
+  },
+  "artifacts": {
+    "patch_score_maps_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment2_patch_score_analysis/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/patch_score_maps.npy",
+    "attention_maps_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment2_patch_score_analysis/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/fusion_attention_maps.npy",
+    "patch_scores_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment2_patch_score_analysis/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/patch_scores.npy"
+  },
+  "manifest_question_entry": {
+    "qa_id": "cac34684-312c-40d9-b3ed-1446f56fd2ef",
+    "scene_name": "06bd2cf800",
+    "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/01_mc_distance_compare_cac34684.jpg",
+    "best_frame_file": "color/train/06bd2cf800/frame_000320.jpg",
+    "best_frame_score": 719.8061331800993,
+    "parsed_question": {
+      "question_type": "mc_distance_compare",
+      "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (pillow, bed, keyboard, cabinet) is the closest to the heater? If there are multiple instances of an object category, measure to the closest. Options: A. pillow B. bed C. keyboard D. cabinet Answer with the option's letter from the given choices directly.",
+      "relevant_objects": [
+        "pillow",
+        "bed",
+        "keyboard",
+        "cabinet",
+        "heater"
+      ],
+      "answer_value": "C",
+      "answer_object": "keyboard",
+      "options_map": {
+        "A": "pillow",
+        "B": "bed",
+        "C": "keyboard",
+        "D": "cabinet"
+      }
+    },
+    "render_info": {
+      "output_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/per_scene/06bd2cf800/01_mc_distance_compare_cac34684.jpg",
+      "frame_color_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+      "frame_instance_path": "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/instance/train/06bd2cf800/frame_000320.png",
+      "drawn_instances": [
+        {
+          "object_name": "pillow",
+          "instance_id": 40,
+          "bbox_2d": [
+            565,
+            279,
+            639,
+            350
+          ],
+          "instance_rank": 1,
+          "area": 5254
+        },
+        {
+          "object_name": "bed",
+          "instance_id": 23,
+          "bbox_2d": [
+            387,
+            177,
+            639,
+            450
+          ],
+          "instance_rank": 1,
+          "area": 68796
+        },
+        {
+          "object_name": "keyboard",
+          "instance_id": 34,
+          "bbox_2d": [
+            235,
+            173,
+            298,
+            186
+          ],
+          "instance_rank": 1,
+          "area": 819
+        },
+        {
+          "object_name": "cabinet",
+          "instance_id": 4,
+          "bbox_2d": [
+            0,
+            0,
+            143,
+            479
+          ],
+          "instance_rank": 1,
+          "area": 68497
+        },
+        {
+          "object_name": "heater",
+          "instance_id": 17,
+          "bbox_2d": [
+            111,
+            189,
+            172,
+            336
+          ],
+          "instance_rank": 1,
+          "area": 8967
+        }
+      ]
+    }
+  },
+  "summary_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment2_patch_score_analysis/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/patch_score_analysis_summary.json"
+}

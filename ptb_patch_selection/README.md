@@ -14,6 +14,13 @@
     - 用问题文本 token embedding 的均值作为 query
     - 与每个 patch token 做 cosine similarity
   - 每帧保留 `top-k`
+- 新增 fusion-guided fine 分支：
+  - 可用 `scoring_mode=fusion_2d3d`
+  - 不再依赖 question query
+  - 直接利用 **2D/3D fusion 过程中** 的 patch importance：
+    - `2D importance`：fusion 前后 token 变化量 `||fused - visual_only||`
+    - `3D importance`：cross-attention 中 spatial patch token 被 2D patch 查询到的强度
+  - 最终分数默认是 `2D + 3D` 的加权平均
 - 最终输入：
   - `coarse_tokens + selected_fine_tokens`
 - demo 会额外输出：
@@ -27,6 +34,10 @@
   - 只构造视频 token 与元信息
 - `generate_with_selective_patch_pooling(...)`
   - 直接生成回答
+- `build_fusion_guided_patch_video_features(...)`
+  - 新版：使用 fusion importance 构造 fine patch
+- `generate_with_fusion_guided_patch_pooling(...)`
+  - 新版：直接走 fusion-guided patch selection 推理
 
 ## 设计取舍
 
@@ -52,6 +63,27 @@ output_ids, metadata = generate_with_selective_patch_pooling(
     fine_topk=16,
     scoring_mode="question_cosine",
     fine_scale=1.0,
+    include_coarse=True,
+    return_metadata=True,
+    max_new_tokens=256,
+    do_sample=False,
+    temperature=0.0,
+)
+```
+
+fusion-guided 版本示例：
+
+```python
+output_ids, metadata = generate_with_selective_patch_pooling(
+    model,
+    input_ids=input_ids,
+    images=video,
+    attention_mask=attention_masks,
+    modalities="video",
+    fine_topk=16,
+    scoring_mode="fusion_2d3d",
+    fusion_2d_weight=1.0,
+    fusion_3d_weight=1.0,
     include_coarse=True,
     return_metadata=True,
     max_new_tokens=256,

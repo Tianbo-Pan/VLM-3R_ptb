@@ -20,7 +20,7 @@ import argparse
 import json
 import math
 import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"  # Limit to one GPU for easier debugging and visualization.
+# os.environ["CUDA_VISIBLE_DEVICES"] = "2"  # Limit to one GPU for easier debugging and visualization.
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Sequence, Tuple

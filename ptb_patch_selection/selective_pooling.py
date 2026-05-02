@@ -96,6 +96,44 @@ def _get_newline_token(model, ref_tensor: torch.Tensor) -> Optional[torch.Tensor
 
 
 @torch.no_grad()
+def pack_coarse_tokens(
+    model,
+    encoded_video_features: torch.Tensor,
+) -> torch.Tensor:
+    coarse_tokens = model.get_2dPool(encoded_video_features)
+    mm_patch_merge_type = getattr(model.config, "mm_patch_merge_type", "flat")
+    mm_newline_position = getattr(model.config, "mm_newline_position", "one_token")
+    if mm_patch_merge_type == "flat":
+        return coarse_tokens.flatten(0, 1)
+    if not mm_patch_merge_type.startswith("spatial"):
+        raise ValueError(f"Unsupported mm_patch_merge_type for selective patch pooling: {mm_patch_merge_type}")
+    if mm_newline_position == "grid":
+        return model.add_token_per_grid(coarse_tokens)
+    if mm_newline_position == "frame":
+        return model.add_token_per_frame(coarse_tokens).flatten(0, 1)
+    if mm_newline_position == "one_token":
+        coarse_tokens = coarse_tokens.flatten(0, 1)
+        if "unpad" in mm_patch_merge_type:
+            newline_token = _get_newline_token(model, coarse_tokens)
+            if newline_token is not None:
+                coarse_tokens = torch.cat((coarse_tokens, newline_token.unsqueeze(0)), dim=0)
+        return coarse_tokens
+    if mm_newline_position == "no_token":
+        return coarse_tokens.flatten(0, 1)
+    raise ValueError(f"Unexpected mm_newline_position: {mm_newline_position}")
+
+
+def _detach_to_cpu(obj):
+    if torch.is_tensor(obj):
+        return obj.detach().cpu()
+    if isinstance(obj, dict):
+        return {k: _detach_to_cpu(v) for k, v in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return type(obj)(_detach_to_cpu(v) for v in obj)
+    return obj
+
+
+@torch.no_grad()
 def pack_fine_selected_tokens(
     model,
     encoded_video_features: torch.Tensor,
@@ -125,49 +163,32 @@ def pack_fine_selected_tokens(
 
 
 @torch.no_grad()
-def build_coarse_and_fine_video_features(
+def build_coarse_and_fine_video_features_from_patch_scores(
     model,
     encoded_video_features: torch.Tensor,
-    input_ids: torch.Tensor,
-    attention_mask: Optional[torch.Tensor] = None,
+    patch_scores: torch.Tensor,
     fine_topk: int = 16,
-    scoring_mode: str = "question_cosine",
     fine_scale: float = 1.0,
     include_coarse: bool = True,
     append_newline: bool = True,
+    metadata_extra: Optional[Dict] = None,
 ) -> Tuple[torch.Tensor, Dict]:
     if encoded_video_features.ndim != 3:
         raise ValueError(
             f"Expected encoded video features with shape [frames, tokens, dim], got {tuple(encoded_video_features.shape)}."
         )
+    if patch_scores.ndim != 2:
+        raise ValueError(f"Expected patch_scores with shape [frames, tokens], got {tuple(patch_scores.shape)}.")
+    if patch_scores.shape[:2] != encoded_video_features.shape[:2]:
+        raise ValueError(
+            "patch_scores must align with encoded_video_features on [frames, tokens], "
+            f"got {tuple(patch_scores.shape)} vs {tuple(encoded_video_features.shape)}."
+        )
 
     coarse_tokens = None
     if include_coarse:
-        coarse_tokens = model.get_2dPool(encoded_video_features)
-        mm_patch_merge_type = getattr(model.config, "mm_patch_merge_type", "flat")
-        mm_newline_position = getattr(model.config, "mm_newline_position", "one_token")
-        if mm_patch_merge_type == "flat":
-            coarse_tokens = coarse_tokens.flatten(0, 1)
-        elif mm_patch_merge_type.startswith("spatial"):
-            if mm_newline_position == "grid":
-                coarse_tokens = model.add_token_per_grid(coarse_tokens)
-            elif mm_newline_position == "frame":
-                coarse_tokens = model.add_token_per_frame(coarse_tokens).flatten(0, 1)
-            elif mm_newline_position == "one_token":
-                coarse_tokens = coarse_tokens.flatten(0, 1)
-                if "unpad" in mm_patch_merge_type:
-                    newline_token = _get_newline_token(model, coarse_tokens)
-                    if newline_token is not None:
-                        coarse_tokens = torch.cat((coarse_tokens, newline_token.unsqueeze(0)), dim=0)
-            elif mm_newline_position == "no_token":
-                coarse_tokens = coarse_tokens.flatten(0, 1)
-            else:
-                raise ValueError(f"Unexpected mm_newline_position: {mm_newline_position}")
-        else:
-            raise ValueError(f"Unsupported mm_patch_merge_type for selective patch pooling: {mm_patch_merge_type}")
+        coarse_tokens = pack_coarse_tokens(model, encoded_video_features)
 
-    question_embedding = build_question_embedding(model, input_ids, attention_mask)
-    patch_scores = score_patch_tokens(encoded_video_features, question_embedding, mode=scoring_mode)
     selected_indices, selected_scores = select_topk_patch_indices(patch_scores, fine_topk)
     fine_tokens = pack_fine_selected_tokens(
         model,
@@ -187,7 +208,6 @@ def build_coarse_and_fine_video_features(
     num_raw_tokens = encoded_video_features.shape[1]
     grid_size = int(round(math.sqrt(num_raw_tokens)))
     metadata = {
-        "scoring_mode": scoring_mode,
         "fine_topk": int(fine_topk),
         "fine_scale": float(fine_scale),
         "include_coarse": bool(include_coarse),
@@ -200,4 +220,32 @@ def build_coarse_and_fine_video_features(
         "fine_token_count": int(fine_tokens.shape[0]),
         "combined_token_count": int(combined.shape[0]),
     }
+    if metadata_extra:
+        metadata.update(_detach_to_cpu(metadata_extra))
     return combined, metadata
+
+
+@torch.no_grad()
+def build_coarse_and_fine_video_features(
+    model,
+    encoded_video_features: torch.Tensor,
+    input_ids: torch.Tensor,
+    attention_mask: Optional[torch.Tensor] = None,
+    fine_topk: int = 16,
+    scoring_mode: str = "question_cosine",
+    fine_scale: float = 1.0,
+    include_coarse: bool = True,
+    append_newline: bool = True,
+) -> Tuple[torch.Tensor, Dict]:
+    question_embedding = build_question_embedding(model, input_ids, attention_mask)
+    patch_scores = score_patch_tokens(encoded_video_features, question_embedding, mode=scoring_mode)
+    return build_coarse_and_fine_video_features_from_patch_scores(
+        model,
+        encoded_video_features,
+        patch_scores,
+        fine_topk=fine_topk,
+        fine_scale=fine_scale,
+        include_coarse=include_coarse,
+        append_newline=append_newline,
+        metadata_extra={"scoring_mode": scoring_mode},
+    )

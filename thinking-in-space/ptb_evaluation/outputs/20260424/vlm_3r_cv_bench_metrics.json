@@ -1,0 +1,17 @@
+{
+  "model_id": "vlm-3r-llava-qwen2-lora",
+  "dataset_path": "nyu-visionx/CV-Bench",
+  "split": "test",
+  "num_samples": 2638,
+  "metrics": {
+    "accuracy_2d_ade20k": 0.669826224328594,
+    "accuracy_2d_coco": 0.7354037267080745,
+    "accuracy_2d": 0.7026149755183342,
+    "accuracy_3d": 0.7825,
+    "combined_accuracy": 0.7425574877591671,
+    "Count": 0.6522842639593909,
+    "Relation": 0.7723076923076924,
+    "Distance": 0.7266666666666667,
+    "Depth": 0.8383333333333334
+  }
+}

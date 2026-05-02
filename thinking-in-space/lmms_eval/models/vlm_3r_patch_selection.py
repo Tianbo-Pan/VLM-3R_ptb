@@ -23,6 +23,8 @@ class Vlm3rPatchSelection(Vlm3r):
         fine_topk: int = 16,
         scoring_mode: str = "question_cosine",
         fine_scale: float = 1.0,
+        fusion_2d_weight: float = 1.0,
+        fusion_3d_weight: float = 1.0,
         include_coarse: bool = True,
         append_newline: bool = True,
         save_patch_selection_metadata: bool = False,
@@ -32,6 +34,8 @@ class Vlm3rPatchSelection(Vlm3r):
         self.fine_topk = int(fine_topk)
         self.scoring_mode = str(scoring_mode)
         self.fine_scale = float(fine_scale)
+        self.fusion_2d_weight = float(fusion_2d_weight)
+        self.fusion_3d_weight = float(fusion_3d_weight)
         self.include_coarse = include_coarse if isinstance(include_coarse, bool) else str(include_coarse).lower() == "true"
         self.append_newline = append_newline if isinstance(append_newline, bool) else str(append_newline).lower() == "true"
         self.save_patch_selection_metadata = (
@@ -43,7 +47,8 @@ class Vlm3rPatchSelection(Vlm3r):
         super().__init__(**kwargs)
         eval_logger.info(
             f"Enabled patch-selection inference: fine_topk={self.fine_topk}, "
-            f"scoring_mode={self.scoring_mode}, include_coarse={self.include_coarse}"
+            f"scoring_mode={self.scoring_mode}, include_coarse={self.include_coarse}, "
+            f"fusion_2d_weight={self.fusion_2d_weight}, fusion_3d_weight={self.fusion_3d_weight}"
         )
 
     def _generate_with_optional_feature_cd(
@@ -68,6 +73,8 @@ class Vlm3rPatchSelection(Vlm3r):
                 fine_topk=self.fine_topk,
                 scoring_mode=self.scoring_mode,
                 fine_scale=self.fine_scale,
+                fusion_2d_weight=self.fusion_2d_weight,
+                fusion_3d_weight=self.fusion_3d_weight,
                 include_coarse=self.include_coarse,
                 append_newline=self.append_newline,
                 return_metadata=self.save_patch_selection_metadata,

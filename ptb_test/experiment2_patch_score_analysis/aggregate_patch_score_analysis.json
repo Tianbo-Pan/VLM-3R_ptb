@@ -1,0 +1,39 @@
+{
+  "model_path": "Journey9ni/vlm-3r-llava-qwen2-lora",
+  "scoring_mode": "question_cosine",
+  "fine_topk": 16,
+  "num_frames": 32,
+  "compare_topk": [
+    4,
+    8,
+    16,
+    32
+  ],
+  "coverage_thresholds": [
+    0.0,
+    0.25,
+    0.5
+  ],
+  "aggregate": {
+    "num_cases": 1,
+    "mean_selected_patch_hit_fraction_any": 0.1875,
+    "std_selected_patch_hit_fraction_any": 0.0,
+    "mean_alignment_pearson": 0.09615112218299257,
+    "std_alignment_pearson": 0.0,
+    "mean_alignment_cosine": 0.33609477516322145,
+    "std_alignment_cosine": 0.0,
+    "mean_framewise_top1_margin": 0.004098237841390073,
+    "std_framewise_top1_margin": 0.0,
+    "mean_framewise_softmax_entropy": 6.591500209913098,
+    "std_framewise_softmax_entropy": 0.0
+  },
+  "case_summaries": [
+    {
+      "scene_name": "06bd2cf800",
+      "qa_id": "cac34684-312c-40d9-b3ed-1446f56fd2ef",
+      "summary_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/experiment2_patch_score_analysis/06bd2cf800/cac34684-312c-40d9-b3ed-1446f56fd2ef/patch_score_analysis_summary.json",
+      "mean_alignment_pearson": 0.09615112218299257,
+      "selected_patch_hit_fraction_any": 0.1875
+    }
+  ]
+}

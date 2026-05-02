@@ -7,8 +7,8 @@ if str(REPO_ROOT) not in sys.path:
 
 import argparse
 
-from vcd.methods import build_spatial_noise_branch
-from vcd.option_demo_utils import add_common_arguments, inject_default_demo_argv, run_option_demo
+from vcd.vcd_feature_degradation.methods import build_spatial_noise_branch
+from vcd.vcd_feature_degradation.option_demo_utils import add_common_arguments, inject_default_demo_argv, run_option_demo
 
 
 def parse_args():

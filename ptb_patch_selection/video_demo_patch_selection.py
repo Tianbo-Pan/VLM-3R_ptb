@@ -75,6 +75,8 @@ def parse_args():
     parser.add_argument("--fine_topk", type=int, default=16)
     parser.add_argument("--scoring_mode", type=str, default="question_cosine")
     parser.add_argument("--fine_scale", type=float, default=1.0)
+    parser.add_argument("--fusion_2d_weight", type=float, default=1.0)
+    parser.add_argument("--fusion_3d_weight", type=float, default=1.0)
     parser.add_argument("--include_coarse", type=lambda x: str(x).lower() == "true", default=True)
     parser.add_argument("--append_newline", type=lambda x: str(x).lower() == "true", default=True)
     parser.add_argument("--save_patch_visualization", type=lambda x: str(x).lower() == "true", default=True)
@@ -311,6 +313,8 @@ def main():
             fine_topk=args.fine_topk,
             scoring_mode=args.scoring_mode,
             fine_scale=args.fine_scale,
+            fusion_2d_weight=args.fusion_2d_weight,
+            fusion_3d_weight=args.fusion_3d_weight,
             include_coarse=args.include_coarse,
             append_newline=args.append_newline,
             return_metadata=True,
@@ -339,6 +343,7 @@ def main():
                 "fine_token_count": metadata["fine_token_count"],
                 "combined_token_count": metadata["combined_token_count"],
                 "scoring_mode": metadata["scoring_mode"],
+                "fusion_spatial_score_source": metadata.get("fusion_spatial_score_source"),
             },
             ensure_ascii=False,
         ),
@@ -366,6 +371,9 @@ def main():
             "fine_token_count": metadata["fine_token_count"],
             "combined_token_count": metadata["combined_token_count"],
             "scoring_mode": metadata["scoring_mode"],
+            "fusion_2d_weight": metadata.get("fusion_2d_weight"),
+            "fusion_3d_weight": metadata.get("fusion_3d_weight"),
+            "fusion_spatial_score_source": metadata.get("fusion_spatial_score_source"),
             "selected_indices": metadata["selected_indices"].tolist(),
             "selected_scores": metadata["selected_scores"].tolist(),
             "patch_visualization_dir": vis_dir,

@@ -11,4 +11,4 @@ The VCD demo/eval implementation now lives under `vcd/option_demo_utils.py` so t
 modified VCD code is centralized in the repo-level `vcd/` directory.
 """
 
-from vcd.option_demo_utils import *  # noqa: F401,F403
+from vcd.vcd_feature_degradation.option_demo_utils import *  # noqa: F401,F403
