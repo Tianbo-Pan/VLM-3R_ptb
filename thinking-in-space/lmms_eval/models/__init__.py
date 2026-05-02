@@ -44,6 +44,7 @@ AVAILABLE_MODELS = {
     "xcomposer2d5": "XComposer2D5",
     "qwen2vl": "Qwen2VL",
     "vlm_3r": "Vlm3r",
+    "vlm_3r_gen_vcd": "Vlm3rGenVCD",
     "vlm_3r_patch_selection": "Vlm3rPatchSelection",
     "vlm_3r_semantic_vcd": "Vlm3rSemanticVCD",
 }

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import math
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 import torch
 
@@ -259,4 +259,41 @@ def build_stage_setting_bundles(args, model, video, input_ids, attention_mask) -
         "stage1_semantic_fine": build_stage1_semantic_branch(args, model, video, input_ids, attention_mask),
         "stage2_fusion_guided_fine": build_stage2_fusion_guided_branch(args, model, video, input_ids, attention_mask),
         "stage3_joint_semantic_fusion": build_stage3_joint_branch(args, model, video, input_ids, attention_mask),
+    }
+
+
+@torch.no_grad()
+def build_generation_branch_bundle(
+    args,
+    model,
+    video,
+    input_ids,
+    attention_mask,
+    branch_mode: str = "pairwise",
+) -> Dict[str, object]:
+    branch_mode = str(branch_mode).lower()
+    if branch_mode != "pairwise":
+        raise ValueError(f"Unsupported branch_mode: {branch_mode}. Only `pairwise` is kept in vcd_vision_token.")
+
+    bundles = build_stage_setting_bundles(args, model, video, input_ids, attention_mask)
+    branch_names: List[str] = [
+        "stage0_semantic_negative_coarse",
+        "stage0_coarse_only",
+    ]
+
+    branches = []
+    for name in branch_names:
+        bundle = bundles[name]
+        branches.append(
+            {
+                "name": name,
+                "video_features": bundle["video_features"],
+                "metadata": bundle.get("metadata"),
+            }
+        )
+
+    return {
+        "branch_mode": branch_mode,
+        "branches": branches,
+        "all_stage_bundles": bundles,
     }
