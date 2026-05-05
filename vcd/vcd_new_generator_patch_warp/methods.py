@@ -27,6 +27,11 @@ QUERY_GUIDED_SCORING_MODES = {
     "question_cosine_x_norm",
 }
 
+PATCH_SELECTION_SCOPES = {
+    "per_frame",
+    "global",
+}
+
 
 def _extract_encoded_video_features_with_details(model, video) -> Tuple[torch.Tensor, Dict]:
     branch_features = extract_video_branch_features(model, video)
@@ -111,6 +116,7 @@ def _resolve_shift_target(
 def _apply_local_patch_shift(
     encoded_video_features: torch.Tensor,
     selected_indices: torch.Tensor,
+    selected_mask: Optional[torch.Tensor] = None,
     shift_size: int = 1,
     mix_ratio: float = 0.5,
 ) -> Tuple[torch.Tensor, torch.Tensor]:
@@ -120,6 +126,10 @@ def _apply_local_patch_shift(
         )
     if selected_indices.ndim != 2:
         raise ValueError(f"Expected selected_indices with shape [frames, k], got {tuple(selected_indices.shape)}.")
+    if selected_mask is not None and selected_mask.shape != selected_indices.shape:
+        raise ValueError(
+            f"Expected selected_mask with shape {tuple(selected_indices.shape)}, got {tuple(selected_mask.shape)}."
+        )
 
     num_frames, num_tokens, _ = encoded_video_features.shape
     if num_tokens <= 1 or selected_indices.numel() == 0:
@@ -141,7 +151,11 @@ def _apply_local_patch_shift(
         orig_frame = encoded_video_features[frame_idx]
         degraded_frame = degraded[frame_idx]
         for rank, patch_idx_tensor in enumerate(selected_indices[frame_idx]):
+            if selected_mask is not None and not bool(selected_mask[frame_idx, rank].item()):
+                continue
             patch_idx = int(patch_idx_tensor.item())
+            if patch_idx < 0:
+                continue
             if use_grid:
                 row, col = divmod(patch_idx, grid_w)
                 src_row, src_col = _resolve_shift_target(row, col, grid_h, grid_w, rank, shift_size)
@@ -153,6 +167,80 @@ def _apply_local_patch_shift(
             degraded_frame[patch_idx] = mix_ratio * orig_frame[patch_idx] + (1.0 - mix_ratio) * orig_frame[src_idx]
         degraded[frame_idx] = degraded_frame
     return degraded, source_indices
+
+
+def _select_patch_indices_by_scope(
+    patch_scores: torch.Tensor,
+    patch_warp_ratio: float,
+    selection_scope: str,
+) -> Tuple[torch.Tensor, torch.Tensor, torch.Tensor, Dict[str, object]]:
+    if patch_scores.ndim != 2:
+        raise ValueError(f"Expected patch_scores with shape [frames, tokens], got {tuple(patch_scores.shape)}.")
+
+    num_frames, num_tokens = patch_scores.shape
+    selection_scope = str(selection_scope).lower()
+    if selection_scope not in PATCH_SELECTION_SCOPES:
+        raise ValueError(
+            f"Unsupported patch_warp_selection_scope: {selection_scope}. Supported: {sorted(PATCH_SELECTION_SCOPES)}"
+        )
+
+    if selection_scope == "per_frame":
+        patch_warp_topk = min(num_tokens, max(1, int(math.ceil(num_tokens * patch_warp_ratio))))
+        selected_indices, selected_scores = select_topk_patch_indices(patch_scores, patch_warp_topk)
+        selected_mask = torch.ones_like(selected_indices, dtype=torch.bool)
+        return selected_indices, selected_scores, selected_mask, {
+            "patch_warp_topk": int(patch_warp_topk),
+            "patch_warp_total_selected": int(num_frames * patch_warp_topk),
+            "patch_warp_selected_per_frame": [int(patch_warp_topk)] * num_frames,
+        }
+
+    total_candidates = num_frames * num_tokens
+    total_selected = min(total_candidates, max(1, int(math.ceil(total_candidates * patch_warp_ratio))))
+    flat_scores = patch_scores.reshape(-1)
+    top_scores, top_flat_indices = torch.topk(flat_scores, k=total_selected, dim=0)
+
+    frame_indices = torch.div(top_flat_indices, num_tokens, rounding_mode="floor")
+    token_indices = torch.remainder(top_flat_indices, num_tokens)
+
+    per_frame_pairs: List[List[Tuple[float, int]]] = [[] for _ in range(num_frames)]
+    for score_tensor, frame_tensor, token_tensor in zip(top_scores, frame_indices, token_indices):
+        frame_idx = int(frame_tensor.item())
+        token_idx = int(token_tensor.item())
+        per_frame_pairs[frame_idx].append((float(score_tensor.item()), token_idx))
+
+    max_selected_in_frame = max((len(items) for items in per_frame_pairs), default=0)
+    selected_indices = torch.full(
+        (num_frames, max_selected_in_frame),
+        fill_value=-1,
+        dtype=torch.long,
+        device=patch_scores.device,
+    )
+    selected_scores = torch.full(
+        (num_frames, max_selected_in_frame),
+        fill_value=float("-inf"),
+        dtype=patch_scores.dtype,
+        device=patch_scores.device,
+    )
+    selected_mask = torch.zeros(
+        (num_frames, max_selected_in_frame),
+        dtype=torch.bool,
+        device=patch_scores.device,
+    )
+
+    selected_per_frame: List[int] = []
+    for frame_idx, items in enumerate(per_frame_pairs):
+        items.sort(key=lambda x: x[0], reverse=True)
+        selected_per_frame.append(len(items))
+        for rank, (score_value, token_idx) in enumerate(items):
+            selected_indices[frame_idx, rank] = token_idx
+            selected_scores[frame_idx, rank] = score_value
+            selected_mask[frame_idx, rank] = True
+
+    return selected_indices, selected_scores, selected_mask, {
+        "patch_warp_topk": int(total_selected),
+        "patch_warp_total_selected": int(total_selected),
+        "patch_warp_selected_per_frame": selected_per_frame,
+    }
 
 
 @torch.no_grad()
@@ -171,11 +259,16 @@ def build_stage0_local_patch_shift_negative_coarse_branch(args, model, video, in
     if patch_warp_ratio <= 0 or patch_warp_ratio > 1:
         raise ValueError(f"patch_warp_ratio must be in (0, 1], got {patch_warp_ratio}.")
 
-    patch_warp_topk = min(num_tokens, max(1, int(math.ceil(num_tokens * patch_warp_ratio))))
-    selected_indices, selected_scores = select_topk_patch_indices(patch_scores, patch_warp_topk)
+    patch_warp_selection_scope = str(getattr(args, "patch_warp_selection_scope", "per_frame")).lower()
+    selected_indices, selected_scores, selected_mask, selection_scope_metadata = _select_patch_indices_by_scope(
+        patch_scores,
+        patch_warp_ratio=patch_warp_ratio,
+        selection_scope=patch_warp_selection_scope,
+    )
     degraded_encoded_video_features, source_indices = _apply_local_patch_shift(
         encoded_video_features,
         selected_indices,
+        selected_mask=selected_mask,
         shift_size=int(args.patch_warp_shift_size),
         mix_ratio=float(args.patch_warp_mix_ratio),
     )
@@ -186,13 +279,17 @@ def build_stage0_local_patch_shift_negative_coarse_branch(args, model, video, in
         "metadata": {
             "stage_name": "stage0_local_patch_shift_negative_coarse",
             "patch_warp_ratio": patch_warp_ratio,
-            "patch_warp_topk": int(patch_warp_topk),
+            "patch_warp_topk": int(selection_scope_metadata["patch_warp_topk"]),
             "patch_warp_selection_mode": selection_metadata["selection_mode"],
             "patch_warp_selection_source": selection_metadata["selection_source"],
+            "patch_warp_selection_scope": patch_warp_selection_scope,
+            "patch_warp_total_selected": int(selection_scope_metadata["patch_warp_total_selected"]),
+            "patch_warp_selected_per_frame": selection_scope_metadata["patch_warp_selected_per_frame"],
             "patch_warp_shift_size": int(args.patch_warp_shift_size),
             "patch_warp_mix_ratio": float(args.patch_warp_mix_ratio),
             "selected_indices": selected_indices.detach().cpu(),
             "selected_scores": selected_scores.detach().cpu(),
+            "selected_mask": selected_mask.detach().cpu(),
             "source_indices": source_indices.detach().cpu(),
             "patch_scores": patch_scores.detach().cpu(),
             "fusion_metadata": selection_metadata["fusion_metadata"],

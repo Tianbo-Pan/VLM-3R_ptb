@@ -19,8 +19,8 @@ from llava.constants import DEFAULT_IM_END_TOKEN, DEFAULT_IM_START_TOKEN, DEFAUL
 from llava.conversation import SeparatorStyle, conv_templates
 from llava.mm_utils import KeywordsStoppingCriteria, tokenizer_image_token
 
+from ptb_new_version_preliminary.methods import build_generation_ptb_preliminary_branch_bundle
 from vcd.vcd_feature_degradation.option_demo_utils import ensure_pad_token
-from vcd.vcd_new_generator_patch_warp.methods import build_generation_patch_warp_branch_bundle
 from vcd.vcd_vision_token.generation_vcd import generate_with_vcd
 
 from .vlm_3r import Vlm3r
@@ -49,8 +49,8 @@ def _parse_bool(raw_value) -> bool:
     return str(raw_value).lower() == "true"
 
 
-@register_model("vlm_3r_gen_vcd_patch_warp")
-class Vlm3rGenVCDPatchWarp(Vlm3r):
+@register_model("vlm_3r_gen_vcd_ptb_preliminary")
+class Vlm3rGenVCDPTBPreliminary(Vlm3r):
     def __init__(
         self,
         branch_mode: str = "pairwise",
@@ -58,54 +58,47 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
         contrast_alphas: Optional[Sequence[float]] = None,
         beta: float = 0.05,
         append_newline: bool = True,
-        patch_warp_ratio: float = 0.08,
-        patch_warp_selection_mode: str = "question_cosine",
-        patch_warp_selection_scope: str = "per_frame",
-        patch_warp_shift_size: int = 1,
-        patch_warp_mix_ratio: float = 0.5,
-        patch_warp_fusion_2d_weight: float = 1.0,
-        patch_warp_fusion_3d_weight: float = 1.0,
+        ptb_preliminary_ratio: float = 0.08,
+        ptb_preliminary_query_mode: str = "question_cosine",
+        ptb_preliminary_selection_scope: str = "per_frame",
+        ptb_preliminary_shift_size: int = 1,
+        ptb_preliminary_mix_ratio: float = 0.5,
         **kwargs,
     ) -> None:
         self.branch_mode = str(branch_mode).lower()
         self.contrast_mode = str(contrast_mode).lower()
         if self.branch_mode != "pairwise" or self.contrast_mode != "pairwise":
-            raise ValueError("Only pairwise generation-time VCD is kept in the current patch-warp implementation.")
-        expected_alpha_len = 1
-        self.contrast_alphas = _parse_float_list(contrast_alphas, expected_len=expected_alpha_len)
+            raise ValueError("Only pairwise generation-time VCD is kept in the current ptb preliminary implementation.")
+        self.contrast_alphas = _parse_float_list(contrast_alphas, expected_len=1)
         self.beta = float(beta)
         self.append_newline = _parse_bool(append_newline)
-        self.patch_warp_ratio = float(patch_warp_ratio)
-        self.patch_warp_selection_mode = str(patch_warp_selection_mode)
-        self.patch_warp_selection_scope = str(patch_warp_selection_scope)
-        self.patch_warp_shift_size = int(patch_warp_shift_size)
-        self.patch_warp_mix_ratio = float(patch_warp_mix_ratio)
-        self.patch_warp_fusion_2d_weight = float(patch_warp_fusion_2d_weight)
-        self.patch_warp_fusion_3d_weight = float(patch_warp_fusion_3d_weight)
+        self.ptb_preliminary_ratio = float(ptb_preliminary_ratio)
+        self.ptb_preliminary_query_mode = str(ptb_preliminary_query_mode)
+        self.ptb_preliminary_selection_scope = str(ptb_preliminary_selection_scope)
+        self.ptb_preliminary_shift_size = int(ptb_preliminary_shift_size)
+        self.ptb_preliminary_mix_ratio = float(ptb_preliminary_mix_ratio)
         self.latest_vcd_metadata: Optional[dict] = None
 
         super().__init__(**kwargs)
         ensure_pad_token(self.tokenizer)
         eval_logger.info(
-            "Enabled patch-warp generation-time VCD: "
+            "Enabled ptb preliminary generation-time VCD: "
             f"branch_mode={self.branch_mode}, "
             f"contrast_mode={self.contrast_mode}, "
             f"contrast_alphas={self.contrast_alphas}, "
             f"beta={self.beta}, "
-            f"selection_mode={self.patch_warp_selection_mode}, "
-            f"selection_scope={self.patch_warp_selection_scope}"
+            f"query_mode={self.ptb_preliminary_query_mode}, "
+            f"selection_scope={self.ptb_preliminary_selection_scope}"
         )
 
     def _build_branch_args(self):
         return SimpleNamespace(
             append_newline=self.append_newline,
-            patch_warp_ratio=self.patch_warp_ratio,
-            patch_warp_selection_mode=self.patch_warp_selection_mode,
-            patch_warp_selection_scope=self.patch_warp_selection_scope,
-            patch_warp_shift_size=self.patch_warp_shift_size,
-            patch_warp_mix_ratio=self.patch_warp_mix_ratio,
-            patch_warp_fusion_2d_weight=self.patch_warp_fusion_2d_weight,
-            patch_warp_fusion_3d_weight=self.patch_warp_fusion_3d_weight,
+            ptb_preliminary_ratio=self.ptb_preliminary_ratio,
+            ptb_preliminary_query_mode=self.ptb_preliminary_query_mode,
+            ptb_preliminary_selection_scope=self.ptb_preliminary_selection_scope,
+            ptb_preliminary_shift_size=self.ptb_preliminary_shift_size,
+            ptb_preliminary_mix_ratio=self.ptb_preliminary_mix_ratio,
         )
 
     def generate_until(self, requests) -> List[str]:
@@ -184,7 +177,7 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
             attention_mask = prompt_input_ids.ne(pad_token_ids).long().cuda()
 
             branch_args = self._build_branch_args()
-            branch_bundle = build_generation_patch_warp_branch_bundle(
+            branch_bundle = build_generation_ptb_preliminary_branch_bundle(
                 branch_args,
                 self.model,
                 videos,

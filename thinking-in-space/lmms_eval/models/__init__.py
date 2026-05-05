@@ -45,6 +45,7 @@ AVAILABLE_MODELS = {
     "qwen2vl": "Qwen2VL",
     "vlm_3r": "Vlm3r",
     "vlm_3r_gen_vcd": "Vlm3rGenVCD",
+    "vlm_3r_gen_vcd_ptb_preliminary": "Vlm3rGenVCDPTBPreliminary",
     "vlm_3r_gen_vcd_patch_warp": "Vlm3rGenVCDPatchWarp",
     "vlm_3r_patch_selection": "Vlm3rPatchSelection",
     "vlm_3r_semantic_vcd": "Vlm3rSemanticVCD",
