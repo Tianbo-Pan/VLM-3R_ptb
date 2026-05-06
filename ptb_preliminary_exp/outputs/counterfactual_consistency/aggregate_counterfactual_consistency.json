@@ -1,0 +1,220 @@
+{
+  "config": {
+    "manifest_path": "/local_home/pantianbo/projects/vision_reasoning/VLM-3R/ptb_test/scannetpp_qa_visualizations/selection_manifest.json",
+    "output_root": "ptb_preliminary_exp/outputs/counterfactual_consistency",
+    "qa_id": null,
+    "scene_name": null,
+    "flat_index": null,
+    "max_cases": 20,
+    "model_path": "Journey9ni/vlm-3r-llava-qwen2-lora",
+    "model_base": "lmms-lab/LLaVA-NeXT-Video-7B-Qwen2",
+    "conv_mode": "qwen_1_5",
+    "load_8bit": false,
+    "overwrite": true,
+    "device": "cuda",
+    "mm_spatial_pool_stride": 2,
+    "mm_spatial_pool_mode": "average",
+    "mm_newline_position": "grid",
+    "num_frames": 32,
+    "score_key": "avg_logprob",
+    "scoring_mode": "fusion_2d3d",
+    "fusion_2d_weight": 1.0,
+    "fusion_3d_weight": 1.0,
+    "no_vision_mode": "zero"
+  },
+  "aggregate": {
+    "num_cases": 13,
+    "overall": {
+      "same_as_original_no_vision": {
+        "count": 13,
+        "positive": 9,
+        "rate": 0.6923076923076923
+      },
+      "same_as_original_mismatched_video": {
+        "count": 13,
+        "positive": 6,
+        "rate": 0.46153846153846156
+      },
+      "same_as_original_frame_shuffle": {
+        "count": 13,
+        "positive": 6,
+        "rate": 0.46153846153846156
+      },
+      "same_as_original_all_counterfactuals": {
+        "count": 13,
+        "positive": 3,
+        "rate": 0.23076923076923078
+      }
+    },
+    "per_question_type": {
+      "mc_distance_compare": {
+        "same_as_original_no_vision": {
+          "count": 13,
+          "positive": 9,
+          "rate": 0.6923076923076923
+        },
+        "same_as_original_mismatched_video": {
+          "count": 13,
+          "positive": 6,
+          "rate": 0.46153846153846156
+        },
+        "same_as_original_frame_shuffle": {
+          "count": 13,
+          "positive": 6,
+          "rate": 0.46153846153846156
+        },
+        "same_as_original_all_counterfactuals": {
+          "count": 13,
+          "positive": 3,
+          "rate": 0.23076923076923078
+        }
+      }
+    },
+    "hallucination_candidate_rate": 0.7692307692307693
+  },
+  "case_summaries": [
+    {
+      "qa_id": "cac34684-312c-40d9-b3ed-1446f56fd2ef",
+      "scene_name": "06bd2cf800",
+      "question_type": "mc_distance_compare",
+      "original_pred": "B",
+      "gt": "C",
+      "same_as_original_no_vision": false,
+      "same_as_original_mismatched_video": false,
+      "same_as_original_frame_shuffle": false,
+      "same_as_original_all_counterfactuals": false
+    },
+    {
+      "qa_id": "7ba2c4e5-fedb-419b-849e-eca48e985d23",
+      "scene_name": "07e6f56969",
+      "question_type": "mc_distance_compare",
+      "original_pred": "A",
+      "gt": "C",
+      "same_as_original_no_vision": true,
+      "same_as_original_mismatched_video": true,
+      "same_as_original_frame_shuffle": false,
+      "same_as_original_all_counterfactuals": false
+    },
+    {
+      "qa_id": "24f54a74-66c6-4463-87d8-d72597d1121e",
+      "scene_name": "07ff1c45bb",
+      "question_type": "mc_distance_compare",
+      "original_pred": "C",
+      "gt": "B",
+      "same_as_original_no_vision": false,
+      "same_as_original_mismatched_video": false,
+      "same_as_original_frame_shuffle": false,
+      "same_as_original_all_counterfactuals": false
+    },
+    {
+      "qa_id": "73ed80ff-a5d1-4aad-a696-b19886ea2d90",
+      "scene_name": "1730c7d709",
+      "question_type": "mc_distance_compare",
+      "original_pred": "A",
+      "gt": "D",
+      "same_as_original_no_vision": true,
+      "same_as_original_mismatched_video": true,
+      "same_as_original_frame_shuffle": true,
+      "same_as_original_all_counterfactuals": true
+    },
+    {
+      "qa_id": "d1941c94-9572-405c-abdb-c069bc001263",
+      "scene_name": "192ab15daf",
+      "question_type": "mc_distance_compare",
+      "original_pred": "A",
+      "gt": "B",
+      "same_as_original_no_vision": true,
+      "same_as_original_mismatched_video": false,
+      "same_as_original_frame_shuffle": false,
+      "same_as_original_all_counterfactuals": false
+    },
+    {
+      "qa_id": "2d134e11-58b8-402d-9c26-0d747d47a605",
+      "scene_name": "1b379f1114",
+      "question_type": "mc_distance_compare",
+      "original_pred": "A",
+      "gt": "D",
+      "same_as_original_no_vision": true,
+      "same_as_original_mismatched_video": true,
+      "same_as_original_frame_shuffle": false,
+      "same_as_original_all_counterfactuals": false
+    },
+    {
+      "qa_id": "fb4a8852-5bd5-4572-ac71-a48236c1606c",
+      "scene_name": "1d34f56de8",
+      "question_type": "mc_distance_compare",
+      "original_pred": "A",
+      "gt": "B",
+      "same_as_original_no_vision": true,
+      "same_as_original_mismatched_video": false,
+      "same_as_original_frame_shuffle": true,
+      "same_as_original_all_counterfactuals": false
+    },
+    {
+      "qa_id": "4ec547c2-5dd0-45e1-b101-bce11fca0572",
+      "scene_name": "3e9a598891",
+      "question_type": "mc_distance_compare",
+      "original_pred": "A",
+      "gt": "B",
+      "same_as_original_no_vision": true,
+      "same_as_original_mismatched_video": true,
+      "same_as_original_frame_shuffle": true,
+      "same_as_original_all_counterfactuals": true
+    },
+    {
+      "qa_id": "5c4f6d1d-d5f3-4c07-990b-3660779d6f22",
+      "scene_name": "aaa11940d3",
+      "question_type": "mc_distance_compare",
+      "original_pred": "A",
+      "gt": "B",
+      "same_as_original_no_vision": true,
+      "same_as_original_mismatched_video": false,
+      "same_as_original_frame_shuffle": false,
+      "same_as_original_all_counterfactuals": false
+    },
+    {
+      "qa_id": "036a40ff-02cc-4071-b1ea-9e512cb12397",
+      "scene_name": "e3c1da58dd",
+      "question_type": "mc_distance_compare",
+      "original_pred": "A",
+      "gt": "B",
+      "same_as_original_no_vision": true,
+      "same_as_original_mismatched_video": true,
+      "same_as_original_frame_shuffle": true,
+      "same_as_original_all_counterfactuals": true
+    },
+    {
+      "qa_id": "e22c8c47-cb5d-4468-848d-c8fd9c07e73e",
+      "scene_name": "e3ef8b690b",
+      "question_type": "mc_distance_compare",
+      "original_pred": "A",
+      "gt": "A",
+      "same_as_original_no_vision": true,
+      "same_as_original_mismatched_video": false,
+      "same_as_original_frame_shuffle": true,
+      "same_as_original_all_counterfactuals": false
+    },
+    {
+      "qa_id": "fa4aceef-66ee-42c6-acd6-78b29b208505",
+      "scene_name": "e4007ff6b5",
+      "question_type": "mc_distance_compare",
+      "original_pred": "C",
+      "gt": "A",
+      "same_as_original_no_vision": false,
+      "same_as_original_mismatched_video": true,
+      "same_as_original_frame_shuffle": false,
+      "same_as_original_all_counterfactuals": false
+    },
+    {
+      "qa_id": "da5e7a40-ffdf-42c2-877a-641c950cd10a",
+      "scene_name": "e4007ff6b5",
+      "question_type": "mc_distance_compare",
+      "original_pred": "C",
+      "gt": "C",
+      "same_as_original_no_vision": false,
+      "same_as_original_mismatched_video": false,
+      "same_as_original_frame_shuffle": true,
+      "same_as_original_all_counterfactuals": false
+    }
+  ]
+}

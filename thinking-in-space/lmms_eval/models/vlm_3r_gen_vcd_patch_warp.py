@@ -60,7 +60,6 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
         append_newline: bool = True,
         patch_warp_ratio: float = 0.08,
         patch_warp_selection_mode: str = "question_cosine",
-        patch_warp_selection_scope: str = "per_frame",
         patch_warp_shift_size: int = 1,
         patch_warp_mix_ratio: float = 0.5,
         patch_warp_fusion_2d_weight: float = 1.0,
@@ -77,7 +76,6 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
         self.append_newline = _parse_bool(append_newline)
         self.patch_warp_ratio = float(patch_warp_ratio)
         self.patch_warp_selection_mode = str(patch_warp_selection_mode)
-        self.patch_warp_selection_scope = str(patch_warp_selection_scope)
         self.patch_warp_shift_size = int(patch_warp_shift_size)
         self.patch_warp_mix_ratio = float(patch_warp_mix_ratio)
         self.patch_warp_fusion_2d_weight = float(patch_warp_fusion_2d_weight)
@@ -92,8 +90,7 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
             f"contrast_mode={self.contrast_mode}, "
             f"contrast_alphas={self.contrast_alphas}, "
             f"beta={self.beta}, "
-            f"selection_mode={self.patch_warp_selection_mode}, "
-            f"selection_scope={self.patch_warp_selection_scope}"
+            f"selection_mode={self.patch_warp_selection_mode}"
         )
 
     def _build_branch_args(self):
@@ -101,7 +98,6 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
             append_newline=self.append_newline,
             patch_warp_ratio=self.patch_warp_ratio,
             patch_warp_selection_mode=self.patch_warp_selection_mode,
-            patch_warp_selection_scope=self.patch_warp_selection_scope,
             patch_warp_shift_size=self.patch_warp_shift_size,
             patch_warp_mix_ratio=self.patch_warp_mix_ratio,
             patch_warp_fusion_2d_weight=self.patch_warp_fusion_2d_weight,

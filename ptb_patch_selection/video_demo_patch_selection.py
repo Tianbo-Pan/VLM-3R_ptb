@@ -41,6 +41,8 @@ DEFAULT_DEMO_ARGV = [
     "--mm_spatial_pool_mode", "average",
     "--mm_newline_position", "grid",
     "--fine_topk", "16",
+    "--fine_ratio", "none",
+    "--selection_scope", "per_frame",
     "--scoring_mode", "question_cosine",
     "--prompt", "If I am standing by the stool and facing the stove, is the sofa to my left, right, or back?\nAn object is to my back if I would have to turn at least 135 degrees in order to face it.",
 ]
@@ -73,6 +75,8 @@ def parse_args():
     parser.add_argument("--add_time_instruction", type=lambda x: str(x).lower() == "true", default=False)
 
     parser.add_argument("--fine_topk", type=int, default=16)
+    parser.add_argument("--fine_ratio", type=str, default="none")
+    parser.add_argument("--selection_scope", type=str, default="per_frame")
     parser.add_argument("--scoring_mode", type=str, default="question_cosine")
     parser.add_argument("--fine_scale", type=float, default=1.0)
     parser.add_argument("--fusion_2d_weight", type=float, default=1.0)
@@ -144,6 +148,12 @@ def save_patch_selection_visualization(
     patch_scores = metadata["patch_scores"].numpy()
     grid_size = int(metadata["grid_size"])
     fine_topk = int(metadata["fine_topk"])
+    fine_ratio = metadata.get("fine_ratio")
+    selection_mode = metadata.get("selection_mode", "topk")
+    selection_scope = metadata.get("selection_scope", "per_frame")
+    selected_counts_per_frame = metadata.get("selected_counts_per_frame")
+    if selected_counts_per_frame is not None:
+        selected_counts_per_frame = selected_counts_per_frame.numpy().tolist()
 
     vis_dir = os.path.join(output_dir, "patch_selection_vis")
     os.makedirs(vis_dir, exist_ok=True)
@@ -161,6 +171,13 @@ def save_patch_selection_visualization(
 
         cur_indices = selected_indices[frame_idx].tolist()
         cur_scores = selected_scores[frame_idx].tolist()
+        cur_indices_scores = [
+            (int(patch_idx), float(score))
+            for patch_idx, score in zip(cur_indices, cur_scores)
+            if int(patch_idx) >= 0
+        ]
+        cur_indices = [patch_idx for patch_idx, _ in cur_indices_scores]
+        cur_scores = [score for _, score in cur_indices_scores]
         cur_patch_scores = patch_scores[frame_idx]
 
         max_score = max(cur_scores) if cur_scores else 1.0
@@ -214,7 +231,15 @@ def save_patch_selection_visualization(
                 }
             )
 
-        frame_label = f"frame {frame_idx:02d} | topk={fine_topk} | grid={grid_size}x{grid_size}"
+        frame_selected_count = len(cur_indices)
+        if selection_mode == "ratio" and fine_ratio is not None:
+            selection_desc = f"ratio={fine_ratio:.3f}"
+        else:
+            selection_desc = f"topk={fine_topk}"
+        frame_label = (
+            f"frame {frame_idx:02d} | {selection_desc} | scope={selection_scope} "
+            f"| count={frame_selected_count} | grid={grid_size}x{grid_size}"
+        )
         cv2.putText(
             frame_bgr,
             frame_label,
@@ -232,6 +257,7 @@ def save_patch_selection_visualization(
             {
                 "frame_idx": frame_idx,
                 "save_path": save_path,
+                "selected_count": frame_selected_count,
                 "selected_patches": selected_entries,
             }
         )
@@ -242,6 +268,10 @@ def save_patch_selection_visualization(
             {
                 "grid_size": grid_size,
                 "fine_topk": fine_topk,
+                "fine_ratio": fine_ratio,
+                "selection_mode": selection_mode,
+                "selection_scope": selection_scope,
+                "selected_counts_per_frame": selected_counts_per_frame,
                 "frames": manifest,
             },
             f,
@@ -254,6 +284,7 @@ def save_patch_selection_visualization(
 def main():
     inject_default_demo_argv()
     args = parse_args()
+    fine_ratio = None if str(args.fine_ratio).lower() in {"", "none"} else float(args.fine_ratio)
 
     model_name = get_model_name_from_path(args.model_path)
     overwrite_config, cfg_pretrained = build_overwrite_config(args)
@@ -309,8 +340,11 @@ def main():
             input_ids=input_ids,
             images=video,
             attention_mask=attention_masks,
+            tokenizer=tokenizer,
             modalities="video",
             fine_topk=args.fine_topk,
+            fine_ratio=fine_ratio,
+            selection_scope=args.selection_scope,
             scoring_mode=args.scoring_mode,
             fine_scale=args.fine_scale,
             fusion_2d_weight=args.fusion_2d_weight,
@@ -339,6 +373,9 @@ def main():
         json.dumps(
             {
                 "fine_topk": metadata["fine_topk"],
+                "fine_ratio": metadata.get("fine_ratio"),
+                "selection_mode": metadata.get("selection_mode"),
+                "selection_scope": metadata.get("selection_scope"),
                 "coarse_token_count": metadata["coarse_token_count"],
                 "fine_token_count": metadata["fine_token_count"],
                 "combined_token_count": metadata["combined_token_count"],
@@ -367,6 +404,10 @@ def main():
         "pred": outputs,
         "patch_selection": {
             "fine_topk": metadata["fine_topk"],
+            "fine_ratio": metadata.get("fine_ratio"),
+            "selection_mode": metadata.get("selection_mode"),
+            "selection_scope": metadata.get("selection_scope"),
+            "selected_counts_per_frame": metadata.get("selected_counts_per_frame").tolist(),
             "coarse_token_count": metadata["coarse_token_count"],
             "fine_token_count": metadata["fine_token_count"],
             "combined_token_count": metadata["combined_token_count"],

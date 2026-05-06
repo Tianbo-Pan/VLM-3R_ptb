@@ -1,0 +1,260 @@
+{
+  "qa_id": "7ba2c4e5-fedb-419b-849e-eca48e985d23",
+  "scene_name": "07e6f56969",
+  "question_type": "mc_distance_compare",
+  "question_text": "These are frames of a video. Measuring from the closest point of each object, which of these objects (chair, towel, toilet paper, soap dispenser) is the closest to the toilet? If there are multiple instances of an object category, measure to the closest. Options: A. chair B. towel C. toilet paper D. soap dispenser Answer with the option's letter from the given choices directly.",
+  "options_map": {
+    "A": "chair",
+    "B": "towel",
+    "C": "toilet paper",
+    "D": "soap dispenser"
+  },
+  "ground_truth": "C",
+  "conditions": {
+    "original": {
+      "prediction_label": "A",
+      "prediction_score": -14.204639434814453,
+      "ground_truth": "C",
+      "ground_truth_score": -16.088428497314453,
+      "is_correct": false,
+      "prediction_margin": 1.4228515625,
+      "gt_margin": -1.8837890625,
+      "ranked_options": [
+        {
+          "label": "A",
+          "score": -14.204639434814453
+        },
+        {
+          "label": "B",
+          "score": -15.627490997314453
+        },
+        {
+          "label": "C",
+          "score": -16.088428497314453
+        },
+        {
+          "label": "D",
+          "score": -16.093311309814453
+        }
+      ],
+      "condition": "original",
+      "option_scores": {
+        "A": -14.204639434814453,
+        "B": -15.627490997314453,
+        "C": -16.088428497314453,
+        "D": -16.093311309814453
+      },
+      "frame_paths": [
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000000.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000150.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000301.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000451.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000602.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000752.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000903.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001053.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001204.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001354.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001505.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001655.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001806.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001956.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002107.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002257.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002408.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002558.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002709.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002859.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003010.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003160.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003311.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003461.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003612.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003762.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003913.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004063.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004214.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004364.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004515.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004666.jpg"
+      ]
+    },
+    "mismatched_video": {
+      "prediction_label": "A",
+      "prediction_score": -12.06904125213623,
+      "ground_truth": "C",
+      "ground_truth_score": -12.67255687713623,
+      "is_correct": false,
+      "prediction_margin": 0.52734375,
+      "gt_margin": -0.603515625,
+      "ranked_options": [
+        {
+          "label": "A",
+          "score": -12.06904125213623
+        },
+        {
+          "label": "D",
+          "score": -12.59638500213623
+        },
+        {
+          "label": "C",
+          "score": -12.67255687713623
+        },
+        {
+          "label": "B",
+          "score": -12.92841625213623
+        }
+      ],
+      "condition": "mismatched_video",
+      "option_scores": {
+        "A": -12.06904125213623,
+        "B": -12.92841625213623,
+        "C": -12.67255687713623,
+        "D": -12.59638500213623
+      },
+      "frame_paths": [
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000000.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000320.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000640.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_000960.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001280.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001600.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_001920.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002240.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002560.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_002880.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003200.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003520.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_003840.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004160.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004480.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_004800.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005120.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005440.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_005760.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006080.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006400.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_006720.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007040.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007360.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_007680.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008000.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008320.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008640.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_008960.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009280.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009600.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/06bd2cf800/frame_009920.jpg"
+      ]
+    },
+    "frame_shuffle": {
+      "prediction_label": "C",
+      "prediction_score": -13.164430618286133,
+      "ground_truth": "C",
+      "ground_truth_score": -13.164430618286133,
+      "is_correct": true,
+      "prediction_margin": 2.115966796875,
+      "gt_margin": 2.115966796875,
+      "ranked_options": [
+        {
+          "label": "C",
+          "score": -13.164430618286133
+        },
+        {
+          "label": "A",
+          "score": -15.280397415161133
+        },
+        {
+          "label": "D",
+          "score": -15.531007766723633
+        },
+        {
+          "label": "B",
+          "score": -15.663393020629883
+        }
+      ],
+      "condition": "frame_shuffle",
+      "option_scores": {
+        "A": -15.280397415161133,
+        "B": -15.663393020629883,
+        "C": -13.164430618286133,
+        "D": -15.531007766723633
+      },
+      "frame_paths": [
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004666.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004515.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004364.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004214.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_004063.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003913.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003762.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003612.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003461.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003311.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003160.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_003010.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002859.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002709.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002558.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002408.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002257.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_002107.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001956.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001806.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001655.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001505.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001354.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001204.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_001053.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000903.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000752.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000602.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000451.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000301.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000150.jpg",
+        "/local_home/pantianbo/dataset_all/vision_reasoning/Scannetpp_processed/color/train/07e6f56969/frame_000000.jpg"
+      ]
+    },
+    "no_vision": {
+      "prediction_label": "A",
+      "prediction_score": -20.42795181274414,
+      "ground_truth": "C",
+      "ground_truth_score": -21.68381118774414,
+      "is_correct": false,
+      "prediction_margin": 1.255859375,
+      "gt_margin": -1.255859375,
+      "ranked_options": [
+        {
+          "label": "A",
+          "score": -20.42795181274414
+        },
+        {
+          "label": "C",
+          "score": -21.68381118774414
+        },
+        {
+          "label": "B",
+          "score": -22.01584243774414
+        },
+        {
+          "label": "D",
+          "score": -22.98654556274414
+        }
+      ],
+      "condition": "no_vision",
+      "option_scores": {
+        "A": -20.42795181274414,
+        "B": -22.01584243774414,
+        "C": -21.68381118774414,
+        "D": -22.98654556274414
+      },
+      "frame_paths": []
+    }
+  },
+  "consistency": {
+    "same_as_original_no_vision": true,
+    "same_as_original_mismatched_video": true,
+    "same_as_original_frame_shuffle": false,
+    "same_as_original_all_counterfactuals": false
+  }
+}
