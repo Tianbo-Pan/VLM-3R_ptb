@@ -26,21 +26,25 @@ from vcd.vcd_vision_token.generation_vcd import generate_with_vcd
 from .vlm_3r import Vlm3r
 
 
-def _parse_float_list(raw_value, expected_len: Optional[int] = None) -> Optional[List[float]]:
+def _parse_float_list(raw_value) -> Optional[List[float]]:
     if raw_value is None:
         return None
     if isinstance(raw_value, (list, tuple)):
-        values = [float(x) for x in raw_value]
+        return [float(x) for x in raw_value]
+    text = str(raw_value).strip()
+    if text.lower() in {"", "none"}:
+        return None
+    if text.startswith("[") and text.endswith("]"):
+        text = text[1:-1]
+    if "," in text:
+        parts = text.split(",")
+    elif ":" in text:
+        parts = text.split(":")
+    elif ";" in text:
+        parts = text.split(";")
     else:
-        text = str(raw_value).strip()
-        if text.lower() in {"", "none"}:
-            return None
-        if text.startswith("[") and text.endswith("]"):
-            text = text[1:-1]
-        values = [float(part.strip()) for part in text.split(",") if part.strip()]
-    if expected_len is not None and len(values) != expected_len:
-        raise ValueError(f"Expected {expected_len} values, got {len(values)} from {raw_value}.")
-    return values
+        parts = [text]
+    return [float(part.strip()) for part in parts if part.strip()]
 
 
 def _parse_bool(raw_value) -> bool:
@@ -49,31 +53,56 @@ def _parse_bool(raw_value) -> bool:
     return str(raw_value).lower() == "true"
 
 
-@register_model("vlm_3r_gen_vcd_patch_warp")
-class Vlm3rGenVCDPatchWarp(Vlm3r):
+@register_model("vlm_3r_gen_vcd_tri_branch")
+class Vlm3rGenVCDTriBranch(Vlm3r):
     def __init__(
         self,
-        branch_mode: str = "pairwise",
-        contrast_mode: str = "pairwise",
+        branch_mode: str = "tri",
+        contrast_mode: str = "tri_rectified",
         contrast_alphas: Optional[Sequence[float]] = None,
         beta: float = 0.05,
+        reference_mode: str = "max_original_augmented",
         append_newline: bool = True,
-        patch_warp_ratio: float = 0.08,
+        patch_warp_ratio: float = 0.2,
         patch_warp_selection_mode: str = "question_cosine",
         patch_warp_selection_scope: str = "per_frame",
         patch_warp_shift_size: int = 1,
-        patch_warp_mix_ratio: float = 0.5,
+        patch_warp_mix_ratio: float = 0.65,
         patch_warp_fusion_2d_weight: float = 1.0,
         patch_warp_fusion_3d_weight: float = 1.0,
+        aug_patch_topk: int = 16,
+        aug_patch_ratio: Optional[float] = 0.01,
+        aug_selection_scope: str = "global",
+        aug_scoring_mode: str = "question_cosine",
+        aug_injection_mode: str = "inplace_boost_coarse",
+        aug_boost_factor: float = 1.5,
+        aug_background_decay: float = 0.98,
+        aug_fine_scale: float = 1.0,
+        aug_include_coarse: bool = True,
+        aug_append_newline: bool = True,
+        aug_fusion_2d_weight: float = 1.0,
+        aug_fusion_3d_weight: float = 1.0,
         **kwargs,
     ) -> None:
         self.branch_mode = str(branch_mode).lower()
         self.contrast_mode = str(contrast_mode).lower()
-        if self.branch_mode != "pairwise" or self.contrast_mode != "pairwise":
-            raise ValueError("Only pairwise generation-time VCD is kept in the current patch-warp implementation.")
-        expected_alpha_len = 1
-        self.contrast_alphas = _parse_float_list(contrast_alphas, expected_len=expected_alpha_len)
+        if self.branch_mode not in {"tri", "pairwise"}:
+            raise ValueError(f"Unsupported branch_mode: {branch_mode}. Expected tri or pairwise.")
+        if self.branch_mode == "tri" and self.contrast_mode not in {"tri_simple", "tri_rectified"}:
+            raise ValueError(
+                f"tri branch_mode expects contrast_mode in {{tri_simple, tri_rectified}}, got {contrast_mode}."
+            )
+        if self.branch_mode == "pairwise" and self.contrast_mode != "pairwise":
+            raise ValueError("pairwise branch_mode expects contrast_mode=pairwise.")
+
+        self.contrast_alphas = _parse_float_list(contrast_alphas)
+        if self.branch_mode == "tri" and self.contrast_alphas is not None and len(self.contrast_alphas) not in {1, 2}:
+            raise ValueError("tri-branch contrast_alphas must contain 1 or 2 floats.")
+        if self.branch_mode == "pairwise" and self.contrast_alphas is not None and len(self.contrast_alphas) != 1:
+            raise ValueError("pairwise contrast_alphas must contain exactly 1 float.")
+
         self.beta = float(beta)
+        self.reference_mode = str(reference_mode).lower()
         self.append_newline = _parse_bool(append_newline)
         self.patch_warp_ratio = float(patch_warp_ratio)
         self.patch_warp_selection_mode = str(patch_warp_selection_mode)
@@ -82,18 +111,33 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
         self.patch_warp_mix_ratio = float(patch_warp_mix_ratio)
         self.patch_warp_fusion_2d_weight = float(patch_warp_fusion_2d_weight)
         self.patch_warp_fusion_3d_weight = float(patch_warp_fusion_3d_weight)
+        self.aug_patch_topk = int(aug_patch_topk)
+        self.aug_patch_ratio = None if aug_patch_ratio in [None, "", "none"] else float(aug_patch_ratio)
+        self.aug_selection_scope = str(aug_selection_scope)
+        self.aug_scoring_mode = str(aug_scoring_mode)
+        self.aug_injection_mode = str(aug_injection_mode)
+        self.aug_boost_factor = float(aug_boost_factor)
+        self.aug_background_decay = float(aug_background_decay)
+        self.aug_fine_scale = float(aug_fine_scale)
+        self.aug_include_coarse = _parse_bool(aug_include_coarse)
+        self.aug_append_newline = _parse_bool(aug_append_newline)
+        self.aug_fusion_2d_weight = float(aug_fusion_2d_weight)
+        self.aug_fusion_3d_weight = float(aug_fusion_3d_weight)
         self.latest_vcd_metadata: Optional[dict] = None
 
         super().__init__(**kwargs)
         ensure_pad_token(self.tokenizer)
         eval_logger.info(
-            "Enabled patch-warp generation-time VCD: "
+            "Enabled tri-branch generation-time VCD: "
             f"branch_mode={self.branch_mode}, "
             f"contrast_mode={self.contrast_mode}, "
             f"contrast_alphas={self.contrast_alphas}, "
+            f"reference_mode={self.reference_mode}, "
             f"beta={self.beta}, "
-            f"selection_mode={self.patch_warp_selection_mode}, "
-            f"selection_scope={self.patch_warp_selection_scope}"
+            f"patch_warp_selection_mode={self.patch_warp_selection_mode}, "
+            f"patch_warp_selection_scope={self.patch_warp_selection_scope}, "
+            f"aug_scoring_mode={self.aug_scoring_mode}, "
+            f"aug_injection_mode={self.aug_injection_mode}"
         )
 
     def _build_branch_args(self):
@@ -106,6 +150,18 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
             patch_warp_mix_ratio=self.patch_warp_mix_ratio,
             patch_warp_fusion_2d_weight=self.patch_warp_fusion_2d_weight,
             patch_warp_fusion_3d_weight=self.patch_warp_fusion_3d_weight,
+            aug_patch_topk=self.aug_patch_topk,
+            aug_patch_ratio=self.aug_patch_ratio,
+            aug_selection_scope=self.aug_selection_scope,
+            aug_scoring_mode=self.aug_scoring_mode,
+            aug_injection_mode=self.aug_injection_mode,
+            aug_boost_factor=self.aug_boost_factor,
+            aug_background_decay=self.aug_background_decay,
+            aug_fine_scale=self.aug_fine_scale,
+            aug_include_coarse=self.aug_include_coarse,
+            aug_append_newline=self.aug_append_newline,
+            aug_fusion_2d_weight=self.aug_fusion_2d_weight,
+            aug_fusion_3d_weight=self.aug_fusion_3d_weight,
         )
 
     def generate_until(self, requests) -> List[str]:
@@ -207,6 +263,7 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
                     top_p=gen_kwargs["top_p"],
                     eos_token_id=self.tokenizer.eos_token_id,
                     stop_strings=gen_kwargs.get("until"),
+                    reference_mode=self.reference_mode,
                 )
 
             self.latest_vcd_metadata = {
@@ -214,6 +271,7 @@ class Vlm3rGenVCDPatchWarp(Vlm3r):
                 "question_type": doc.get("question_type"),
                 "branch_mode": branch_bundle.get("branch_mode"),
                 "branch_names": generation_output.get("branch_names"),
+                "reference_mode": self.reference_mode,
                 "steps": generation_output.get("steps"),
                 "branch_metadata": {
                     branch["name"]: branch.get("metadata")

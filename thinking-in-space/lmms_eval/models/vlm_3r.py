@@ -78,6 +78,7 @@ class Vlm3r(lmms):
         mm_spatial_pool_stride: int = 2,
         mm_spatial_pool_out_channels: int = 1024,
         mm_spatial_pool_mode: str = "bilinear",
+        # mm_spatial_pool_mode: str = "average",
         mm_newline_position: str = "grid",
         mm_pooling_position: str = "after",
         overwrite: bool = True,
@@ -118,6 +119,7 @@ class Vlm3r(lmms):
         else:
             self.model_name = get_model_name_from_path(pretrained)
         self.video_decode_backend = video_decode_backend
+        self.attn_implementation = attn_implementation
         # self._config = AutoConfig.from_pretrained(self.pretrained)
         self.overwrite = overwrite
         self.mm_resampler_type = mm_resampler_type
@@ -193,13 +195,21 @@ class Vlm3r(lmms):
                 else:
                     self._max_length = 2048
             else:
-                self._tokenizer, self._model, self._image_processor, self._max_length = load_pretrained_model(pretrained, model_base, self.model_name, device_map=self.device_map, overwrite_config=overwrite_config)
+                self._tokenizer, self._model, self._image_processor, self._max_length = load_pretrained_model(
+                    pretrained,
+                    model_base,
+                    self.model_name,
+                    device_map=self.device_map,
+                    overwrite_config=overwrite_config,
+                    attn_implementation=self.attn_implementation,
+                )
         else:
             self._tokenizer, self._model, self._image_processor, self._max_length = load_pretrained_model(
                 pretrained,
                 None,
                 self.model_name,
                 device_map=self.device_map,
+                attn_implementation=self.attn_implementation,
             )
 
         self._config = self._model.config

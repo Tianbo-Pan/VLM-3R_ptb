@@ -16,8 +16,6 @@ CONV_TEMPLATE="${CONV_TEMPLATE:-qwen_1_5}"
 MAX_FRAMES_NUM="${MAX_FRAMES_NUM:-32}"
 
 FINE_TOPK="${FINE_TOPK:-16}"
-FINE_RATIO="${FINE_RATIO:-none}"
-SELECTION_SCOPE="${SELECTION_SCOPE:-per_frame}"
 SCORING_MODE="${SCORING_MODE:-question_cosine}"
 FINE_SCALE="${FINE_SCALE:-1.0}"
 INCLUDE_COARSE="${INCLUDE_COARSE:-True}"
@@ -26,7 +24,7 @@ APPEND_NEWLINE="${APPEND_NEWLINE:-True}"
 RUN_SUFFIX="${RUN_SUFFIX:-vlm_3r_patch_selection_vstibench}"
 OUTPUT_ROOT="${OUTPUT_ROOT:-logs/$(TZ="America/New_York" date "+%Y%m%d")/vstibench_patch_selection}"
 
-MODEL_ARGS="pretrained=${PRETRAINED},model_base=${MODEL_BASE},conv_template=${CONV_TEMPLATE},max_frames_num=${MAX_FRAMES_NUM},fine_topk=${FINE_TOPK},fine_ratio=${FINE_RATIO},selection_scope=${SELECTION_SCOPE},scoring_mode=${SCORING_MODE},fine_scale=${FINE_SCALE},include_coarse=${INCLUDE_COARSE},append_newline=${APPEND_NEWLINE}"
+MODEL_ARGS="pretrained=${PRETRAINED},model_base=${MODEL_BASE},conv_template=${CONV_TEMPLATE},max_frames_num=${MAX_FRAMES_NUM},fine_topk=${FINE_TOPK},scoring_mode=${SCORING_MODE},fine_scale=${FINE_SCALE},include_coarse=${INCLUDE_COARSE},append_newline=${APPEND_NEWLINE}"
 
 echo "Running VSTIBench with VLM-3R patch-selection inference"
 echo "model_args: ${MODEL_ARGS}"

@@ -102,7 +102,7 @@ def build_stage0_semantic_negative_coarse_branch(args, model, video, input_ids, 
     if semantic_neg_ratio <= 0 or semantic_neg_ratio > 1:
         raise ValueError(f"semantic_neg_ratio must be in (0, 1], got {semantic_neg_ratio}.")
     semantic_neg_topk = min(num_tokens, max(1, int(math.ceil(num_tokens * semantic_neg_ratio))))
-    selected_indices, selected_scores = select_topk_patch_indices(patch_scores, semantic_neg_topk)
+    selected_indices, selected_scores, _, _ = select_topk_patch_indices(patch_scores, semantic_neg_topk)
     degraded_encoded_video_features = _corrupt_patch_tokens(
         encoded_video_features,
         selected_indices,

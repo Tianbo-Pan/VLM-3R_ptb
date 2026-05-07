@@ -4,7 +4,7 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR"
 
-export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-4,5,6,7}"  # 可在命令前覆盖，例如 CUDA_VISIBLE_DEVICES=0 bash ...
+export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-1}"  # 可在命令前覆盖，例如 CUDA_VISIBLE_DEVICES=0 bash ...
 export LMMS_EVAL_LAUNCHER="accelerate"
 export LMMS_EVAL_PER_TYPE_LIMIT="${LMMS_EVAL_PER_TYPE_LIMIT:-15}"
 export LMMS_EVAL_SAMPLE_SEED="${LMMS_EVAL_SAMPLE_SEED:-42}"
@@ -12,7 +12,7 @@ export LMMS_EVAL_SAMPLE_SEED="${LMMS_EVAL_SAMPLE_SEED:-42}"
 OUTPUT_ROOT="logs/$(TZ="America/New_York" date "+%Y%m%d")/vsibench_${LMMS_EVAL_PER_TYPE_LIMIT}_per_type"
 
 accelerate launch \
-    --num_processes=4 \
+    --num_processes=1 \
     -m lmms_eval \
     --model vlm_3r \
     --model_args pretrained=Journey9ni/vlm-3r-llava-qwen2-lora,model_base=lmms-lab/LLaVA-NeXT-Video-7B-Qwen2,conv_template=qwen_1_5,max_frames_num=32 \

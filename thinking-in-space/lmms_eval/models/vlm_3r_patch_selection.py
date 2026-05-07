@@ -21,41 +21,23 @@ class Vlm3rPatchSelection(Vlm3r):
     def __init__(
         self,
         fine_topk: int = 16,
-        fine_ratio: Optional[float] = None,
-        selection_scope: str = "per_frame",
         scoring_mode: str = "question_cosine",
         fine_scale: float = 1.0,
         fusion_2d_weight: float = 1.0,
         fusion_3d_weight: float = 1.0,
         include_coarse: bool = True,
         append_newline: bool = True,
-        coarse_mode: str = "full",
-        coarse_context_radius: int = 0,
-        coarse_context_topk: Optional[int] = None,
-        coarse_context_scale: float = 1.0,
-        contextual_coarse_first: bool = True,
         save_patch_selection_metadata: bool = False,
         **kwargs,
     ) -> None:
         self.patch_selection_enabled = True
         self.fine_topk = int(fine_topk)
-        self.fine_ratio = None if fine_ratio in [None, "", "none"] else float(fine_ratio)
-        self.selection_scope = str(selection_scope)
         self.scoring_mode = str(scoring_mode)
         self.fine_scale = float(fine_scale)
         self.fusion_2d_weight = float(fusion_2d_weight)
         self.fusion_3d_weight = float(fusion_3d_weight)
         self.include_coarse = include_coarse if isinstance(include_coarse, bool) else str(include_coarse).lower() == "true"
         self.append_newline = append_newline if isinstance(append_newline, bool) else str(append_newline).lower() == "true"
-        self.coarse_mode = str(coarse_mode)
-        self.coarse_context_radius = int(coarse_context_radius)
-        self.coarse_context_topk = None if coarse_context_topk in [None, "", "none"] else int(coarse_context_topk)
-        self.coarse_context_scale = float(coarse_context_scale)
-        self.contextual_coarse_first = (
-            contextual_coarse_first
-            if isinstance(contextual_coarse_first, bool)
-            else str(contextual_coarse_first).lower() == "true"
-        )
         self.save_patch_selection_metadata = (
             save_patch_selection_metadata
             if isinstance(save_patch_selection_metadata, bool)
@@ -65,10 +47,7 @@ class Vlm3rPatchSelection(Vlm3r):
         super().__init__(**kwargs)
         eval_logger.info(
             f"Enabled patch-selection inference: fine_topk={self.fine_topk}, "
-            f"fine_ratio={self.fine_ratio}, selection_scope={self.selection_scope}, "
             f"scoring_mode={self.scoring_mode}, include_coarse={self.include_coarse}, "
-            f"coarse_mode={self.coarse_mode}, coarse_context_radius={self.coarse_context_radius}, "
-            f"coarse_context_topk={self.coarse_context_topk}, coarse_context_scale={self.coarse_context_scale}, "
             f"fusion_2d_weight={self.fusion_2d_weight}, fusion_3d_weight={self.fusion_3d_weight}"
         )
 
@@ -90,22 +69,14 @@ class Vlm3rPatchSelection(Vlm3r):
                 input_ids=input_ids,
                 images=videos,
                 attention_mask=attention_masks,
-                tokenizer=self.tokenizer,
                 modalities="video",
                 fine_topk=self.fine_topk,
-                fine_ratio=self.fine_ratio,
-                selection_scope=self.selection_scope,
                 scoring_mode=self.scoring_mode,
                 fine_scale=self.fine_scale,
                 fusion_2d_weight=self.fusion_2d_weight,
                 fusion_3d_weight=self.fusion_3d_weight,
                 include_coarse=self.include_coarse,
                 append_newline=self.append_newline,
-                coarse_mode=self.coarse_mode,
-                coarse_context_radius=self.coarse_context_radius,
-                coarse_context_topk=self.coarse_context_topk,
-                coarse_context_scale=self.coarse_context_scale,
-                contextual_coarse_first=self.contextual_coarse_first,
                 return_metadata=self.save_patch_selection_metadata,
                 use_cache=self.use_cache,
                 stopping_criteria=[stopping_criteria],

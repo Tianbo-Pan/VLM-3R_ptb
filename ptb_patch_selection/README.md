@@ -13,12 +13,7 @@
   - 默认打分方式：`question_cosine`
     - 用问题文本 token embedding 的均值作为 query
     - 与每个 patch token 做 cosine similarity
-  - 支持两种保留方式：
-    - 固定数量：`fine_topk`
-    - 固定比例：`fine_ratio`（例如 `0.3` 表示 top 30%）
-  - 支持两种选择范围：
-    - `selection_scope=per_frame`：逐帧选
-    - `selection_scope=global`：在所有帧的所有 patch 上全局选
+  - 每帧保留 `top-k`
 - 新增 fusion-guided fine 分支：
   - 可用 `scoring_mode=fusion_2d3d`
   - 不再依赖 question query
@@ -66,8 +61,6 @@ output_ids, metadata = generate_with_selective_patch_pooling(
     attention_mask=attention_masks,
     modalities="video",
     fine_topk=16,
-    fine_ratio=None,
-    selection_scope="per_frame",
     scoring_mode="question_cosine",
     fine_scale=1.0,
     include_coarse=True,
@@ -88,8 +81,6 @@ output_ids, metadata = generate_with_selective_patch_pooling(
     attention_mask=attention_masks,
     modalities="video",
     fine_topk=16,
-    fine_ratio=0.3,
-    selection_scope="global",
     scoring_mode="fusion_2d3d",
     fusion_2d_weight=1.0,
     fusion_3d_weight=1.0,

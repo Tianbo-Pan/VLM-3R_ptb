@@ -51,6 +51,7 @@ def combine_branch_logits(
     branch_logits: Sequence[torch.Tensor],
     contrast_mode: str = "pairwise",
     contrast_alphas: Optional[Sequence[float]] = None,
+    branch_names: Optional[Sequence[str]] = None,
 ) -> torch.Tensor:
     if not branch_logits:
         raise ValueError("branch_logits must contain at least one tensor.")
@@ -66,7 +67,71 @@ def combine_branch_logits(
         weak_logits, strong_logits = branch_logits
         return (1.0 + alpha) * strong_logits - alpha * weak_logits
 
-    raise ValueError(f"Unsupported contrast_mode: {contrast_mode}. Only `pairwise` is kept in vcd_vision_token.")
+    if contrast_mode in {"tri_simple", "tri_rectified"}:
+        if len(branch_logits) != 3:
+            raise ValueError(f"{contrast_mode} expects exactly 3 branches, got {len(branch_logits)}.")
+        if not branch_names or len(branch_names) != len(branch_logits):
+            raise ValueError(f"{contrast_mode} requires 3 branch_names aligned with branch_logits.")
+        branch_logit_map = {str(name): logits for name, logits in zip(branch_names, branch_logits)}
+        required_names = {"degraded", "original", "augmented"}
+        missing = sorted(required_names - set(branch_logit_map.keys()))
+        if missing:
+            raise ValueError(f"{contrast_mode} requires branches {sorted(required_names)}, missing {missing}.")
+
+        if not contrast_alphas:
+            alpha_aug, alpha_deg = 1.0, 1.0
+        elif len(contrast_alphas) == 1:
+            alpha_aug = alpha_deg = float(contrast_alphas[0])
+        else:
+            alpha_aug = float(contrast_alphas[0])
+            alpha_deg = float(contrast_alphas[1])
+
+        degraded_logits = branch_logit_map["degraded"]
+        original_logits = branch_logit_map["original"]
+        augmented_logits = branch_logit_map["augmented"]
+        augmented_delta = augmented_logits - original_logits
+        degraded_delta = degraded_logits - original_logits
+
+        if contrast_mode == "tri_rectified":
+            augmented_delta = torch.relu(augmented_delta)
+            degraded_delta = torch.relu(degraded_delta)
+
+        return original_logits + alpha_aug * augmented_delta - alpha_deg * degraded_delta
+
+    raise ValueError(
+        f"Unsupported contrast_mode: {contrast_mode}. Supported: none, pairwise, tri_simple, tri_rectified."
+    )
+
+
+def build_reference_logits(
+    branch_logits: Sequence[torch.Tensor],
+    branch_names: Optional[Sequence[str]] = None,
+    reference_mode: str = "last",
+) -> torch.Tensor:
+    if not branch_logits:
+        raise ValueError("branch_logits must contain at least one tensor.")
+
+    reference_mode = str(reference_mode).lower()
+    if reference_mode == "last":
+        return branch_logits[-1]
+
+    if not branch_names or len(branch_names) != len(branch_logits):
+        raise ValueError(f"reference_mode={reference_mode} requires branch_names aligned with branch_logits.")
+
+    branch_logit_map = {str(name): logits for name, logits in zip(branch_names, branch_logits)}
+    if reference_mode in branch_logit_map:
+        return branch_logit_map[reference_mode]
+
+    if reference_mode == "max_original_augmented":
+        return torch.maximum(branch_logit_map["original"], branch_logit_map["augmented"])
+    if reference_mode == "mean_original_augmented":
+        return 0.5 * (branch_logit_map["original"] + branch_logit_map["augmented"])
+
+    raise ValueError(
+        "Unsupported reference_mode: "
+        f"{reference_mode}. Supported: last, degraded, original, augmented, "
+        "max_original_augmented, mean_original_augmented."
+    )
 
 
 def apply_plausibility_constraint(
@@ -158,6 +223,7 @@ def generate_with_vcd(
     eos_token_id: Optional[int] = None,
     stop_strings: Optional[Sequence[str]] = None,
     allowed_tokens_fn: Optional[AllowedTokensFn] = None,
+    reference_mode: str = "last",
 ) -> Dict[str, object]:
     branches = branch_bundle.get("branches")
     if not branches:
@@ -188,6 +254,12 @@ def generate_with_vcd(
             step_branch_logits,
             contrast_mode=contrast_mode,
             contrast_alphas=contrast_alphas,
+            branch_names=branch_names,
+        )
+        reference_logits = build_reference_logits(
+            step_branch_logits,
+            branch_names=branch_names,
+            reference_mode=reference_mode,
         )
 
         allowed_mask = None
@@ -198,7 +270,7 @@ def generate_with_vcd(
 
         constrained_logits = apply_plausibility_constraint(
             combined_logits,
-            reference_logits=step_branch_logits[-1],
+            reference_logits=reference_logits,
             beta=beta,
             allowed_mask=allowed_mask,
         )
